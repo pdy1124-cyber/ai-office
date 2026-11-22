@@ -43,7 +43,7 @@ def _grow(seed, allowed, h, w):
     return seen
 
 
-def cutout(path, tol=26.0, eat_shadow=False, floor_kill=False):
+def cutout(path, tol=26.0, eat_shadow=False, floor_kill=False, keep_holes=True, key_all=False):
     im = load_small(path)
     a = np.asarray(im).astype(np.int16)
     h, w, _ = a.shape
@@ -57,12 +57,16 @@ def cutout(path, tol=26.0, eat_shadow=False, floor_kill=False):
         mn = a.min(axis=2)
         gray = ((mx - mn) < 22) & (a.mean(axis=2) > 95)
         allowed = allowed | gray
-    seed = np.zeros((h, w), dtype=bool)
-    seed[0, :] = allowed[0, :]
-    seed[-1, :] = allowed[-1, :]
-    seed[:, 0] = allowed[:, 0]
-    seed[:, -1] = allowed[:, -1]
-    bg = _grow(seed, allowed, h, w)
+    if key_all:
+        # 배경과 같은 색은 위치와 무관하게 지운다 (ㅂ 카운터 같은 내부 구멍)
+        bg = allowed.copy()
+    else:
+        seed = np.zeros((h, w), dtype=bool)
+        seed[0, :] = allowed[0, :]
+        seed[-1, :] = allowed[-1, :]
+        seed[:, 0] = allowed[:, 0]
+        seed[:, -1] = allowed[:, -1]
+        bg = _grow(seed, allowed, h, w)
 
     fg = ~bg
     if floor_kill:
@@ -88,9 +92,10 @@ def cutout(path, tol=26.0, eat_shadow=False, floor_kill=False):
                     best, best_n = cur, n
             x += 1
     fg = (lab == best) if best else fg
-    # 내부 구멍 메우기 (눈동자 하이라이트 등 유지)
-    outside = _grow(seed_border(~fg, h, w), ~fg, h, w)
-    fg = fg | (~fg & ~outside)
+    if keep_holes:
+        # 내부 구멍 메우기 (눈동자 하이라이트 등 유지)
+        outside = _grow(seed_border(~fg, h, w), ~fg, h, w)
+        fg = fg | (~fg & ~outside)
 
     alpha = Image.fromarray((fg * 255).astype(np.uint8))
     alpha = alpha.filter(ImageFilter.MinFilter(3))
@@ -173,7 +178,7 @@ def photo_avatar(path, out_path, box, bright=1.02, contrast=1.04):
 
 # src, out, brand color, tol, scale, eat_shadow, floor_kill
 JOBS = [
-    ("gen_bro3.png",        "avatar_bro.webp",      "#5aa2ff", 30, 0.92, True,  True),
+    ("gen_bro4.png",        "avatar_bro.webp",      "#5aa2ff", 26, 0.92, True,  True, False, True),
     ("gen_instinct.png",    "avatar_instinct.webp", "#8b8cff", 30, 0.92, True,  True),
     ("gen_dict.png",        "avatar_dict.webp",     "#7fb0ff", 30, 0.92, False, True),
     ("gen_sound.png",       "avatar_sound.webp",    "#b18cff", 30, 0.92, False, True),
@@ -186,8 +191,12 @@ JOBS = [
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    for src, out, color, tol, scale, eat, floor in JOBS:
-        cut = square_tight(cutout(os.path.join(SRC, src), tol=tol, eat_shadow=eat, floor_kill=floor))
+    for job in JOBS:
+        src, out, color, tol, scale, eat, floor = job[:7]
+        holes = job[7] if len(job) > 7 else True
+        key_all = job[8] if len(job) > 8 else False
+        cut = square_tight(cutout(os.path.join(SRC, src), tol=tol, eat_shadow=eat,
+                                  floor_kill=floor, keep_holes=holes, key_all=key_all))
         p = compose(cut, color, os.path.join(OUT, out), scale=scale)
         print(out, os.path.getsize(p) // 1024, "KB")
     golf = photo_avatar(
