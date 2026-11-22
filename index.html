@@ -10,15 +10,15 @@
 <meta property="og:description" content="2.5D 아이소메트릭 오피스 + 실시간 다크 대시보드 — 브로·인스팅트와 5개 브랜드">
 <meta property="og:image" content="assets/office_bg.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235aa2ff'/%3E%3Cstop offset='.6' stop-color='%2337e0c6'/%3E%3Cstop offset='1' stop-color='%23b18cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230a1020'/%3E%3Crect x='7' y='10' width='18' height='13' rx='2' fill='url(%23g)'/%3E%3Crect x='9' y='13' width='14' height='7' rx='1' fill='%230a1020' opacity='.55'/%3E%3C/svg%3E">
-<link rel="preload" as="image" href="assets/avatar_bro.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_instinct.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_golf.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_tips.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_dict.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_sound.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_ssada.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_meet.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_lounge.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_bro.webp?v=21" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_instinct.webp?v=21" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_golf.webp?v=21" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_tips.webp?v=21" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_dict.webp?v=21" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_sound.webp?v=21" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_ssada.webp?v=21" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_meet.webp?v=21" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_lounge.webp?v=21" type="image/webp">
 <style>
 :root{
   --bg:#06090f; --bg2:#0a1018;
@@ -462,7 +462,7 @@ footer code{
 
   <section class="stage-wrap">
     <div class="scene" id="scene">
-      <img class="bg" id="bg" src="assets/office_bg.webp" alt="따뜻한 간접조명과 통유리 야경이 있는 2.5D 아이소메트릭 오피스" width="1672" height="941" decoding="async">
+      <img class="bg" id="bg" src="assets/office_bg.webp?v=21" alt="따뜻한 간접조명과 통유리 야경이 있는 2.5D 아이소메트릭 오피스" width="1672" height="941" decoding="async">
       <div class="atmo"></div>
       <div class="led-layer" id="leds" aria-hidden="true"></div>
       <div class="pins" id="pins"></div>
@@ -578,7 +578,7 @@ var DATA = {
    2. 캐릭터 · 존 (핀 좌표 = 배경 이미지 대비 %)
    ========================================================= */
 var PEOPLE = {
-  bro:{ name:"브로", role:"총괄 · 최종 편집·검수·스케줄", color:"#5aa2ff", img:"assets/avatar_bro.webp",
+  bro:{ name:"브로", role:"총괄 · 최종 편집·검수·스케줄", color:"#5aa2ff", img:"assets/avatar_bro.webp?v=21",
     x:44.5, y:34.5, d:"0s",
     rows:[["지금","17:00 공개 4편 상태 확인 · 고정댓글·영어 다국어 마무리"],
           ["다음","18:00 블로그 83호 → 18:30 저녁 브리핑"],
@@ -586,7 +586,7 @@ var PEOPLE = {
     links:[["유튜브 4편 보기","#yt"],["다음 스케줄","#sched"]],
     say:["17시 4편 공개 완료!","고정댓글 등록 중…","18시 블로그 83호 대기","검수는 내가 맡을게"] },
 
-  instinct:{ name:"인스팅트", role:"AI 파트너 · 토픽 스캔·대본·팩트체크", color:"#8b8cff", img:"assets/avatar_instinct.webp",
+  instinct:{ name:"인스팅트", role:"AI 파트너 · 토픽 스캔·대본·팩트체크", color:"#8b8cff", img:"assets/avatar_instinct.webp?v=21",
     x:16.5, y:29, d:".8s",
     rows:[["지금","검수대기 패키지 2편(꿀팁·회화 v8.1) · 실영상 소스풀 140개 확보"],
           ["가동","5분 주기 완료 메일·검수대기 드라이브 무과금 감시"],
@@ -594,7 +594,7 @@ var PEOPLE = {
     links:[["시스템 상태","#sys"]],
     say:["소스풀 140개 확보","검수대기 2편 올렸어요","5분마다 메일 확인","팩트체크 통과!"] },
 
-  golf:{ name:"골프랩", role:"골프 쇼츠 · 기본기·장비", color:"#4ade80", img:"assets/avatar_golf.webp",
+  golf:{ name:"골프랩", role:"골프 쇼츠 · 기본기·장비", color:"#4ade80", img:"assets/avatar_golf.webp?v=21",
     x:23.5, y:49, d:".35s",
     rows:[["17:00","lebLw-AC6Io · 드라이버 티 높이(공 절반 위로 4cm) · 0:47"],
           ["상태","고정댓글 등록·고정 완료 · 재생목록 '골프 기본기 12단계'"],
@@ -602,7 +602,7 @@ var PEOPLE = {
     links:[["영상 보기","https://youtu.be/lebLw-AC6Io"]],
     say:["드라이버 티 4cm!","고정댓글 완료","골프 기본기 12단계"] },
 
-  tips:{ name:"꿀팁랩", role:"생활 꿀팁 쇼츠", color:"#ffd166", img:"assets/avatar_tips.webp",
+  tips:{ name:"꿀팁랩", role:"생활 꿀팁 쇼츠", color:"#ffd166", img:"assets/avatar_tips.webp?v=21",
     x:33, y:55, d:"1.2s",
     rows:[["17:00","SEStrZdWWVM · 계란 프라이 물 2큰술 · 0:39"],
           ["상태","고정댓글 등록 대기 · 설명란에 살림 꿀팁 링크"],
@@ -610,7 +610,7 @@ var PEOPLE = {
     links:[["영상 보기","https://youtu.be/SEStrZdWWVM"]],
     say:["계란엔 물 2큰술","17:00 공개!","뚜껑 3분이면 끝"] },
 
-  dict:{ name:"1분 용어사전", role:"회화·용어 1분 짤", color:"#7fb0ff", img:"assets/avatar_dict.webp",
+  dict:{ name:"1분 용어사전", role:"회화·용어 1분 짤", color:"#7fb0ff", img:"assets/avatar_dict.webp?v=21",
     x:42.5, y:61, d:"1.7s",
     rows:[["17:00","xwN1nR5QEDM · 카페 주문 영어 3문장 · 0:49"],
           ["상태","고정댓글 등록 대기 · 한국어 CC 비움, 영어 제목·설명 추가"],
@@ -618,7 +618,7 @@ var PEOPLE = {
     links:[["영상 보기","https://youtu.be/xwN1nR5QEDM"]],
     say:["I want 대신 3문장","카페 영어 완료","ASR 검수 통과"] },
 
-  sound:{ name:"사운드랩", role:"음악 · 카페 어쿠스틱", color:"#b18cff", img:"assets/avatar_sound.webp",
+  sound:{ name:"사운드랩", role:"음악 · 카페 어쿠스틱", color:"#b18cff", img:"assets/avatar_sound.webp?v=21",
     x:52, y:67, d:".6s",
     rows:[["17:00","CAp_TMvKGt0 · 일요일 오후 카페 어쿠스틱 재즈·피아노 15분"],
           ["상태","16:9 커버 업로드 완료 · 고정댓글 등록 대기"],
@@ -626,7 +626,7 @@ var PEOPLE = {
     links:[["영상 보기","https://youtu.be/CAp_TMvKGt0"]],
     say:["어쿠스틱 재즈 15분","커버 16:9 업로드","창가에서 듣기 좋아"] },
 
-  ssada:{ name:"싸다싸", role:"골프·개꿀쇼핑 커머스", color:"#ff8ac2", img:"assets/avatar_ssada.webp",
+  ssada:{ name:"싸다싸", role:"골프·개꿀쇼핑 커머스", color:"#ff8ac2", img:"assets/avatar_ssada.webp?v=21",
     x:60.5, y:72.5, d:"2.1s",
     rows:[["운영","싸다싸 골프(티타임·예약처) + 개꿀쇼핑(제휴·할인)"],
           ["집계","제휴·정산 수치는 07:00 / 22:00 수익성 브리핑에서 집계"],
@@ -636,7 +636,7 @@ var PEOPLE = {
 };
 
 var PROPS = {
-  meet:{ name:"콘텐츠 기획·편집 회의실", short:"기획·편집 회의실", role:"편성 · 편집 · 검수 미팅", color:"#37e0c6", img:"assets/avatar_meet.webp",
+  meet:{ name:"콘텐츠 기획·편집 회의실", short:"기획·편집 회의실", role:"편성 · 편집 · 검수 미팅", color:"#37e0c6", img:"assets/avatar_meet.webp?v=21",
     x:26, y:22.5, d:"1.4s", kind:"prop",
     rows:[["편성","골프랩 · 꿀팁랩 · 1분 용어사전 · 사운드랩 4편"],
           ["편집","0.2초 훅 프레임 썸네일 · 자막·CC 정리"],
@@ -644,7 +644,7 @@ var PROPS = {
     links:[["다음 스케줄","#sched"]],
     say:["4편 편성 확정","훅 프레임 통일","검수 통과분만 발행"] },
 
-  lounge:{ name:"라운지 · 브리핑 존", short:"라운지 · 브리핑", role:"오늘 목표 · 브리핑", color:"#ffc36b", img:"assets/avatar_lounge.webp",
+  lounge:{ name:"라운지 · 브리핑 존", short:"라운지 · 브리핑", role:"오늘 목표 · 브리핑", color:"#ffc36b", img:"assets/avatar_lounge.webp?v=21",
     x:79, y:49.5, d:"2.6s", kind:"prop",
     rows:[["17:00","유튜브 4편 공개 — 완료 ✓"],
           ["18:00","블로그 83호 발행 → 18:30 저녁 브리핑"],
