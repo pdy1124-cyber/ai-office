@@ -179,10 +179,18 @@ body{
 .hud b{font-size:12px;font-weight:700;color:#f1f7ff;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .hud em{font-style:normal;font-weight:750;color:var(--teal);font-variant-numeric:tabular-nums;font-size:12.5px}
 .hud em.now{color:#0a1018;background:var(--teal);border-radius:6px;padding:2px 7px}
+.hint{
+  position:absolute;right:16px;bottom:14px;z-index:5;
+  font-size:10.5px;font-weight:600;color:#a8b8d0;letter-spacing:0;
+  padding:6px 11px;border-radius:999px;
+  background:rgba(8,13,22,.55);border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  pointer-events:none;
+}
 
 /* panel */
 .panel{
-  position:relative;border-radius:var(--r);padding:18px 17px 16px;min-height:210px;
+  position:relative;border-radius:var(--r);padding:18px 17px 16px;min-height:242px;
   background:linear-gradient(180deg,rgba(20,28,44,.78),rgba(11,17,27,.72));
   border:1px solid var(--line);box-shadow:var(--shadow);
   backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);
@@ -352,6 +360,7 @@ footer code{
   .pin-name{font-size:9px;padding:2px 6px}
   .bubble{font-size:10.5px;padding:7px 10px;max-width:170px}
   .hud{left:10px;bottom:9px;padding:6px 10px;gap:7px}
+  .hint{display:none}
   .hud b{max-width:150px;font-size:10.5px}
   .hud em{font-size:11px}
   .panel{padding:15px 14px 14px}
@@ -423,6 +432,7 @@ footer code{
       <div class="hud">
         <span class="k">다음 일정</span><b id="hudLabel">—</b><em id="hudCd">--:--</em>
       </div>
+      <span class="hint">핀을 눌러 작업 상세 보기</span>
     </div>
 
     <aside class="panel" id="panel" aria-live="polite"></aside>
@@ -586,7 +596,7 @@ var PEOPLE = {
 };
 
 var PROPS = {
-  meet:{ name:"콘텐츠 기획·편집 회의실", role:"편성 · 편집 · 검수 미팅", color:"#37e0c6", ava:"🗓",
+  meet:{ name:"콘텐츠 기획·편집 회의실", short:"기획·편집 회의실", role:"편성 · 편집 · 검수 미팅", color:"#37e0c6", ava:"🗓",
     x:26, y:22.5, d:"1.4s", kind:"prop",
     rows:[["편성","골프랩 · 꿀팁랩 · 1분 용어사전 · 사운드랩 4편"],
           ["편집","0.2초 훅 프레임 썸네일 · 자막·CC 정리"],
@@ -594,7 +604,7 @@ var PROPS = {
     links:[["다음 스케줄","#sched"]],
     say:["4편 편성 확정","훅 프레임 통일","검수 통과분만 발행"] },
 
-  lounge:{ name:"라운지 · 브리핑 존", role:"오늘 목표 · 브리핑", color:"#ffc36b", ava:"📋",
+  lounge:{ name:"라운지 · 브리핑 존", short:"라운지 · 브리핑", role:"오늘 목표 · 브리핑", color:"#ffc36b", ava:"📋",
     x:79, y:49.5, d:"2.6s", kind:"prop",
     rows:[["17:00","유튜브 4편 공개 — 완료 ✓"],
           ["18:00","블로그 83호 발행 → 18:30 저녁 브리핑"],
@@ -670,7 +680,7 @@ function buildPins(){
     inner.appendChild(ava);
     inner.appendChild(el("span", "pin-dot"));
     b.appendChild(inner);
-    b.appendChild(el("span", "pin-name", p.name));
+    b.appendChild(el("span", "pin-name", p.short || p.name));
     host.appendChild(b);
   }
   host.addEventListener("click", function(ev){
