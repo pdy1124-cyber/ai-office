@@ -94,6 +94,11 @@ body{
 }
 .lab:hover{color:#fff;border-color:var(--blue);background:rgba(20,40,72,.95)}
 .lab.right{transform:translate(-100%,-50%)}
+.sign{
+  position:absolute;z-index:4;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap;
+  font:800 11px/1 "Galmuri11","DungGeunMo",system-ui,sans-serif;letter-spacing:.3em;
+  color:#b8efff;text-shadow:0 0 4px rgba(80,200,255,.95),0 0 9px rgba(80,200,255,.55),0 0 16px rgba(80,200,255,.3);
+}
 
 .hud{
   position:absolute;right:8px;bottom:8px;z-index:4;
@@ -218,6 +223,7 @@ footer code{background:#101b2c;border:1px solid #1e2f4a;border-radius:4px;paddin
   .card.wide{grid-column:span 1}
   .bubble{font-size:9px;max-width:104px;padding:3px 5px 4px}
   .lab{font-size:8px;padding:2px 4px}
+  .sign{font-size:7.5px;letter-spacing:.22em}
   .hud{font-size:8.5px;padding:4px 6px;gap:5px}
   .sched .tm{width:38px;font-size:10px}
   .panel{padding:11px}
@@ -537,30 +543,48 @@ function drawBoardProp(t){
 
 function drawSign(){
   r(157,7,74,21,"#0b1322");
-  r(157,7,74,1,"#3f5f92");
+  r(157,7,74,1,"#4a6fa8");
   r(157,27,74,1,"#1a2740");
   r(159,9,70,17,"#101c31");
-  r(160,10,68,15,"#0d1729");
+  r(160,10,68,15,"#0a1526");
+  // 네온 테두리
+  r(161,11,66,1,"rgba(90,200,255,.35)");
+  r(161,25,66,1,"rgba(90,200,255,.18)");
 }
 
 function drawClock(t){
   var d = new Date();
   var hh = d.getHours()%12, mm=d.getMinutes(), ss=d.getSeconds();
-  circle(330,44,11,"#0b1220");
-  circle(330,44,10,"#dfe8f6");
-  circle(330,44,8,"#eef4fc");
-  r(330,35,1,2,"#7c93b3"); r(330,51,1,2,"#7c93b3");
-  r(321,44,2,1,"#7c93b3"); r(337,44,2,1,"#7c93b3");
-  function hand(ang,len,col,pad){
-    for (var i=pad||0;i<=len*2;i++){
-      var tt=i/(len*2);
-      r(330+Math.cos(ang)*len*tt, 44+Math.sin(ang)*len*tt, 1, 1, col);
+  circle(330,44,12,"#0b1220");
+  circle(330,44,11,"#8298b8");
+  circle(330,44,10,"#f2f7ff");
+  // 12·3·6·9 눈금
+  r(329,35,2,2,"#7d90ad"); r(329,51,2,2,"#7d90ad");
+  r(321,43,2,2,"#7d90ad"); r(337,43,2,2,"#7d90ad");
+  function hand(ang,len,col,w){
+    var steps=Math.round(len*3);
+    for (var i=0;i<=steps;i++){
+      var tt=i/steps;
+      r(330+Math.cos(ang)*len*tt-((w||1)-1)/2, 44+Math.sin(ang)*len*tt-((w||1)-1)/2, w||1, w||1, col);
     }
   }
-  hand((hh+mm/60)/12*Math.PI*2 - Math.PI/2, 4.5, "#22314d");
-  hand(mm/60*Math.PI*2 - Math.PI/2, 6.5, "#22314d");
-  hand(ss/60*Math.PI*2 - Math.PI/2, 7.5, "#d1435b");
-  r(329,43,3,3,"#22314d");
+  hand((hh+mm/60)/12*Math.PI*2 - Math.PI/2, 3.2, "#2b3a55", 2);
+  hand(mm/60*Math.PI*2 - Math.PI/2, 5.2, "#2b3a55", 1);
+  hand(ss/60*Math.PI*2 - Math.PI/2, 6.4, "#d1435b", 1);
+  r(329,43,3,3,"#2b3a55");
+}
+
+function drawShelf(){
+  // 화이트보드 아래 벽 선반
+  r(8,85,66,3,"#6d4f33");
+  r(8,85,66,1,"#b98d5c");
+  r(8,88,66,1,"#3a2a19");
+  r(12,88,2,4,"#4e3924"); r(68,88,2,4,"#4e3924");
+  var cols=["#c22148","#2f6fd0","#2f8f5f","#b18cff","#ffd166","#e2915c"];
+  var bx=11;
+  for (var i=0;i<6;i++){ var bh=5+(i%3)*2; r(bx,85-bh,3,bh,cols[i]); r(bx,85-bh,3,1,shade(cols[i],35)); bx+=4; }
+  r(42,77,7,8,"#2f8f5f"); r(44,75,3,3,"#57d69a"); r(42,85,7,2,"#8a5a3a");
+  r(56,80,9,5,"#1b2740"); r(57,81,7,3,"#2d3a52"); r(58,82,5,1,"#5aa2ff");
 }
 
 function drawFloor(){
@@ -698,13 +722,14 @@ function drawBro(t){
   r(x-6, y-1, 4, 2, "#0b1220");
   r(x+2, y-1, 4, 2, "#0b1220");
   // 몸통 ㅂ
-  var blue="#3b82f6", dark="#2563eb", light="#7fb0ff";
+  var blue="#4f92ff", dark="#1e56c9", light="#a8ccff";
   r(x-6, y-17+bob, 3, 10, blue);
   r(x+3, y-17+bob, 3, 10, blue);
-  r(x-6, y-12+bob, 12, 2, dark);
-  r(x-6, y-9+bob, 12, 2, dark);
+  r(x-6, y-12+bob, 12, 2, blue);
+  r(x-6, y-9+bob, 12, 2, blue);
+  r(x-6, y-7+bob, 12, 1, dark);
   r(x-6, y-17+bob, 1, 10, light);
-  r(x+5, y-17+bob, 1, 10, "#1e56c9");
+  r(x+5, y-17+bob, 1, 10, dark);
   // 목
   r(x-2, y-18+bob, 4, 1, "#c9a17c");
   // 머리
@@ -869,9 +894,16 @@ function drawScene(t){
   drawWindow(80,14,64,40);
   drawWindow(238,14,64,40);
   drawBoardProp(t);
+  drawShelf();
   drawSign();
   drawClock(t);
   drawFloor();
+  // 따뜻한 조명 워시
+  var lg = ctx.createLinearGradient(0,96,0,176);
+  lg.addColorStop(0,"rgba(255,222,170,.075)");
+  lg.addColorStop(1,"rgba(255,222,170,0)");
+  ctx.fillStyle = lg;
+  ctx.fillRect(0,96,W,80);
 
   drawRack(t);
   for (var i=0;i<booths.length;i++) drawBooth(booths[i], t);
@@ -946,8 +978,8 @@ function buildBubbles(){
 function placeBubble(id, x, y){
   var el = bubbleEls[id];
   if (!el) return;
-  var lx = Math.max(13, Math.min(87, x/W*100));
-  var ly = Math.max(9, (y-30)/H*100);
+  var lx = Math.max(12, Math.min(88, x/W*100));
+  var ly = Math.max(4, y/H*100);
   el.style.left = lx.toFixed(2)+"%";
   el.style.top = ly.toFixed(2)+"%";
 }
@@ -1093,6 +1125,7 @@ function buildLabels(){
     html += '<button class="lab '+items[i].cls+'" data-id="'+items[i].id+'" style="left:'+
       items[i].left.toFixed(2)+'%;top:'+items[i].top.toFixed(2)+'%">'+items[i].text+'</button>';
   }
+  html += '<span class="sign" style="left:50.5%;top:8.1%">PARK LAB</span>';
   host.innerHTML = html;
   var btns = host.querySelectorAll(".lab");
   for (var j=0;j<btns.length;j++){
