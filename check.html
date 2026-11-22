@@ -14,9 +14,14 @@
 </head>
 <body>
 <div class="row">
-  <figure><figcaption>390 × 844 — iPhone</figcaption><iframe id="f390" src="index.html?w=390" width="390" height="844" scrolling="yes"></iframe></figure>
-  <figure><figcaption>360 × 780 — Galaxy</figcaption><iframe id="f360" src="index.html?w=360" width="360" height="780" scrolling="yes"></iframe></figure>
-  <figure><figcaption>768 × 900 — tablet</figcaption><iframe id="f768" src="index.html?w=768" width="768" height="900" scrolling="yes"></iframe></figure>
+  <figure><figcaption>390 × 844 — iPhone</figcaption><iframe id="f390" data-w="390" width="390" height="844" scrolling="yes"></iframe></figure>
+  <figure><figcaption>360 × 780 — Galaxy</figcaption><iframe id="f360" data-w="360" width="360" height="780" scrolling="yes"></iframe></figure>
+  <figure><figcaption>768 × 900 — tablet</figcaption><iframe id="f768" data-w="768" width="768" height="900" scrolling="yes"></iframe></figure>
 </div>
+<script>
+  document.querySelectorAll("iframe").forEach(function(f){
+    f.src = "index.html?w=" + f.dataset.w + "&cb=" + Date.now();
+  });
+</script>
 </body>
 </html>
