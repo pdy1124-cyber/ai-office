@@ -222,8 +222,9 @@ footer code{background:#101b2c;border:1px solid #1e2f4a;border-radius:4px;paddin
   .grid{grid-template-columns:1fr}
   .card.wide{grid-column:span 1}
   .bubble{font-size:9px;max-width:104px;padding:3px 5px 4px}
-  .lab{font-size:8px;padding:2px 4px}
+  .lab{display:none}
   .sign{font-size:7.5px;letter-spacing:.22em}
+  .hud{font-size:8px;padding:3px 5px;gap:4px;right:5px;bottom:5px}
   .hud{font-size:8.5px;padding:4px 6px;gap:5px}
   .sched .tm{width:38px;font-size:10px}
   .panel{padding:11px}
@@ -1007,11 +1008,12 @@ function charPos(id){
 function updateBubbles(t){
   var slot = Math.floor(t / 5200);
   var rot = (slot % 6) + 1;
+  var narrow = window.innerWidth <= 640;
   for (var i=0;i<BUBBLE_IDS.length;i++){
     var id = BUBBLE_IDS[i];
     var el = bubbleEls[id];
     if (!el) continue;
-    var show = (id === "bro") || (i === rot);
+    var show = (id === "bro") || (!narrow && i === rot);
     if (show){
       if (slot !== lastSlot || (id !== "bro" && lastRot !== rot)) setSay(id);
       el.classList.add("on");
