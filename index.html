@@ -97,6 +97,8 @@ body{
   content:"";position:absolute;inset:0;
   background:radial-gradient(120% 100% at 50% 46%, transparent 52%, rgba(0,0,0,.55) 100%);
 }
+@keyframes breathe{0%,100%{opacity:.9}50%{opacity:1}}
+@media (prefers-reduced-motion:no-preference){ .scene .atmo{animation:breathe 11s ease-in-out infinite} }
 
 /* LED cluster on the server rack */
 .led-layer{position:absolute;inset:0;pointer-events:none;z-index:2}
@@ -397,6 +399,9 @@ footer code{
   .chips{gap:6px}
   .chip{font-size:11px;padding:7px 11px 7px 8px}
 }
+@media (max-width:520px){
+  .pill.stamp{display:none}
+}
 @media (max-width:480px){
   .pin.prop{display:none}
 }
@@ -436,7 +441,7 @@ footer code{
     <div class="topbar-r">
       <div class="pill live"><i></i>LIVE</div>
       <div class="pill clock">🕒 <b id="clock">--:--:--</b><span class="day" id="today">—</span></div>
-      <div class="pill">데이터 기준 <b id="stamp">—</b> KST</div>
+      <div class="pill stamp">데이터 기준 <b id="stamp">—</b> KST</div>
     </div>
   </header>
 
