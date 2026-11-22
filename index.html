@@ -10,6 +10,15 @@
 <meta property="og:description" content="2.5D 아이소메트릭 오피스 + 실시간 다크 대시보드 — 브로·인스팅트와 5개 브랜드">
 <meta property="og:image" content="assets/office_bg.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235aa2ff'/%3E%3Cstop offset='.6' stop-color='%2337e0c6'/%3E%3Cstop offset='1' stop-color='%23b18cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230a1020'/%3E%3Crect x='7' y='10' width='18' height='13' rx='2' fill='url(%23g)'/%3E%3Crect x='9' y='13' width='14' height='7' rx='1' fill='%230a1020' opacity='.55'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="assets/avatar_bro.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_instinct.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_golf.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_tips.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_dict.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_sound.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_ssada.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_meet.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_lounge.webp" type="image/webp">
 <style>
 :root{
   --bg:#06090f; --bg2:#0a1018;
@@ -106,7 +115,7 @@ body{
 .led.lg{width:4px;height:4px;border-radius:2px;box-shadow:0 0 8px currentColor}
 @keyframes ledBlink{0%,100%{opacity:.18}45%{opacity:1}55%{opacity:.55}}
 
-/* pins */
+/* pins — 실제 캐릭터 아바타 */
 .pins{position:absolute;inset:0;z-index:3}
 .pin{
   position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
@@ -114,29 +123,30 @@ body{
   padding:0;border:0;background:none;cursor:pointer;font-family:inherit;
   -webkit-tap-highlight-color:transparent;
 }
+.pin-frame{position:relative;display:block;line-height:0}
 .pin-inner{
-  position:relative;display:grid;place-items:center;
-  width:46px;height:46px;border-radius:50%;
-  background:linear-gradient(155deg,rgba(22,31,48,.9),rgba(10,16,26,.94));
-  border:1px solid rgba(255,255,255,.2);
-  box-shadow:0 10px 22px -10px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 4px rgba(8,13,22,.42);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  position:relative;display:block;width:48px;height:48px;border-radius:50%;overflow:hidden;
+  background:#0d1421;
+  border:1px solid rgba(255,255,255,.30);
+  box-shadow:
+    0 0 0 2px rgba(8,13,22,.92),
+    0 0 0 3.5px var(--c),
+    0 10px 22px -10px rgba(0,0,0,.95),
+    0 0 20px -6px var(--c);
   animation:floatY 7s ease-in-out infinite;animation-delay:var(--d,0s);
-  transition:box-shadow .25s ease, border-color .25s ease, transform .25s ease;
+  transition:box-shadow .25s ease, transform .25s ease, border-color .25s ease;
 }
-.pin-inner::before{
-  content:"";position:absolute;inset:-5px;border-radius:50%;
-  border:1px solid var(--c);opacity:0;transition:opacity .25s ease, transform .25s ease;
+.pin-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}
+.pin:hover .pin-inner{
+  transform:translateY(-2px) scale(1.06);
+  box-shadow:0 0 0 2px rgba(8,13,22,.92), 0 0 0 3.5px rgba(255,255,255,.92), 0 14px 28px -12px rgba(0,0,0,.95), 0 0 26px -4px var(--c);
 }
-.pin:hover .pin-inner{box-shadow:0 12px 26px -10px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.26), 0 0 0 4px rgba(8,13,22,.42), 0 0 22px -4px var(--c)}
-.pin:hover .pin-inner::before{opacity:.55}
-.pin.sel .pin-inner{border-color:var(--c);box-shadow:0 0 0 2px var(--c), 0 0 30px -2px var(--c), inset 0 1px 0 rgba(255,255,255,.3)}
-.pin.sel .pin-inner::before{opacity:.9;transform:scale(1.06)}
-.pin-ava{font-size:20px;line-height:1;display:grid;place-items:center;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.55)}
-.pin-ava.bit{font-size:19px;font-weight:800;letter-spacing:0;color:#eaf4ff}
+.pin.sel .pin-inner{
+  box-shadow:0 0 0 2px rgba(8,13,22,.95), 0 0 0 3.5px var(--c), 0 0 0 5.5px rgba(255,255,255,.82), 0 0 30px -2px var(--c), 0 10px 24px -10px #000;
+}
 .pin-dot{
-  position:absolute;right:1px;bottom:2px;width:9px;height:9px;border-radius:50%;
-  background:var(--c);border:2px solid #0a1018;box-shadow:0 0 8px var(--c);
+  position:absolute;right:-2px;bottom:-2px;width:11px;height:11px;border-radius:50%;
+  background:var(--c);border:2.5px solid #0a1018;box-shadow:0 0 10px var(--c);
   animation:livePulse 2.4s ease-in-out infinite;animation-delay:var(--d,0s);
 }
 .pin-name{
@@ -152,14 +162,16 @@ body{
 
 /* 대표 캐릭터(브로) 핀 — 한 단계 큰 링 */
 .pin.lead .pin-inner{
-  width:54px;height:54px;
-  background:
-    radial-gradient(circle at 50% 34%, rgba(122,182,255,.34), transparent 60%),
-    linear-gradient(155deg,rgba(24,36,58,.94),rgba(9,15,26,.96));
-  border-color:rgba(150,200,255,.45);
-  box-shadow:0 12px 26px -10px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.25), 0 0 0 5px rgba(8,13,22,.46), 0 0 26px -8px #5aa2ff;
+  width:60px;height:60px;
+  border-color:rgba(180,215,255,.6);
+  box-shadow:
+    0 0 0 2px rgba(8,13,22,.94),
+    0 0 0 4px rgba(255,255,255,.9),
+    0 0 0 6px rgba(90,162,255,.85),
+    0 14px 28px -12px rgba(0,0,0,.95),
+    0 0 30px -4px #5aa2ff;
 }
-.pin.lead .pin-ava{font-size:23px}
+.pin.lead .pin-dot{width:13px;height:13px}
 .pin.lead .pin-name{font-size:11px;font-weight:750;background:rgba(12,24,44,.8);border-color:rgba(122,182,255,.4)}
 
 /* glass speech bubble */
@@ -217,13 +229,12 @@ body{
 }
 .p-head{display:flex;gap:12px;align-items:center;margin-bottom:15px}
 .p-ava{
-  width:46px;height:46px;border-radius:14px;flex:0 0 auto;display:grid;place-items:center;
-  font-size:21px;font-weight:800;
-  background:linear-gradient(155deg,rgba(255,255,255,.16),rgba(255,255,255,.03));
-  border:1px solid rgba(255,255,255,.18);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 8px 20px -12px var(--pc,#5aa2ff);
+  width:52px;height:52px;border-radius:50%;flex:0 0 auto;display:block;overflow:hidden;
+  background:#0d1421;
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:0 0 0 2px rgba(8,13,22,.9), 0 0 0 3.5px var(--pc,#5aa2ff), 0 8px 22px -12px var(--pc,#5aa2ff), 0 0 22px -8px var(--pc,#5aa2ff);
 }
-.p-ava-bit{font-size:20px;letter-spacing:0}
+.p-ava img{width:100%;height:100%;object-fit:cover;display:block}
 .p-head h3{margin:0;font-size:15.5px;font-weight:750;letter-spacing:-.01em}
 .p-head .role{margin:4px 0 0;font-size:11.5px;color:var(--mute);line-height:1.4}
 .kv{margin:0;display:grid;gap:9px}
@@ -259,7 +270,11 @@ body{
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   transition:.18s ease;
 }
-.chip i{width:17px;height:17px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-style:normal;color:#08111f;font-weight:800;background:var(--c)}
+.chip i{
+  width:21px;height:21px;border-radius:50%;display:block;overflow:hidden;font-style:normal;flex:0 0 auto;
+  background:#0d1421;box-shadow:0 0 0 1.5px var(--c), 0 0 10px -3px var(--c);
+}
+.chip i img{width:100%;height:100%;object-fit:cover;display:block}
 .chip:hover{color:#fff;border-color:var(--line2);background:rgba(24,34,52,.8);transform:translateY(-1px)}
 .chip.on{color:#fff;border-color:var(--c);box-shadow:0 0 0 1px var(--c), 0 8px 20px -14px var(--c);background:rgba(24,34,52,.9)}
 
@@ -370,8 +385,10 @@ footer code{
   .brand p{font-size:11px}
   .mark{width:40px;height:40px;border-radius:12px}
   .pill{height:30px;padding:0 10px;font-size:10.5px}
-  .pin-inner{width:36px;height:36px}
-  .pin-ava{font-size:16px}
+  .pin-inner{width:40px;height:40px}
+  .pin.lead .pin-inner{width:50px;height:50px}
+  .pin-dot{width:9px;height:9px;border-width:2px}
+  .pin.lead .pin-dot{width:10px;height:10px}
   .pin-name{font-size:9px;padding:2px 6px}
   .bubble{font-size:10.5px;padding:7px 10px;max-width:170px}
   .hud{left:10px;bottom:9px;padding:6px 10px;gap:7px}
@@ -384,12 +401,10 @@ footer code{
 }
 @media (max-width:430px){
   body{padding:12px 10px 30px}
-  .pin-inner{width:28px;height:28px;box-shadow:0 6px 14px -8px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 3px rgba(8,13,22,.4)}
-  .pin.lead .pin-inner{width:36px;height:36px}
-  .pin.lead .pin-ava{font-size:17px}
-  .pin-ava{font-size:13px}
-  .pin-ava.bit{font-size:12px}
-  .pin-dot{width:7px;height:7px;border-width:1.5px;right:0;bottom:1px}
+  .pin-inner{width:34px;height:34px;box-shadow:0 0 0 1.5px rgba(8,13,22,.92), 0 0 0 2.5px var(--c), 0 6px 14px -8px rgba(0,0,0,.9), 0 0 14px -6px var(--c)}
+  .pin.lead .pin-inner{width:42px;height:42px;box-shadow:0 0 0 1.5px rgba(8,13,22,.94), 0 0 0 3px rgba(255,255,255,.9), 0 0 0 4.5px rgba(90,162,255,.85), 0 8px 18px -10px rgba(0,0,0,.95), 0 0 20px -6px #5aa2ff}
+  .pin-dot{width:8px;height:8px;border-width:1.5px;right:-1px;bottom:-1px}
+  .pin.lead .pin-dot{width:9px;height:9px}
   .pin-name{display:none}
   .pin{gap:0}
   .bubble{font-size:10px;max-width:140px}
@@ -406,7 +421,7 @@ footer code{
   .pin.prop{display:none}
 }
 @media (hover:none){
-  .pin:hover .pin-inner{box-shadow:0 10px 22px -10px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 4px rgba(8,13,22,.42)}
+  .pin:hover .pin-inner{transform:none}
 }
 @media (prefers-reduced-motion:reduce){
   .pin-inner,.pin-dot,.led,.pill.live i,.p-live i{animation:none !important}
@@ -435,7 +450,7 @@ footer code{
       </div>
       <div>
         <h1>PARK LAB <em>AI OFFICE</em></h1>
-        <p>브로 · 인스팅트 + 5개 브랜드 워크스테이션 — 실시간 작업 현황</p>
+        <p>브로 · 인스팅트 + 5개 브랜드 워크스테이션 — 실제 캐릭터 아바타 v2.1</p>
       </div>
     </div>
     <div class="topbar-r">
@@ -503,6 +518,8 @@ footer code{
       <code>scheduled-actions/</code></p>
     <p>개인정보(이름·연락처·주소·이메일·계좌·키) 없이 공개 브랜드·캐릭터·공개 영상 ID·작업 상태만 담았습니다.
       데이터는 <b id="stamp2">—</b> KST 스냅샷이며, 시계와 카운트다운만 실시간으로 흐릅니다.</p>
+    <p>캐릭터 아바타 v2.1 — 골프랩은 공식 모델 사진, 꿀팁랩은 마스코트 빠찌, 브로·인스팅트·1분 용어사전·사운드랩·싸다싸는 3D 피규어 일러스트.
+      모든 이미지는 <code>assets/*.webp</code> 로컬 파일(외부 CDN·추적 0건)입니다.</p>
   </footer>
 </div>
 
@@ -561,7 +578,7 @@ var DATA = {
    2. 캐릭터 · 존 (핀 좌표 = 배경 이미지 대비 %)
    ========================================================= */
 var PEOPLE = {
-  bro:{ name:"브로", role:"총괄 · 최종 편집·검수·스케줄", color:"#5aa2ff", ava:"ㅂ", bit:true,
+  bro:{ name:"브로", role:"총괄 · 최종 편집·검수·스케줄", color:"#5aa2ff", img:"assets/avatar_bro.webp",
     x:44.5, y:34.5, d:"0s",
     rows:[["지금","17:00 공개 4편 상태 확인 · 고정댓글·영어 다국어 마무리"],
           ["다음","18:00 블로그 83호 → 18:30 저녁 브리핑"],
@@ -569,7 +586,7 @@ var PEOPLE = {
     links:[["유튜브 4편 보기","#yt"],["다음 스케줄","#sched"]],
     say:["17시 4편 공개 완료!","고정댓글 등록 중…","18시 블로그 83호 대기","검수는 내가 맡을게"] },
 
-  instinct:{ name:"인스팅트", role:"AI 파트너 · 토픽 스캔·대본·팩트체크", color:"#8b8cff", ava:"✦", bit:true,
+  instinct:{ name:"인스팅트", role:"AI 파트너 · 토픽 스캔·대본·팩트체크", color:"#8b8cff", img:"assets/avatar_instinct.webp",
     x:16.5, y:29, d:".8s",
     rows:[["지금","검수대기 패키지 2편(꿀팁·회화 v8.1) · 실영상 소스풀 140개 확보"],
           ["가동","5분 주기 완료 메일·검수대기 드라이브 무과금 감시"],
@@ -577,7 +594,7 @@ var PEOPLE = {
     links:[["시스템 상태","#sys"]],
     say:["소스풀 140개 확보","검수대기 2편 올렸어요","5분마다 메일 확인","팩트체크 통과!"] },
 
-  golf:{ name:"골프랩", role:"골프 쇼츠 · 기본기·장비", color:"#4ade80", ava:"⛳",
+  golf:{ name:"골프랩", role:"골프 쇼츠 · 기본기·장비", color:"#4ade80", img:"assets/avatar_golf.webp",
     x:23.5, y:49, d:".35s",
     rows:[["17:00","lebLw-AC6Io · 드라이버 티 높이(공 절반 위로 4cm) · 0:47"],
           ["상태","고정댓글 등록·고정 완료 · 재생목록 '골프 기본기 12단계'"],
@@ -585,7 +602,7 @@ var PEOPLE = {
     links:[["영상 보기","https://youtu.be/lebLw-AC6Io"]],
     say:["드라이버 티 4cm!","고정댓글 완료","골프 기본기 12단계"] },
 
-  tips:{ name:"꿀팁랩", role:"생활 꿀팁 쇼츠", color:"#ffd166", ava:"💡",
+  tips:{ name:"꿀팁랩", role:"생활 꿀팁 쇼츠", color:"#ffd166", img:"assets/avatar_tips.webp",
     x:33, y:55, d:"1.2s",
     rows:[["17:00","SEStrZdWWVM · 계란 프라이 물 2큰술 · 0:39"],
           ["상태","고정댓글 등록 대기 · 설명란에 살림 꿀팁 링크"],
@@ -593,7 +610,7 @@ var PEOPLE = {
     links:[["영상 보기","https://youtu.be/SEStrZdWWVM"]],
     say:["계란엔 물 2큰술","17:00 공개!","뚜껑 3분이면 끝"] },
 
-  dict:{ name:"1분 용어사전", role:"회화·용어 1분 짤", color:"#7fb0ff", ava:"📖",
+  dict:{ name:"1분 용어사전", role:"회화·용어 1분 짤", color:"#7fb0ff", img:"assets/avatar_dict.webp",
     x:42.5, y:61, d:"1.7s",
     rows:[["17:00","xwN1nR5QEDM · 카페 주문 영어 3문장 · 0:49"],
           ["상태","고정댓글 등록 대기 · 한국어 CC 비움, 영어 제목·설명 추가"],
@@ -601,7 +618,7 @@ var PEOPLE = {
     links:[["영상 보기","https://youtu.be/xwN1nR5QEDM"]],
     say:["I want 대신 3문장","카페 영어 완료","ASR 검수 통과"] },
 
-  sound:{ name:"사운드랩", role:"음악 · 카페 어쿠스틱", color:"#b18cff", ava:"🎧",
+  sound:{ name:"사운드랩", role:"음악 · 카페 어쿠스틱", color:"#b18cff", img:"assets/avatar_sound.webp",
     x:52, y:67, d:".6s",
     rows:[["17:00","CAp_TMvKGt0 · 일요일 오후 카페 어쿠스틱 재즈·피아노 15분"],
           ["상태","16:9 커버 업로드 완료 · 고정댓글 등록 대기"],
@@ -609,7 +626,7 @@ var PEOPLE = {
     links:[["영상 보기","https://youtu.be/CAp_TMvKGt0"]],
     say:["어쿠스틱 재즈 15분","커버 16:9 업로드","창가에서 듣기 좋아"] },
 
-  ssada:{ name:"싸다싸", role:"골프·개꿀쇼핑 커머스", color:"#ff8ac2", ava:"🛒",
+  ssada:{ name:"싸다싸", role:"골프·개꿀쇼핑 커머스", color:"#ff8ac2", img:"assets/avatar_ssada.webp",
     x:60.5, y:72.5, d:"2.1s",
     rows:[["운영","싸다싸 골프(티타임·예약처) + 개꿀쇼핑(제휴·할인)"],
           ["집계","제휴·정산 수치는 07:00 / 22:00 수익성 브리핑에서 집계"],
@@ -619,7 +636,7 @@ var PEOPLE = {
 };
 
 var PROPS = {
-  meet:{ name:"콘텐츠 기획·편집 회의실", short:"기획·편집 회의실", role:"편성 · 편집 · 검수 미팅", color:"#37e0c6", ava:"🗓",
+  meet:{ name:"콘텐츠 기획·편집 회의실", short:"기획·편집 회의실", role:"편성 · 편집 · 검수 미팅", color:"#37e0c6", img:"assets/avatar_meet.webp",
     x:26, y:22.5, d:"1.4s", kind:"prop",
     rows:[["편성","골프랩 · 꿀팁랩 · 1분 용어사전 · 사운드랩 4편"],
           ["편집","0.2초 훅 프레임 썸네일 · 자막·CC 정리"],
@@ -627,7 +644,7 @@ var PROPS = {
     links:[["다음 스케줄","#sched"]],
     say:["4편 편성 확정","훅 프레임 통일","검수 통과분만 발행"] },
 
-  lounge:{ name:"라운지 · 브리핑 존", short:"라운지 · 브리핑", role:"오늘 목표 · 브리핑", color:"#ffc36b", ava:"📋",
+  lounge:{ name:"라운지 · 브리핑 존", short:"라운지 · 브리핑", role:"오늘 목표 · 브리핑", color:"#ffc36b", img:"assets/avatar_lounge.webp",
     x:79, y:49.5, d:"2.6s", kind:"prop",
     rows:[["17:00","유튜브 4편 공개 — 완료 ✓"],
           ["18:00","블로그 83호 발행 → 18:30 저녁 브리핑"],
@@ -699,11 +716,18 @@ function buildPins(){
     b.style.setProperty("--y", p.y + "%");
     b.style.setProperty("--c", p.color);
     b.style.setProperty("--d", p.d || "0s");
+    var frame = el("span", "pin-frame");
     var inner = el("span", "pin-inner");
-    var ava = el("span", "pin-ava" + (p.bit ? " bit" : ""), p.ava);
+    var ava = document.createElement("img");
+    ava.className = "pin-ava pin-img";
+    ava.src = p.img;
+    ava.alt = "";
+    ava.width = 120; ava.height = 120;
+    ava.decoding = "async";
     inner.appendChild(ava);
-    inner.appendChild(el("span", "pin-dot"));
-    b.appendChild(inner);
+    frame.appendChild(inner);
+    frame.appendChild(el("span", "pin-dot"));
+    b.appendChild(frame);
     b.appendChild(el("span", "pin-name", p.short || p.name));
     host.appendChild(b);
   }
@@ -783,11 +807,13 @@ function renderPanel(id){
     var ext = L[1].indexOf("http") === 0;
     links += '<a href="'+L[1]+'"'+(ext ? ' target="_blank" rel="noopener"' : '')+'>'+L[0]+' →</a>';
   }
-  var avaCls = p.bit ? " p-ava-bit" : "";
+  var avaCls = "";
   panel.innerHTML =
     '<div class="p-live"><i></i>'+(p.kind === "prop" ? "ZONE" : "WORKING")+'</div>'+
     '<div class="p-head">'+
-      '<div class="p-ava'+avaCls+'" style="color:'+p.color+'">'+p.ava+'</div>'+
+      '<div class="p-ava">'+
+        '<img src="'+p.img+'" alt="'+p.name+' 캐릭터 아바타" width="104" height="104" decoding="async">'+
+      '</div>'+
       '<div><h3>'+p.name+'</h3><p class="role">'+p.role+'</p></div>'+
     '</div>'+
     '<dl class="kv">'+rows+'</dl>'+
@@ -812,7 +838,14 @@ function buildChips(){
     b.type = "button";
     b.setAttribute("data-id", id);
     b.style.setProperty("--c", p.color);
-    b.appendChild(el("i", null, p.bit ? (id === "bro" ? "ㅂ" : "✦") : p.ava));
+    var ic = el("i");
+    var ci = document.createElement("img");
+    ci.src = p.img;
+    ci.alt = "";
+    ci.width = 42; ci.height = 42;
+    ci.decoding = "async";
+    ic.appendChild(ci);
+    b.appendChild(ic);
     b.appendChild(document.createTextNode(p.name));
     host.appendChild(b);
   }
