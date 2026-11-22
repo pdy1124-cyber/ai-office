@@ -289,14 +289,7 @@ footer code{background:#101b2c;border:1px solid #1e2f4a;border-radius:4px;paddin
         <div class="sched" id="schedList"></div>
       </article>
 
-      <article class="card" id="stock">
-        <h3>📈 후지모토 백테스트</h3>
-        <p class="cap" id="stockCap">한국주식 10종목 · 1억 원 · 왕복비용 0.20%</p>
-        <table class="mx" id="stockTable"></table>
-        <p class="cap" id="stockFoot" style="margin:8px 0 0"></p>
-      </article>
-
-      <article class="card wide" id="sys">
+      <article class="card" id="sys">
         <h3>🖥 시스템 · 자동화 <span class="badge">무인 가동</span></h3>
         <p class="cap">GitHub Actions · 블로그스팟 큐 · 인스팅트 감시</p>
         <div class="sys" id="sysList"></div>
@@ -308,7 +301,7 @@ footer code{background:#101b2c;border:1px solid #1e2f4a;border-radius:4px;paddin
   <footer>
     <p><b>데이터 출처</b> — 이 화면의 모든 수치·영상 ID·발행 상태는 워크스페이스 실제 기록에서만 가져왔습니다.
       <code>work/daily_20261122/RESULT_20261122.md</code> · <code>work/blog1122/RESULT_20261122.md</code> ·
-      <code>work/shigeru_kr_stock/report.md</code> · <code>scheduled-actions/</code></p>
+      <code>scheduled-actions/</code></p>
     <p>개인정보(이름·연락처·주소·이메일·계좌·키) 없이 공개 브랜드·캐릭터·공개 영상 ID·작업 상태만 담았습니다.
       데이터는 <b id="stamp2">2026-11-22 17:16</b> KST 스냅샷이며, 시계와 카운트다운만 실시간으로 흐릅니다.</p>
   </footer>
@@ -354,20 +347,8 @@ var DATA = {
     { ic:"🌙", t:"2026-11-22T18:30:00+09:00", label:"저녁 퇴근 브리핑", sub:"하루 결산 · 내일 준비" },
     { ic:"💰", t:"2026-11-22T22:00:00+09:00", label:"수익성·정산 브리핑", sub:"애드센스 · 제휴 · 네이버페이 집계" },
     { ic:"🌅", t:"2026-11-23T04:10:00+09:00", label:"새벽 콘텐츠 제작 → 즉시 공개 전환", sub:"블로그 3편 + 유튜브 4편, 예약 없이 바로 공개" },
-    { ic:"📈", t:"2026-11-23T15:05:00+09:00", label:"평일 한국주식 신호 감시", sub:"월~금 15:05 장 마감 신호 확인" },
     { ic:"🔮", t:"2026-11-23T16:40:00+09:00", label:"메타 뮤즈(Muse) 가입 재시도", sub:"Browserling 한도 초기화 후 1회" }
   ],
-
-  stock: {
-    cap:"한국주식 10종목 · 2024-01-02~2026-11-20 · 1억 원 · 왕복비용 0.20%",
-    rows:[
-      ["전략 A (익절 +20/40/80%)", "+78.7%", "+23.1%", "-15.0%"],
-      ["전략 B (익절 +35/45/60/100%)", "+83.0%", "+24.2%", "-17.6%"],
-      ["단순 보유 (Buy & Hold)", "+197.8%", "+47.9%", "-49.0%"],
-      ["KOSPI 지수", "+92.4%", "—", "-45.5%"]
-    ],
-    foot:"수익은 단순 보유가 크고, 낙폭은 룰 트레이딩이 작다 (CAGR÷MDD A 1.54 / B 1.37 / B&H 0.98)."
-  },
 
   system: [
     { k:"GitHub Actions", v:"절감 완료", n:false, d:"블로그·유튜브 크론 하루 12회 → 새벽 05:00~05:40 1회 (월 2,000분 한도 방어)" },
@@ -384,7 +365,7 @@ var PEOPLE = {
   bro:{ name:"브로", role:"총괄 · 최종 편집·검수·스케줄", color:"#5aa2ff", ava:"ㅂ", cls:"b-blue",
     rows:[["지금","17:00 공개 4편 상태 확인 · 고정댓글·영어 다국어 마무리 진행"],
           ["다음","18:00 블로그 83호 → 18:30 저녁 브리핑"],
-          ["담당","최종 편집·검수, 스케줄·주식 신호 감시 총괄"]],
+          ["담당","최종 편집·검수, 스케줄·발행 총괄"]],
     links:[["유튜브 4편 보기","#yt"],["다음 스케줄","#sched"]],
     say:["17시 4편 공개 완료!","고정댓글 등록 중…","18시 블로그 83호 대기","검수는 내가 맡을게"] },
 
@@ -445,12 +426,12 @@ var PROPS = {
           ["무인 업로더","queue/2026-11-22-18-blog83.json 1건 대기"]],
     links:[["시스템 상세","#sys"]] },
 
-  table:{ name:"회의 테이블 · 백테스트", role:"주식 · 일정", color:"#ffd166", ava:"📈", cls:"b-yellow",
-    rows:[["전략 A","+78.7% · CAGR 23.1% · MDD -15.0%"],
-          ["전략 B","+83.0% · CAGR 24.2% · MDD -17.6%"],
-          ["단순 보유","+197.8% · MDD -49.0%"],
-          ["기간","2024-01-02 ~ 2026-11-20 · 10종목"]],
-    links:[["백테스트 표","#stock"]] }
+  table:{ name:"콘텐츠 기획·편집 회의 테이블", role:"콘텐츠 기획 · 편집 · 일정", color:"#ffd166", ava:"🗓", cls:"b-yellow",
+    rows:[["편성","골프랩 · 꿀팁랩 · 1분 용어사전 · 사운드랩 4편"],
+          ["편집","0.2초 훅 프레임 썸네일 · 자막·CC 정리"],
+          ["검수","ASR 역검수 · 팩트체크 통과분만 발행"],
+          ["발행","17:00 공개 → 18:00 블로그 83호"]],
+    links:[["다음 스케줄","#sched"]] }
 };
 
 /* =========================================================
@@ -765,11 +746,10 @@ function drawTable(t){
   r(112,178,106,6,"#a37c50");
   r(112,178,106,1,"#c39a68");
   r(112,184,106,3,"#6d4f33");
-  // 서류 + 미니 차트
+  // 서류 + 콘텐츠 편성안 (텍스트 줄 + 썸네일 3칸)
   r(126,172,26,6,"#dfe8f6"); r(126,172,26,1,"#b9c8dd");
-  var pts=[[128,176],[132,174],[136,175],[140,172],[144,173],[148,171],[152,172]];
-  for (var i=0;i<pts.length;i++){ r(pts[i][0],pts[i][1],2,1,"#22b06a"); if(i>0) r(pts[i][0]-1, Math.min(pts[i][1],pts[i-1][1])+1, 1,1, "#22b06a"); }
-  r(150,170,2,1,"#d1435b");
+  r(128,174,10,1,"#8199b9"); r(128,176,7,1,"#a8b9d2");
+  r(140,174,3,3,"#4ade80"); r(144,174,3,3,"#ffd166"); r(148,174,3,3,"#b18cff");
   // 노트북
   r(162,170,15,8,"#1b2433"); r(163,171,13,5,"#2d3a52"); r(166,172,6,2,"#5aa2ff");
   r(160,178,19,2,"#2d3a52");
@@ -1122,7 +1102,7 @@ function buildLabels(){
   var items = [
     { id:"board", text:"오늘 목표", left:(40/384*100), top:(64/216*100), cls:"" },
     { id:"rack",  text:"GitHub Actions", left:(378/384*100), top:(96/216*100), cls:"right" },
-    { id:"table", text:"주식 백테스트 · 일정", left:(163/384*100), top:(161/216*100), cls:"" }
+    { id:"table", text:"콘텐츠 기획·편집 회의", left:(163/384*100), top:(161/216*100), cls:"" }
   ];
   var html = "";
   for (var i=0;i<items.length;i++){
@@ -1222,20 +1202,6 @@ function tickSched(){
   }
 }
 
-function renderStock(){
-  var rows = DATA.stock.rows;
-  var html = "<thead><tr><th>전략</th><th>총수익</th><th>CAGR</th><th>MDD</th></tr></thead><tbody>";
-  for (var i=0;i<rows.length;i++){
-    var cls = rows[i][1].indexOf("+")===0 ? "up" : "dn";
-    var mdd = rows[i][3].indexOf("-")===0 ? "dn" : "";
-    html += "<tr><td>"+rows[i][0]+"</td><td class='"+cls+"'>"+rows[i][1]+"</td><td>"+rows[i][2]+"</td><td class='"+mdd+"'>"+rows[i][3]+"</td></tr>";
-  }
-  html += "</tbody>";
-  document.getElementById("stockTable").innerHTML = html;
-  document.getElementById("stockCap").textContent = DATA.stock.cap;
-  document.getElementById("stockFoot").textContent = DATA.stock.foot;
-}
-
 function renderSys(){
   var html = "";
   for (var i=0;i<DATA.system.length;i++){
@@ -1262,7 +1228,6 @@ buildLabels();
 renderVideos();
 renderBlogs();
 renderSched();
-renderStock();
 renderSys();
 renderPanel("bro");
 tickSched();
