@@ -190,13 +190,15 @@ body{
 .ceo .ceo-st.busy{color:#ffe3a8}
 .ceo .ceo-st.ok{color:#b4f7cf}
 .ceo-stamp{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-9deg) scale(.6);
-  font-size:15px;font-weight:800;letter-spacing:.14em;color:#8ef0b8;
-  padding:3px 9px;border:2.5px solid rgba(142,240,184,.9);border-radius:6px;
-  background:rgba(10,30,20,.55);opacity:0;pointer-events:none;
+  position:absolute;right:-10px;top:-12px;transform:rotate(-11deg) scale(.6);
+  font-size:12.5px;font-weight:800;letter-spacing:.12em;color:#8ef0b8;
+  padding:2px 7px;border:2px solid rgba(142,240,184,.9);border-radius:5px;
+  background:rgba(10,30,20,.9);opacity:0;pointer-events:none;
   transition:opacity .3s ease, transform .45s cubic-bezier(.2,1.5,.4,1);
+  box-shadow:0 6px 16px -8px #000;
 }
-.ceo.approved .ceo-stamp{opacity:1;transform:translate(-50%,-50%) rotate(-9deg) scale(1)}
+.ceo.approved .ceo-stamp{opacity:1;transform:rotate(-11deg) scale(1)}
+.ceo.approved{border-color:rgba(142,240,184,.6);box-shadow:0 14px 30px -18px #000, 0 0 26px -10px rgba(142,240,184,.8)}
 
 /* scene hud */
 .hud{
