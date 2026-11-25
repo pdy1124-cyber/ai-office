@@ -165,7 +165,7 @@ body{
 /* speech bubble */
 .w-bubble{
   position:absolute;left:50%;bottom:calc(100% + 8px);transform:translate(-50%,4px);
-  max-width:190px;padding:8px 11px;border-radius:12px;
+  width:max-content;max-width:200px;padding:8px 11px;border-radius:12px;
   font-size:11.5px;font-weight:600;line-height:1.42;color:#f2f7ff;letter-spacing:-.01em;
   background:rgba(16,24,38,.9);border:1px solid rgba(255,255,255,.18);
   box-shadow:0 16px 34px -16px rgba(0,0,0,.95);
@@ -405,7 +405,7 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10
   .w-ava{width:44px;height:44px;border-radius:12px}
   .w-name{font-size:9.5px;padding:1px 6px}
   .w-st{font-size:8.5px;padding:1px 5px}
-  .w-bubble{font-size:10px;max-width:150px;padding:6px 9px}
+  .w-bubble{font-size:10px;max-width:158px;padding:6px 9px}
   .station img{width:22px;height:22px}
   .station span{font-size:8.5px;padding:1px 5px}
   .ceo{padding:6px 9px 5px;gap:2px}
@@ -483,9 +483,9 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10
       <div class="atmo"></div>
 
       <div class="stations" id="stations"></div>
-      <span class="room-tag" style="--x:23.5%;--y:37%">회의실 · 오더 브리핑</span>
+      <span class="room-tag" style="--x:23.5%;--y:31.5%">회의실 · 오더 브리핑</span>
 
-      <button class="ceo" id="ceoDesk" style="--x:66%;--y:60%" data-id="ceo" aria-label="박시영 최종 승인자 — 승인 데스크">
+      <button class="ceo" id="ceoDesk" style="--x:70.5%;--y:59.5%" data-id="ceo" aria-label="박시영 최종 승인자 — 승인 데스크">
         <span class="ceo-k">최종 승인자</span>
         <b>박시영</b>
         <span class="ceo-st" id="ceoSt">대기</span>
@@ -685,7 +685,7 @@ var ZONES = {
   ssada:{ name:"싸다싸", short:"싸다싸", role:"골프·개꿀쇼핑 커머스", color:"#ff8ac2", img:"assets/avatar_ssada.webp", kind:"zone", x:53.5, y:45.5,
     rows:[["운영","싸다싸 골프(티타임·예약처) + 개꿀쇼핑(제휴·할인)"],["집계","제휴·정산 수치는 07:00 / 22:00 수익성 브리핑에서 집계"],["담당","공식 DB·제휴 웹폼·쇼핑 허브 운영"]],
     links:[["다음 스케줄","#sched"]], say:["골프 특가 스캔 중","제휴 정산 22시","티타임 감시 가동"] },
-  meet:{ name:"AI 회의실", short:"회의실", role:"오더 브리핑 · 3인 회의", color:"#37e0c6", img:"assets/avatar_meet.webp", kind:"zone", x:23.5, y:49,
+  meet:{ name:"AI 회의실", short:"회의실", role:"오더 브리핑 · 3인 회의", color:"#37e0c6", img:"assets/avatar_meet.webp", kind:"zone", x:17.2, y:44.5,
     rows:[["용도","오더 브리핑 · 3인 회의 · 수정 지시"],["참석","브로 · 인스팅트 · 뮤즈"],["Drive","회의 결과는 작업요약_인수인계/ 로 전달"]],
     links:[["결재라인 보기","#flowList"]], say:["3인 모두 참석","오더 브리핑 시작","회의록은 인수인계로"] },
   lounge:{ name:"라운지 · 브리핑 존", short:"라운지", role:"오늘 목표 · 브리핑", color:"#ffc36b", img:"assets/avatar_lounge.webp", kind:"zone", x:88, y:66,
@@ -848,6 +848,7 @@ function showTalk(id){
   if (!hud) return;
   hud.textContent = p.say[0];
   clearTimeout(talkTimer);
+  talkTimer = setTimeout(function(){ hud.textContent = lastHud.path; }, 2600);
 }
 
 /* =========================================================
@@ -999,7 +1000,9 @@ function renderFlow(activeTl, finished){
 function setHud(k, path){
   document.getElementById("hudK").textContent = k;
   document.getElementById("hudPath").textContent = path;
+  lastHud = { k:k, path:path };
 }
+var lastHud = { k:"결재라인 대기", path:"새 오더를 시작하세요" };
 
 function resetAll(){
   clearTimeout(stepTimer); clearTimeout(endTimer);
