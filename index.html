@@ -483,7 +483,6 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10
       <div class="atmo"></div>
 
       <div class="stations" id="stations"></div>
-      <span class="room-tag" style="--x:23.5%;--y:31.5%">회의실 · 오더 브리핑</span>
 
       <button class="ceo" id="ceoDesk" style="--x:70.5%;--y:59.5%" data-id="ceo" aria-label="박시영 최종 승인자 — 승인 데스크">
         <span class="ceo-k">최종 승인자</span>
@@ -685,7 +684,7 @@ var ZONES = {
   ssada:{ name:"싸다싸", short:"싸다싸", role:"골프·개꿀쇼핑 커머스", color:"#ff8ac2", img:"assets/avatar_ssada.webp", kind:"zone", x:53.5, y:45.5,
     rows:[["운영","싸다싸 골프(티타임·예약처) + 개꿀쇼핑(제휴·할인)"],["집계","제휴·정산 수치는 07:00 / 22:00 수익성 브리핑에서 집계"],["담당","공식 DB·제휴 웹폼·쇼핑 허브 운영"]],
     links:[["다음 스케줄","#sched"]], say:["골프 특가 스캔 중","제휴 정산 22시","티타임 감시 가동"] },
-  meet:{ name:"AI 회의실", short:"회의실", role:"오더 브리핑 · 3인 회의", color:"#37e0c6", img:"assets/avatar_meet.webp", kind:"zone", x:17.2, y:44.5,
+  meet:{ name:"AI 회의실", short:"회의실", role:"오더 브리핑 · 3인 회의", color:"#37e0c6", img:"assets/avatar_meet.webp", kind:"zone", x:13.2, y:42,
     rows:[["용도","오더 브리핑 · 3인 회의 · 수정 지시"],["참석","브로 · 인스팅트 · 뮤즈"],["Drive","회의 결과는 작업요약_인수인계/ 로 전달"]],
     links:[["결재라인 보기","#flowList"]], say:["3인 모두 참석","오더 브리핑 시작","회의록은 인수인계로"] },
   lounge:{ name:"라운지 · 브리핑 존", short:"라운지", role:"오늘 목표 · 브리핑", color:"#ffc36b", img:"assets/avatar_lounge.webp", kind:"zone", x:88, y:66,
@@ -704,7 +703,7 @@ var SPOT = {
   ceoSpot:{ x:60.5, y:67 },
   meet:{ x:23.5, y:49 }
 };
-var MEET_OFFSET = { bro:{x:-3.1,y:-1.8}, instinct:{x:3.1,y:-1.8}, muse:{x:0,y:1.2} };
+var MEET_OFFSET = { bro:{x:-4.6,y:-2.2}, instinct:{x:4.6,y:-2.2}, muse:{x:0,y:1.4} };
 
 /* =========================================================
    3. DOM 헬퍼
