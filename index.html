@@ -441,6 +441,12 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10
   .chip{font-size:11px;padding:7px 11px 7px 8px}
 }
 @media (max-width:520px){ .pill.stamp{display:none} }
+@media (max-width:560px){
+  .w-st{display:none}
+  .w-name{font-size:9px;padding:1px 6px}
+  .w-bubble{max-width:136px;font-size:9.5px;padding:5px 8px;line-height:1.38}
+  .ceo .ceo-k{font-size:7.5px}
+}
 @media (prefers-reduced-motion:reduce){
   .walker{transition:none !important}
   .walker.walking .w-body,.w-doc,.pill.live i,.p-live i{animation:none !important}
@@ -814,6 +820,8 @@ function moveTo(id, spotKey, doc, cb){
   if (!w || !target) { if (cb) cb(); return; }
   var off = { x:0, y:0 };
   if (spotKey === "meet" && MEET_OFFSET[id]) off = MEET_OFFSET[id];
+  var sceneW = document.getElementById("scene").getBoundingClientRect().width;
+  if (sceneW && sceneW < 600) off = { x: off.x * 1.55, y: off.y };
   var tx = target.x + off.x, ty = target.y + off.y;
   var dx = tx - pos[id].x, dy = ty - pos[id].y;
   var dist = Math.sqrt(dx*dx + dy*dy);
