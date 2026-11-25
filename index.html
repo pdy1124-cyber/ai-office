@@ -1268,7 +1268,19 @@ tickClock();
 initParallax();
 setInterval(tickSched, 1000);
 setInterval(tickClock, 1000);
-setTimeout(function(){ runStep(0); }, 900);
+
+/* 캡처·공유용 정지 모드: ?still=1 (브리핑 장면 고정) */
+var STILL = false;
+try { STILL = new URLSearchParams(location.search).get("still") === "1"; } catch(e){}
+if (STILL){
+  moveTo("bro","meet"); moveTo("instinct","meet"); moveTo("muse","meet");
+  setStatus("bro","오더 하달"); setStatus("instinct","브리핑 참석"); setStatus("muse","오더 접수");
+  renderFlow(0,false);
+  setHud("결재 1/7 · 오더 하달", "muse_staging/2026-11-27_order_golf.md");
+  say("bro","11-27 골프 쇼츠 1편 오더. 오더 카드는 Drive muse_staging/ 에 올렸습니다.", 600000);
+} else {
+  setTimeout(function(){ runStep(0); }, 900);
+}
 </script>
 </body>
 </html>
