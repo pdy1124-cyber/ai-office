@@ -135,6 +135,11 @@ body{
   box-shadow:0 0 0 2px rgba(8,13,22,.9), 0 0 0 3.5px var(--c), 0 12px 24px -12px rgba(0,0,0,.95), 0 0 22px -8px var(--c);
   background:#0d1421;
 }
+.walker.compact .w-ava{width:46px;height:46px;border-radius:12px}
+.walker.compact .w-name{font-size:9px;padding:1px 6px}
+.walker.compact .w-st{display:none}
+.walker.compact .w-bubble{max-width:184px}
+
 .walker.walking .w-body{animation:walkBob .52s ease-in-out infinite}
 @keyframes walkBob{0%,100%{transform:translateY(0) rotate(-1.1deg)}25%{transform:translateY(-4px) rotate(.8deg)}50%{transform:translateY(0) rotate(1.1deg)}75%{transform:translateY(-3px) rotate(-.8deg)}}
 .w-shadow{position:absolute;left:50%;bottom:-6px;width:42px;height:9px;margin-left:-21px;border-radius:50%;background:rgba(0,0,0,.5);filter:blur(3px);z-index:-1}
@@ -711,7 +716,7 @@ var SPOT = {
   ceoSpot:{ x:60.5, y:67 },
   meet:{ x:23.5, y:49 }
 };
-var MEET_OFFSET = { bro:{x:-4.6,y:-2.2}, instinct:{x:4.6,y:-2.2}, muse:{x:0,y:1.4} };
+var MEET_OFFSET = { bro:{x:-5.4,y:-2.6}, instinct:{x:5.4,y:-2.6}, muse:{x:0,y:1.8} };
 
 /* =========================================================
    3. DOM 헬퍼
@@ -832,6 +837,7 @@ function moveTo(id, spotKey, doc, cb){
   w.style.setProperty("--y", ty + "%");
   pos[id].x = tx; pos[id].y = ty;
   w.classList.toggle("has-doc", !!doc);
+  w.classList.toggle("compact", spotKey === "meet");
   pos[id].doc = !!doc;
   if (ms > 0){
     w.classList.add("walking");
@@ -1023,7 +1029,7 @@ function resetAll(){
     w.style.setProperty("--x", s.x + "%");
     w.style.setProperty("--y", s.y + "%");
     pos[id] = { x:s.x, y:s.y, doc:false };
-    w.classList.remove("walking","has-doc");
+    w.classList.remove("walking","has-doc","compact");
     w.querySelector(".w-bubble").classList.remove("on");
     w.querySelector(".w-bubble").textContent = "";
     setStatus(id, "대기");
