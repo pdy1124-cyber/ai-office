@@ -497,9 +497,9 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10
 
       <div class="stations" id="stations"></div>
 
-      <button class="ceo" id="ceoDesk" style="--x:70.5%;--y:59.5%" data-id="ceo" aria-label="박시영 최종 승인자 — 승인 데스크">
+      <button class="ceo" id="ceoDesk" style="--x:70.5%;--y:59.5%" data-id="ceo" aria-label="빡 최종 승인자 — 승인 데스크">
         <span class="ceo-k">최종 승인자</span>
-        <b>박시영</b>
+        <b>빡</b>
         <span class="ceo-st" id="ceoSt">대기</span>
         <span class="ceo-stamp">승인</span>
       </button>
@@ -538,7 +538,7 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10
     <ol class="flow-list" id="flowList"></ol>
     <p class="flow-note">
       <b>전달 경로</b> — 오더·제작물·수정본은 <code>muse_staging/</code>, 검토·검수·최종 승인 기록은 <code>작업요약_인수인계/</code>, 승인 후 발행분은 <code>auto_upload_queue/</code>로 전달됩니다.
-      최종 승인자는 <b>박시영 (최종 승인자)</b>이며, 승인 전에는 어떤 산출물도 업로드되지 않습니다.
+      최종 승인자는 <b>빡 (최종 승인자)</b>이며, 승인 전에는 어떤 산출물도 업로드되지 않습니다.
       이 화면의 결재 흐름은 표준 경로를 보여주는 시연이며, 실제 오더·승인 기록은 해당 Drive 폴더에 남습니다.
     </p>
   </section>
@@ -552,7 +552,7 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10
 
       <article class="card full" id="team">
         <h3>AI 팀 3인 + 최종 승인자 <span class="tag">Drive 결재라인</span></h3>
-        <p class="cap">브로(총괄·검수) → 뮤즈(제작·수정) → 인스팅트(검토·업로드), 마지막 승인은 박시영 님. 카드를 누르면 상세가 열립니다.</p>
+        <p class="cap">브로(총괄·검수) → 뮤즈(제작·수정) → 인스팅트(검토·업로드), 마지막 승인은 빡 님. 카드를 누르면 상세가 열립니다.</p>
         <div class="team" id="teamList"></div>
       </article>
 
@@ -673,8 +673,8 @@ var PEOPLE = {
     links:[["결재라인 보기","#flowList"]],
     say:["영상은 제가 뽑습니다","목소리도 그대로 씁니다","수정본은 v2로 올려요"] },
 
-  ceo:{ name:"박시영", short:"박시영", role:"최종 승인자 (CEO)", color:"#ffd166", kind:"approver",
-    rows:[["직함","박시영 (최종 승인자)"],
+  ceo:{ name:"빡", short:"빡", role:"최종 승인자 (CEO)", color:"#ffd166", kind:"approver",
+    rows:[["직함","빡 (최종 승인자)"],
           ["결재","결재라인 마지막 — 승인 / 보류 / 반려"],
           ["경로","작업요약_인수인계/ 최종 승인 상신"]],
     links:[["결재라인 보기","#flowList"]],
@@ -942,7 +942,7 @@ var TLINE = [
   { t:"1차 검토", who:"뮤즈 → 인스팅트", drv:"작업요약_인수인계/" },
   { t:"보고", who:"인스팅트 → 브로", drv:"작업요약_인수인계/" },
   { t:"수정 루프", who:"브로 → 뮤즈 → 인스팅트", drv:"muse_staging/ v2" },
-  { t:"최종 승인", who:"브로 → 박시영", drv:"작업요약_인수인계/" },
+  { t:"최종 승인", who:"브로 → 빡", drv:"작업요약_인수인계/" },
   { t:"업로드", who:"인스팅트", drv:"auto_upload_queue/" }
 ];
 
@@ -977,12 +977,12 @@ var SEQ = [
     hud:"작업요약_인수인계/ 2차 검토 통과" },
   { tl:5, dur:3200, moves:[["bro","ceoSpot",true]],
     st:{ bro:"최종 승인 상신", ceo:"승인 대기" },
-    say:["bro","박시영 님, 최종 승인 상신합니다."],
+    say:["bro","빡 님, 최종 승인 상신합니다."],
     hud:"작업요약_인수인계/ 최종 승인 상신" },
   { tl:5, dur:2800, moves:[], stamp:true,
     st:{ ceo:"승인 완료", bro:"승인 대기" },
     say:["bro","승인 확인. auto_upload_queue/ 로 넘깁니다."],
-    hud:"최종 승인 완료 · 박시영 (최종 승인자)" },
+    hud:"최종 승인 완료 · 빡 (최종 승인자)" },
   { tl:6, dur:3000, moves:[["instinct","instinctDesk",true]],
     st:{ instinct:"업로드 중", bro:"완료", ceo:"승인 완료" },
     say:["instinct","auto_upload_queue/ 에서 꺼내 업로드합니다."],
