@@ -825,6 +825,16 @@ body.still .walker .w-fig{animation:none !important}
 .ceo.golfing .ceo-st{display:none}
 .ceo.golfing .ceo-plate{border-color:rgba(74,222,128,.55);box-shadow:0 14px 30px -18px #000,0 0 22px -12px rgba(74,222,128,.8)}
 
+
+/* v3.7c 라벨·배치 */
+.w-plate{flex-direction:row;align-items:center;justify-content:center;gap:4px;margin-bottom:5px}
+.w-cue{font-size:8.5px;padding:2px 7px}
+.ceo .ceo-plate{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:3px 5px;max-width:214px;padding:4px 9px 5px}
+.ceo .ceo-plate b{font-size:12px}
+.ceo .ceo-k{font-size:7.5px;letter-spacing:.06em}
+.ceo .ceo-st{font-size:9px}
+.ceo .ceo-cue{font-size:8px;margin-top:0}
+
 </style>
 </head>
 <body>
@@ -865,7 +875,7 @@ body.still .walker .w-fig{animation:none !important}
 
       <div class="stations" id="stations"></div>
 
-      <button class="ceo" id="ceoDesk" style="--x:73.5%;--y:84%" data-id="ceo" aria-label="대표 최종 승인자 — 승인 데스크">
+      <button class="ceo" id="ceoDesk" style="--x:77.5%;--y:87%" data-id="ceo" aria-label="대표 최종 승인자 — 승인 데스크">
         <span class="ceo-plate">
           <span class="ceo-k">최종 승인자</span>
           <b>대표</b>
@@ -1210,11 +1220,11 @@ var ENTITY_IDS = ["ceo","secon","bro","c1","c2","c3","instinct","muse","meet","l
 
 /* 좌표: 장면 대비 % (바닥 기준점 · 캐릭터는 그 위에 서 있음) */
 var SPOT = {
-  museDesk:{ x:25, y:88 },
-  seconDesk:{ x:37, y:91 },
-  broDesk:{ x:49, y:88 },
-  instinctDesk:{ x:61, y:91 },
-  ceoSpot:{ x:73.5, y:84 },
+  museDesk:{ x:25, y:89 },
+  seconDesk:{ x:37, y:92.5 },
+  broDesk:{ x:49, y:89 },
+  instinctDesk:{ x:61, y:92.5 },
+  ceoSpot:{ x:77.5, y:87 },
   meet:{ x:43, y:72 },
   ninstinct:{ x:68.5, y:88 },
   nsecon:{ x:31.5, y:88 },
