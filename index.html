@@ -926,7 +926,7 @@ var DATA = {
   ],
 
   schedules: [
-    { ic:"☀️", hh:8,  mm:17, label:"아침 브리핑", sub:"시영 님 지시로 일시정지", off:true },
+    { ic:"☀️", hh:8,  mm:17, label:"아침 브리핑", sub:"오빠 지시로 일시정지", off:true },
     { ic:"🧹", hh:4,  mm:0,  label:"협업 메일 일괄 정리", sub:"완료·종결 메일 휴지통 정리" },
     { ic:"🌅", hh:4,  mm:10, label:"당일 콘텐츠 사전 제작", sub:"유튜브 4편 + 블로그 3편 → 즉시 공개" },
     { ic:"🖼", hh:6,  mm:10, label:"블로그 표지 GitHub 미러", sub:"공개 URL 생성·유지" },
@@ -1016,7 +1016,7 @@ var PEOPLE = {
   bro:{ name:"쩡이", short:"쩡이", handle:"@pdy1124", role:"보고·지시 창구", color:"#5aa2ff", kind:"person", badge:"PICKLE · 창구",
     img:"assets/avatar_jjongi_v36.webp",
     rows:[["계정","@pdy1124 · 피클 본캐"],
-          ["역할","시영 님 보고 · 지시 전달·회신 창구"],
+          ["역할","오빠 보고 · 지시 전달·회신 창구"],
           ["지금","한도 보호 — 실무는 쎄컨에 이관 완료"],
           ["공유","메일 허브로 변경점만 주고받음"]],
     links:[["결재라인 보기","#flowList"],["다음 스케줄","#sched"]],
@@ -1546,7 +1546,7 @@ function tileHTML(id){
     : id === "muse" ? "muse_staging/"
     : id === "instinct" ? "검수대기 → 업로드 큐"
     : id === "secon" ? "작업요약_인수인계/"
-    : id === "bro" ? "시영 님 보고 · 지시 전달"
+    : id === "bro" ? "오빠 보고 · 지시 전달"
     : "메일 허브 · 변경점만";
   return '<button class="tm" data-id="'+id+'" style="--c:'+p.color+'" type="button">'+av+
     '<span><b>'+p.name+'</b>'+(p.handle ? '<em class="id">'+p.handle+'</em>' : '')+
