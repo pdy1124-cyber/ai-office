@@ -169,7 +169,7 @@ body{
 @keyframes docPop{from{transform:translateY(4px) scale(.8);opacity:0}to{transform:none;opacity:1}}
 /* speech bubble */
 .w-bubble{
-  position:absolute;left:50%;bottom:calc(100% + 8px);transform:translate(-50%,4px);
+  position:absolute;left:50%;bottom:calc(100% + 8px);transform:translate(calc(-50% + var(--shift,0px)),4px);
   width:max-content;max-width:200px;padding:8px 11px;border-radius:12px;
   font-size:11.5px;font-weight:600;line-height:1.42;color:#f2f7ff;letter-spacing:-.01em;
   background:rgba(16,24,38,.9);border:1px solid rgba(255,255,255,.18);
@@ -177,8 +177,8 @@ body{
   opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s ease, transform .3s ease, visibility .3s;
   white-space:normal;text-align:center;z-index:6;
 }
-.w-bubble.on{opacity:1;visibility:visible;transform:translate(-50%,0)}
-.w-bubble::after{content:"";position:absolute;left:50%;bottom:-5px;width:9px;height:9px;margin-left:-4.5px;background:rgba(16,24,38,.95);border-right:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18);transform:rotate(45deg);border-radius:0 0 3px 0}
+.w-bubble.on{opacity:1;visibility:visible;transform:translate(calc(-50% + var(--shift,0px)),0)}
+.w-bubble::after{content:"";position:absolute;left:calc(50% - var(--shift,0px));bottom:-5px;width:9px;height:9px;margin-left:-4.5px;background:rgba(16,24,38,.95);border-right:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18);transform:rotate(45deg);border-radius:0 0 3px 0}
 
 /* CEO desk */
 .ceo{
@@ -1038,11 +1038,27 @@ function moveTo(id, spotKey, doc, cb){
   } else if (cb) cb();
 }
 
+/* 말풍선이 장면 밖으로 나가지 않게 안쪽으로 밀어 넣는다 */
+function clampBubble(b){
+  var scene = document.getElementById("scene");
+  if (!scene || !b) return;
+  requestAnimationFrame(function(){
+    if (!b.classList.contains("on")) return;
+    var br = b.getBoundingClientRect(), sr = scene.getBoundingClientRect();
+    var pad = 10, shift = 0;
+    if (br.left < sr.left + pad) shift = (sr.left + pad) - br.left;
+    else if (br.right > sr.right - pad) shift = (sr.right - pad) - br.right;
+    if (shift) b.style.setProperty("--shift", Math.round(shift) + "px");
+  });
+}
+
 function say(id, text, ms){
   var w = walkerEls[id]; if (!w) return;
   var b = w.querySelector(".w-bubble");
   b.textContent = text;
+  b.style.setProperty("--shift","0px");
   b.classList.add("on");
+  clampBubble(b);
   clearTimeout(b._t);
   b._t = setTimeout(function(){ b.classList.remove("on"); }, ms || 3200);
 }
