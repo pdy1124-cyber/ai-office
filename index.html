@@ -1102,7 +1102,10 @@ var SPOT = {
   broDesk:{ x:50, y:86 },
   instinctDesk:{ x:62, y:90 },
   ceoSpot:{ x:72, y:80 },
-  meet:{ x:44, y:70 }
+  meet:{ x:44, y:70 },
+  ninstinct:{ x:68.5, y:88 },
+  nsecon:{ x:33, y:88 },
+  nbro:{ x:45, y:86 }
 };
 var DESK_OF = { bro:"broDesk", secon:"seconDesk", instinct:"instinctDesk", muse:"museDesk" };
 var WALKER_IDS = ["secon","bro","instinct","muse"];
@@ -1371,11 +1374,11 @@ var SEQ = [
     st:{ muse:"컷·음성 제작", instinct:"조립 대기" },
     say:["muse","컷 6개 + 문장별 음성, 0.16초 호흡으로 올립니다."],
     hud:"muse_staging/ (제작 중)" },
-  { tl:2, dur:3000, moves:[["muse","instinctDesk",true]],
+  { tl:2, dur:3000, moves:[["muse","ninstinct",true]],
     st:{ muse:"납품 · 이동", instinct:"ffmpeg 조립" },
     say:["muse","초안 납품했습니다 — 검수대기_패키지/ 사본도 올렸어요."],
     hud:"검수대기_패키지/ 납품" },
-  { tl:3, dur:3000, moves:[["instinct","seconDesk",true]],
+  { tl:3, dur:3000, moves:[["instinct","nsecon",true]],
     st:{ instinct:"조립 완료 · QA 요청", secon:"qa_gate 실행" },
     say:["instinct","qa_gate 돌렸습니다. FAIL 0건 나올 때까지 안 올립니다."],
     hud:"qa_gate.py PASS 대기" },
@@ -1383,7 +1386,7 @@ var SEQ = [
     st:{ secon:"QA PASS", instinct:"대기", muse:"대기" },
     say:["secon","PASS. 이제 찌니·쮸·써니 크로스 검증으로 넘깁니다."],
     hud:"qa_gate.py 4/4 PASS" },
-  { tl:4, dur:3400, moves:[["secon","broDesk",true]],
+  { tl:4, dur:3400, moves:[["secon","nbro",true]],
     st:{ secon:"검증 취합", bro:"보고 준비" },
     say:["bro","3계정 대조 결과 수치·소재 일치. 오빠 상신 준비합니다."],
     hud:"작업요약_인수인계/ 크로스 검증 완료" },
@@ -1496,8 +1499,8 @@ document.getElementById("btnOrder").addEventListener("click", function(){
 document.getElementById("btnRevise").addEventListener("click", function(){
   setAuto(false);
   jumpTo(4, function(){
-    moveTo("muse","instinctDesk",false);
-    moveTo("instinct","seconDesk",false);
+    moveTo("muse","ninstinct",false);
+    moveTo("instinct","nsecon",false);
     moveTo("bro","broDesk",false);
     setStatus("muse","수정본 v2");
     setStatus("instinct","재조립 완료");
