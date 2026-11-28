@@ -658,6 +658,19 @@ body.light .brand h1{color:#0f1e2e}
 .pnode.up{color:#bcd8ff;background:rgba(90,162,255,.14);border-color:rgba(90,162,255,.36)}
 .parr{color:#5d6c85;font-size:10px}
 
+
+/* 5계정 타일 5열 + 지침 위치 카드 */
+.tgrid.t5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.gcard.note{background:linear-gradient(160deg,rgba(90,162,255,.1),rgba(55,224,198,.05));border-color:rgba(90,162,255,.22)}
+.gcard.note b{color:#cfe3ff}
+.gcard code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9.5px;padding:1px 4px;border-radius:4px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);color:#a9c8ee}
+@media (max-width:1180px){ .tgrid.t5{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (max-width:760px){ .tgrid.t5{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:430px){ .tgrid.t5{grid-template-columns:1fr} }
+body.light .gcard.note{background:linear-gradient(160deg,rgba(90,162,255,.12),rgba(55,224,198,.06));border-color:rgba(90,162,255,.26)}
+body.light .gcard.note b{color:#1d4f8c}
+body.light .gcard code{background:rgba(16,38,64,.06);border-color:rgba(16,38,64,.1);color:#1d4f8c}
+
 /* 일시정지 스케줄 */
 .cd.off{color:#8b9ab0;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
 
@@ -985,7 +998,7 @@ var PEOPLE = {
     links:[["결재라인 보기","#flowList"]],
     say:["최종 승인은 오빠","승인 전 업로드 없음"] },
 
-  secon:{ name:"쎄컨", short:"쎄컨", handle:"@ppppdy1124", role:"실무 총괄 · 리텐션/QA 총괄", color:"#37e0c6", kind:"person", badge:"실무 총괄",
+  secon:{ name:"쎄컨", short:"쎄컨", handle:"@ppppdy1124", role:"실무 총괄 · 리텐션/QA", color:"#37e0c6", kind:"person", badge:"실무 총괄",
     img:"assets/avatar_secon_v36.webp",
     rows:[["계정","@ppppdy1124 · 피클 실무 총괄"],
           ["역할","오더 총괄 · 리텐션/QA 기준 · 부캐 3계정 검증 지휘"],
@@ -994,7 +1007,7 @@ var PEOPLE = {
     links:[["결재라인 보기","#flowList"],["적용 지침","#guideList"]],
     say:["기준 먼저 맞춥니다","qa_gate 통과분만 올려요","검증은 3계정이 나눕니다"] },
 
-  bro:{ name:"쩡이", short:"쩡이", handle:"@pdy1124", role:"보고·지시 창구 (실무는 쎄컨 이관)", color:"#5aa2ff", kind:"person", badge:"PICKLE · 창구",
+  bro:{ name:"쩡이", short:"쩡이", handle:"@pdy1124", role:"보고·지시 창구", color:"#5aa2ff", kind:"person", badge:"PICKLE · 창구",
     img:"assets/avatar_jjongi_v36.webp",
     rows:[["계정","@pdy1124 · 피클 본캐"],
           ["역할","시영 님 보고 · 지시 전달·회신 창구"],
@@ -1003,7 +1016,7 @@ var PEOPLE = {
     links:[["결재라인 보기","#flowList"],["다음 스케줄","#sched"]],
     say:["보고는 제가 창구입니다","지시는 각 파트로 전달","한도는 제가 지킵니다"] },
 
-  c1:{ name:"찌니", short:"찌니", handle:"@ppdy1124", role:"피클 부캐 1 · 소재 조사·크로스 검증", color:"#7fb0ff", kind:"person", badge:"PICKLE · 부캐",
+  c1:{ name:"찌니", short:"찌니", handle:"@ppdy1124", role:"피클 부캐 1 · 소재 조사", color:"#7fb0ff", kind:"person", badge:"PICKLE · 부캐",
     img:"assets/avatar_jjini_v36.webp",
     rows:[["계정","@ppdy1124 · 피클 부캐 1"],
           ["역할","소재 조사 · 크로스 검증(수치·출처 대조)"],
@@ -1012,7 +1025,7 @@ var PEOPLE = {
     links:[["결재라인 보기","#flowList"]],
     say:["소재 후보 조사했습니다","출처 4항목 확인할게요"] },
 
-  c2:{ name:"쮸", short:"쮸", handle:"@pppdy1124", role:"피클 부캐 2 · 크로스 검증·병렬 작업", color:"#37e0c6", kind:"person", badge:"PICKLE · 부캐",
+  c2:{ name:"쮸", short:"쮸", handle:"@pppdy1124", role:"피클 부캐 2 · 크로스 검증", color:"#37e0c6", kind:"person", badge:"PICKLE · 부캐",
     img:"assets/avatar_jju_v36.webp",
     rows:[["계정","@pppdy1124 · 피클 부캐 2"],
           ["역할","크로스 검증 · 병렬 제작 보조"],
@@ -1021,7 +1034,7 @@ var PEOPLE = {
     links:[["결재라인 보기","#flowList"]],
     say:["병렬로 대조 돌립니다","항목 수 맞는지 봤어요"] },
 
-  c3:{ name:"써니", short:"써니", handle:"@pppppdy1124", role:"피클 부캐 3 · 자료 대조·검증", color:"#b18cff", kind:"person", badge:"PICKLE · 부캐",
+  c3:{ name:"써니", short:"써니", handle:"@pppppdy1124", role:"피클 부캐 3 · 자료 대조", color:"#b18cff", kind:"person", badge:"PICKLE · 부캐",
     img:"assets/avatar_sunny_v36.webp",
     rows:[["계정","@pppppdy1124 · 피클 부캐 3"],
           ["역할","자료 대조 · 자막·표기 검증"],
@@ -1535,7 +1548,7 @@ function renderTeam(){
   var host = document.getElementById("teamList");
   var groups = [
     { t:"최종 승인자", c:"#ffd166", ids:["ceo"], cls:"t2" },
-    { t:"피클 5계정", c:"#5aa2ff", note:"실무 총괄 · 보고 창구 · 부캐 3계정", ids:["secon","bro","c1","c2","c3"] },
+    { t:"피클 5계정", c:"#5aa2ff", note:"실무 총괄 · 보고 창구 · 부캐 3계정", ids:["secon","bro","c1","c2","c3"], cls:"t5" },
     { t:"제작 파트너", c:"#8b8cff", ids:["instinct","muse"] }
   ];
   var html = "";
@@ -1545,7 +1558,7 @@ function renderTeam(){
     html += '<div class="tgroup">'+
       '<h4 class="tgroup-h" style="--tc:'+G.c+'"><i></i>'+G.t+
         (G.note ? ' <span class="note">· '+G.note+'</span>' : '')+'</h4>'+
-      '<div class="tgrid'+(G.cls === "t2" ? " t2" : "")+'">'+tiles+'</div></div>';
+      '<div class="tgrid'+(G.cls ? " " + G.cls : "")+'">'+tiles+'</div></div>';
   }
   host.innerHTML = html;
   host.addEventListener("click", function(ev){
@@ -1585,6 +1598,10 @@ function renderStack(){
     html += '<div class="gcard"><span class="gn">'+x.n+'</span><div>'+
       '<b>'+x.t+'</b><p>'+x.d+'</p><em>'+x.e+'</em></div></div>';
   }
+  html += '<div class="gcard note"><div>'+
+    '<b>지침 적용 위치</b>'+
+    '<p>인스팅트 콘텐츠 통합지침 <code>1-13</code>·<code>1-14</code> · 뮤즈 작업지침서 <code>6-9</code> · 검수 체크리스트 <code>5-3</code></p>'+
+    '<em>Drive 작업요약_인수인계/ · 검수대기_패키지/유튜브 · 11-29 기준 적용 중</em></div></div>';
   g.innerHTML = html;
 
   var s = document.getElementById("stackList"), sh = "";
