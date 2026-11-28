@@ -818,6 +818,13 @@ body.still .walker .w-fig{animation:none !important}
   .ceo .ceo-cue{font-size:7.5px}
 }
 
+
+/* v3.7.1 미세조정 */
+.walker{--fh:clamp(82px,13.1vw,186px)}
+.ceo{--fhc:clamp(88px,14.1vw,200px)}
+.ceo.golfing .ceo-st{display:none}
+.ceo.golfing .ceo-plate{border-color:rgba(74,222,128,.55);box-shadow:0 14px 30px -18px #000,0 0 22px -12px rgba(74,222,128,.8)}
+
 </style>
 </head>
 <body>
@@ -1313,15 +1320,19 @@ function buildWalkers(){
 
 function setStatus(id, text){
   var el2, cls = "idle";
-  busy[id] = !/^(대기|완료|승인 완료|수정 완료)$/.test(text);
+  var t = norm(text);
+  busy[id] = IDLE_TXT.indexOf(t) === -1;
   if (id === "ceo"){
     el2 = document.getElementById("ceoSt");
-    if (/완료|승인$/.test(text)) cls = "ok"; else if (/대기|상신/.test(text)) cls = "busy";
+    if (t.indexOf(K.done) >= 0 || t.slice(-2) === K.appr) cls = "ok";
+    else if (t.indexOf(K.idle) >= 0 || t.indexOf(K.wait) >= 0) cls = "busy";
     if (!el2) return;
     el2.textContent = text; el2.className = "ceo-st " + cls; syncGolf(); return;
   }
   var w = walkerEls[id]; if (!w) return;
-  if (/완료|통과|PASS|게시/.test(text)) cls = "ok"; else if (/대기/.test(text)) cls = "idle"; else cls = "busy";
+  if (t.indexOf(K.done) >= 0 || t.indexOf(K.pass) >= 0 || t.indexOf("PASS") >= 0 || t.indexOf(K.upload) >= 0) cls = "ok";
+  else if (t === K.idle) cls = "idle";
+  else cls = "busy";
   var s = w.querySelector(".w-st");
   s.textContent = text; s.className = "w-st " + cls;
   syncGolf();
@@ -1652,6 +1663,13 @@ function setAuto(on){
 }
 btnAuto.addEventListener("click", function(){ setAuto(!autoOn); });
 
+
+
+/* 한글 비교용 — 파일 안에서 NFC/NFD가 섞여 있어 항상 NFC로 맞춘다 */
+function norm(s){ return (s == null ? "" : String(s)).normalize("NFC"); }
+var K = { idle:norm("대기"), done:norm("완료"), pass:norm("통과"), upload:norm("게시"),
+          wait:norm("상신"), appr:norm("승인") };
+var IDLE_TXT = [K.idle, K.done, norm("승인 완료"), norm("수정 완료")];
 
 /* =========================================================
    6-b. 아이들 골프 — 보고 없을 땐 스윙·퍼팅 연습 (v3.7)
