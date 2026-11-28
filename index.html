@@ -373,7 +373,7 @@ body{
 .srow .lb{flex:1;min-width:0}
 .srow .lb b{display:block;font-size:12.5px;font-weight:650;color:#e9f1fd;line-height:1.3}
 .srow .lb em{display:block;font-style:normal;font-size:10.5px;color:var(--mute);margin-top:2px}
-.cd{flex:0 0 auto;min-width:62px;text-align:center;font-size:11px;font-weight:750;font-variant-numeric:tabular-nums;color:#7ff0dd;background:rgba(55,224,198,.1);border:1px solid rgba(55,224,198,.24);border-radius:8px;padding:4px 7px}
+.cd{flex:0 0 auto;min-width:74px;text-align:center;font-size:10.5px;font-weight:750;font-variant-numeric:tabular-nums;color:#7ff0dd;background:rgba(55,224,198,.1);border:1px solid rgba(55,224,198,.24);border-radius:8px;padding:4px 7px}
 .cd.past{color:#5f6f88;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.07)}
 .cd.now{color:#04120f;background:var(--teal);border-color:var(--teal)}
 .sys-row + .sys-row{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.055)}
@@ -426,7 +426,7 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10
   .flow{padding:14px}
   .flow-list{grid-template-columns:repeat(2,minmax(0,1fr))}
   .srow .lb b{font-size:12px}
-  .cd{min-width:54px;font-size:10px}
+  .cd{min-width:64px;font-size:10px}
   .team{grid-template-columns:1fr}
 }
 @media (max-width:430px){
@@ -751,18 +751,20 @@ var DATA = {
       meta:"오빠 최종 승인 완료 · 뮤즈 출처 4항목 확인 후 즉시 공개", st:"승인 완료", state:"wait" },
     { ch:"실시간 이슈 · 토픽", color:"#ffd166", title:"국민연금 v3", len:"0:34",
       meta:"오빠 최종 승인 완료 · 업로드 지시 메일 발송 · 뮤즈 출처 확인 대기", st:"승인 완료", state:"wait" },
-    { ch:"골프랩 · 고정 편성", color:"#4ade80", title:"골프 v8 · 그립", len:"—",
-      meta:"뮤즈 V자 홈 음성 수령 · 보완 2컷 제작 대기", st:"보완 대기", state:"wait" }
+    { ch:"골프랩 · 고정 편성", color:"#4ade80", title:"골프 v8 · 그립", len:"제작 중",
+      meta:"뮤즈 V자 홈 음성 수령 · 보완 2컷 제작 대기", st:"보완 대기", state:"wait" },
+    { ch:"4대 채널", color:"#7fb0ff", title:"11-26 즉시 공개 4편", len:"4편",
+      meta:"골프·꿀팁·용어사전·사운드랩 공개 완료 · 고정댓글 등록", st:"공개 완료", state:"done" }
   ],
 
   blogs: [
     { no:"A", state:"done", st:"공개 완료", url:"https://pparkdoo.blogspot.com/2026/11/325-5-2.html",
-      title:"11-28 A편 · 기준금리", meta:"블로그스팟 07:14 공개 확인" },
+      title:"기준금리", meta:"11-28 A편 · 블로그스팟 07:14 공개 확인" },
     { no:"C", state:"done", st:"공개 완료", url:"https://pparkdoo.blogspot.com/2026/11/12-3-1-1-12.html",
-      title:"11-28 C편 · 난임휴직", meta:"블로그스팟 07:15 공개 확인" },
-    { no:"B", state:"wait", st:"확인 대기", title:"11-28 B편 · 기초생활보장 v5",
-      meta:"게이트 4/4 PASS · 발행 확인 대기" },
-    { no:"티", state:"wait", st:"게시 대기", title:"티스토리 11-27·28 6편",
+      title:"난임휴직", meta:"11-28 C편 · 블로그스팟 07:15 공개 확인" },
+    { no:"B", state:"wait", st:"확인 대기", title:"기초생활보장 제4차 종합계획 v5",
+      meta:"11-28 B편 · 게이트 4/4 PASS · 발행 확인 대기" },
+    { no:"T", state:"wait", st:"게시 대기", title:"티스토리 11-27·28 6편",
       meta:"게시 슬롯 대기 · 인스팅트 발행" }
   ],
 
@@ -818,7 +820,7 @@ var PEOPLE = {
     say:["오더는 Drive로 내립니다","검수 통과분만 상신","5계정 일감 나눠요"] },
 
   c1:{ name:"쩡", short:"쩡", handle:"@ppdy1124", role:"피클 부캐 · 일감 분산·보완", color:"#7fb0ff",
-    kind:"clone", initials:"쩡",
+    kind:"clone", initials:"②",
     rows:[["계정","@ppdy1124 · 피클 부캐 1"],
           ["역할","일감 분산 · 쩡이 산출물 보완·교차 검증"],
           ["상태","대기 — 일감 분배 시 투입"],
@@ -827,7 +829,7 @@ var PEOPLE = {
     say:["보완분 맡을게요","교차 검증 준비"] },
 
   c2:{ name:"둥이", short:"둥이", handle:"@pppdy1124", role:"피클 부캐 · 일감 분산·보완", color:"#37e0c6",
-    kind:"clone", initials:"둥",
+    kind:"clone", initials:"③",
     rows:[["계정","@pppdy1124 · 피클 부캐 2"],
           ["역할","일감 분산 · 병렬 작업·검증"],
           ["상태","대기 — 일감 분배 시 투입"],
@@ -836,7 +838,7 @@ var PEOPLE = {
     say:["병렬로 돌릴게요","검증 결과 올립니다"] },
 
   c3:{ name:"시영", short:"시영", handle:"@pppppdy1124", role:"피클 부캐 · 일감 분산·보완", color:"#b18cff",
-    kind:"clone", initials:"시",
+    kind:"clone", initials:"⑤",
     rows:[["계정","@pppppdy1124 · 피클 부캐 3"],
           ["역할","일감 분산 · 자료 정리·대조"],
           ["상태","대기 — 일감 분배 시 투입"],
@@ -845,7 +847,7 @@ var PEOPLE = {
     say:["자료 대조 맡을게요","정리본 올립니다"] },
 
   backup:{ name:"예비 백업", short:"백업", handle:"@ppppdy1124", role:"쩡이 예비 백업 · 평시 제외", color:"#8595ad",
-    kind:"clone", initials:"백",
+    kind:"clone", initials:"④",
     rows:[["계정","@ppppdy1124 · 예비 백업"],
           ["운영","평시 제외 — 쩡이 장애·한도 소진 시에만 투입"],
           ["권한","평시 계정 조작·발행 없음"],
@@ -1337,7 +1339,7 @@ function renderTeam(){
   var groups = [
     { t:"최종 승인자", c:"#ffd166", ids:["ceo"], cls:"t2" },
     { t:"피클 5계정", c:"#5aa2ff", note:"@ppppdy1124 예비 백업은 평시 제외", ids:["bro","c1","c2","c3","backup"] },
-    { t:"실행 파트너", c:"#8b8cff", ids:["instinct","muse"], cls:"t2" }
+    { t:"실행 파트너", c:"#8b8cff", ids:["instinct","muse"] }
   ];
   var html = "";
   for (var g=0;g<groups.length;g++){
@@ -1402,8 +1404,9 @@ function fmtLeft(ms){
   var h = Math.floor(s/3600); s -= h*3600;
   var m = Math.floor(s/60); s -= m*60;
   if (d > 0) return d+"일 "+h+"시간";
-  if (h > 0) return two(h)+":"+two(m)+":"+two(s);
-  return two(m)+":"+two(s);
+  if (h > 0) return h+"시간 "+m+"분";
+  if (m > 0) return m+"분 "+s+"초";
+  return s+"초";
 }
 
 /* 매일 반복 스케줄의 다음 회차(ms) — KST 고정(+09:00) */
