@@ -835,6 +835,10 @@ body.still .walker .w-fig{animation:none !important}
 .ceo .ceo-st{font-size:9px}
 .ceo .ceo-cue{font-size:8px;margin-top:0}
 
+
+/* v3.7d */
+.ceo .ceo-plate{max-width:186px}
+
 </style>
 </head>
 <body>
@@ -875,7 +879,7 @@ body.still .walker .w-fig{animation:none !important}
 
       <div class="stations" id="stations"></div>
 
-      <button class="ceo" id="ceoDesk" style="--x:77.5%;--y:87%" data-id="ceo" aria-label="대표 최종 승인자 — 승인 데스크">
+      <button class="ceo" id="ceoDesk" style="--x:80%;--y:87.5%" data-id="ceo" aria-label="대표 최종 승인자 — 승인 데스크">
         <span class="ceo-plate">
           <span class="ceo-k">최종 승인자</span>
           <b>대표</b>
@@ -1224,7 +1228,7 @@ var SPOT = {
   seconDesk:{ x:37, y:92.5 },
   broDesk:{ x:49, y:89 },
   instinctDesk:{ x:61, y:92.5 },
-  ceoSpot:{ x:77.5, y:87 },
+  ceoSpot:{ x:80, y:87.5 },
   meet:{ x:43, y:72 },
   ninstinct:{ x:68.5, y:88 },
   nsecon:{ x:31.5, y:88 },
@@ -1324,6 +1328,7 @@ function buildWalkers(){
     w.style.setProperty("--x", s.x + "%");
     w.style.setProperty("--y", s.y + "%");
     w.style.setProperty("--wd", "0ms");
+    w.style.zIndex = Math.round(s.y);
     w.addEventListener("click", function(){ select(id); showTalk(id); });
   });
 }
@@ -1365,6 +1370,7 @@ function moveTo(id, spotKey, doc, cb){
   w.style.setProperty("--x", tx + "%");
   w.style.setProperty("--y", ty + "%");
   pos[id].x = tx; pos[id].y = ty; pos[id].t = Date.now();
+  w.style.zIndex = Math.round(ty);
   w.classList.toggle("has-doc", !!doc);
   w.classList.toggle("compact", spotKey === "meet");
   pos[id].doc = !!doc;
@@ -1713,6 +1719,7 @@ function walkTo(id, x, y, ms){
   w.style.setProperty("--x", x + "%");
   w.style.setProperty("--y", y + "%");
   pos[id].x = x; pos[id].y = y; pos[id].t = Date.now();
+  w.style.zIndex = Math.round(y);
   if (ms > 0){
     w.classList.add("walking");
     clearTimeout(w._wt);
@@ -1741,9 +1748,19 @@ function strollTick(){
     if (Date.now() - (pos[id].t || 0) < 5200) return;
     if (Math.random() > 0.5) return;
     var base = SPOT[DESK_OF[id]];
-    var dx = (Math.random() < .5 ? -1 : 1) * (2.5 + Math.random() * 4.5);
-    var tx = Math.max(11, Math.min(87, base.x + dx));
-    var ty = Math.max(81, Math.min(93, base.y + (Math.random() - .5) * 3));
+    var tx = 0, ty = 0, ok = false;
+    for (var tryN = 0; tryN < 6 && !ok; tryN++){
+      var dx = (Math.random() < .5 ? -1 : 1) * (2.5 + Math.random() * 4.5);
+      tx = Math.max(11, Math.min(86, base.x + dx));
+      ty = Math.max(82, Math.min(93, base.y + (Math.random() - .5) * 3));
+      ok = true;
+      for (var j = 0; j < WALKER_IDS.length; j++){
+        var o = WALKER_IDS[j];
+        if (o === id || !pos[o]) continue;
+        if (Math.abs(pos[o].x - tx) < 8.5 && Math.abs(pos[o].y - ty) < 7){ ok = false; break; }
+      }
+    }
+    if (!ok) return;
     walkTo(id, tx, ty, 3400 + Math.round(Math.random() * 900));
   });
 }
