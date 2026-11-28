@@ -3,3 +3,4 @@ node_modules/
 _src/
 _preview/
 _gen/
+_tools/__pycache__/

@@ -3,17 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Park Lab AI Office v3.6.1 · 야외 골프장 라운딩 · 피클 5계정 결재라인</title>
-<meta name="description" content="Park Lab AI 실사 오피스 v3.6.1 — 쎄컨·빡이·피클 부캐 3계정과 인스팅트·뮤즈가 Google Drive로 오더·제작·QA·최종 승인(대표)을 주고받는 야외 골프장 라운딩 대시보드">
+<title>Park Lab AI Office v3.7 · 전신 골프모델 라운딩 · 보고 없으면 스윙 연습</title>
+<meta name="description" content="Park Lab AI 실사 오피스 v3.7 — 전신 골프웨어 모델로 세운 대표·쎄컨·빡이·인스팅트·뮤즈가 페어웨이에서 스윙 연습하며, 오더·보고가 오면 스윙을 멈추고 Google Drive 결재라인을 도는 야외 골프장 대시보드">
 <meta name="theme-color" content="#06090f">
-<meta property="og:title" content="Park Lab AI Office v3.6.1 · 야외 골프장 라운딩">
-<meta property="og:description" content="골프장 라운딩에서 움직이는 쎄컨·빡이·인스팅트·뮤즈 — 대표 최종 승인 결재라인과 11-29 현황">
+<meta property="og:title" content="Park Lab AI Office v3.7 · 전신 골프모델 라운딩">
+<meta property="og:description" content="보고 없을 땐 골프 ㅋㅋ — 전신 골프웨어 모델 스윙 모션 + 대표 최종 승인 결재라인 (v3.7)">
 <meta property="og:image" content="assets/golf_bg_v36.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235aa2ff'/%3E%3Cstop offset='.6' stop-color='%2337e0c6'/%3E%3Cstop offset='1' stop-color='%23b18cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230a1020'/%3E%3Crect x='7' y='10' width='18' height='13' rx='2' fill='url(%23g)'/%3E%3Crect x='9' y='13' width='14' height='7' rx='1' fill='%230a1020' opacity='.55'/%3E%3C/svg%3E">
 <link rel="preload" as="image" href="assets/golf_bg_v36.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_ceo_v36.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_instinct_v36.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_muse_v36.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/full/ceo.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/full/secon.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/full/bro.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/full/instinct.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/full/muse.webp" type="image/webp">
 <style>
 :root{
   --bg:#06090f; --bg2:#0a1018;
@@ -718,6 +720,104 @@ body.light .pnode.gate{color:#06655c;background:rgba(55,224,198,.2);border-color
 body.light .pnode.up{color:#1d4f8c;background:rgba(90,162,255,.16);border-color:rgba(90,162,255,.34)}
 body.light .pipe{border-top-color:rgba(16,38,64,.08)}
 body.light .cd.off{color:#8794a6;background:rgba(16,38,64,.05);border-color:rgba(16,38,64,.08)}
+
+/* ══════════════════════════════════════════════════════════
+   v3.7 · 전신 골프웨어 모델 + 아이들 골프 스윙
+   (기존 로직·클래스는 그대로 두고 무대 위 캐릭터만 전신으로 교체)
+   ══════════════════════════════════════════════════════════ */
+.walker{--fh:clamp(78px,12.4vw,168px);transform:translate(-50%,-100%)}
+.ceo{--fhc:clamp(84px,13.4vw,182px)}
+.w-body{gap:2px}
+.w-plate{display:flex;flex-direction:column;align-items:center;gap:3px;margin-bottom:4px;position:relative;z-index:3}
+.w-fig{position:relative;height:var(--fh);display:flex;align-items:flex-end;justify-content:center;transform-origin:50% 100%}
+.w-full{position:relative;z-index:2;height:100%;width:auto;max-width:none;display:block;transform-origin:50% 100%;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.42)) saturate(1.03) contrast(1.02);will-change:transform}
+.w-fig .w-shadow{position:absolute;left:50%;bottom:-4px;width:70%;height:14px;margin-left:0;transform:translateX(-50%);
+  border-radius:50%;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.6),rgba(0,0,0,.26) 55%,rgba(0,0,0,0) 74%);
+  filter:blur(2.5px);z-index:0}
+.w-fig .w-doc{right:-6px;top:10%}
+
+/* 골프 상태 큐 — 보고 없을 때 */
+.w-cue{display:none;font-size:9px;font-weight:750;white-space:nowrap;padding:2px 8px;border-radius:999px;letter-spacing:0;
+  color:#cdf9d6;background:rgba(9,30,18,.86);border:1px solid rgba(74,222,128,.5);box-shadow:0 6px 14px -8px #000}
+.walker.golfing .w-cue,.ceo.golfing .ceo-cue{display:inline-block}
+.walker.golfing .w-st{display:none}
+.walker.golfing .w-name{border-color:rgba(134,239,172,.6);box-shadow:0 6px 14px -8px #000,0 0 14px -6px rgba(74,222,128,.8)}
+
+/* 걷기 — 전신 스트라이드 */
+.walker.walking .w-body{animation:none}
+.walker.walking .w-fig{animation:strideBob .62s ease-in-out infinite}
+@keyframes strideBob{0%,100%{transform:translateY(0) rotate(-.9deg)}25%{transform:translateY(-3px) rotate(.7deg)}50%{transform:translateY(-1px) rotate(.9deg)}75%{transform:translateY(-3px) rotate(-.6deg)}}
+
+/* 아이들 골프 스윙 */
+.walker.golfing .w-full{animation:golfSwing 5.6s cubic-bezier(.37,.03,.28,1) infinite}
+@keyframes golfSwing{
+  0%,34%,100%{transform:rotate(0deg) translateY(0)}
+  40%{transform:rotate(-2.2deg) translateY(1px)}
+  46%{transform:rotate(-6.4deg) translateY(1px) scaleX(.985)}
+  51%{transform:rotate(4.6deg) translateY(-2px) scaleX(.975)}
+  57%{transform:rotate(6.2deg) translateY(0) scaleX(.98)}
+  64%{transform:rotate(1.4deg) translateY(0)}
+  72%{transform:rotate(-.8deg)}
+}
+.w-arc{position:absolute;left:50%;bottom:2%;width:118%;height:58%;transform:translateX(-50%) rotate(-60deg);opacity:0;
+  border-radius:50%;border:2px solid transparent;border-top-color:rgba(255,255,255,.75);z-index:1;pointer-events:none}
+.walker.golfing .w-arc{animation:swingArc 5.6s ease-out infinite}
+@keyframes swingArc{
+  0%,42%{opacity:0;transform:translateX(-50%) rotate(-64deg) scale(.62)}
+  50%{opacity:.8;transform:translateX(-50%) rotate(-14deg) scale(.82)}
+  58%{opacity:.45;transform:translateX(-50%) rotate(34deg) scale(.96)}
+  68%{opacity:0;transform:translateX(-50%) rotate(58deg) scale(1.02)}
+  100%{opacity:0}
+}
+.w-ball,.ceo .ceo-ball{position:absolute;left:64%;bottom:6px;width:5px;height:5px;border-radius:50%;background:#fff;
+  box-shadow:0 0 7px rgba(255,255,255,.95);opacity:0;z-index:3;pointer-events:none}
+.walker.golfing .w-ball,.ceo.golfing .ceo-ball{animation:ballFly 5.6s ease-out infinite}
+@keyframes ballFly{
+  0%,54%{opacity:0;transform:translate(0,0) scale(.6)}
+  58%{opacity:1;transform:translate(1px,-2px) scale(1)}
+  84%{opacity:.85;transform:translate(26px,-52px) scale(.7)}
+  96%,100%{opacity:0;transform:translate(40px,-30px) scale(.55)}
+}
+/* 보고·말풍선이 오면 스윙 정지 */
+.walker.talking .w-full,.walker.talking .w-arc,.walker.talking .w-ball,
+.ceo.talking .ceo-full,.ceo.talking .ceo-ball{animation-play-state:paused}
+
+/* 회의실 클러스터 */
+.walker.compact .w-fig{height:calc(var(--fh) * .78)}
+.walker.compact .w-cue{display:none !important}
+.walker.compact .w-plate .w-st{display:none}
+
+/* 최종 승인 데스크 = 전신 대표 */
+.ceo{transform:translate(-50%,-100%);padding:0;gap:0;background:none;border:0;box-shadow:none;border-radius:0;z-index:6}
+.ceo .ceo-plate{display:flex;flex-direction:column;align-items:center;gap:1px;margin-bottom:5px;padding:5px 11px 6px;border-radius:12px;
+  background:rgba(10,16,26,.8);border:1px solid rgba(255,209,102,.5);
+  box-shadow:0 14px 30px -18px #000,0 0 24px -12px rgba(255,209,102,.85)}
+.ceo .ceo-fig{position:relative;height:var(--fhc);display:flex;align-items:flex-end;justify-content:center;transform-origin:50% 100%}
+.ceo .ceo-full{position:relative;z-index:2;height:100%;width:auto;display:block;transform-origin:50% 100%;
+  filter:drop-shadow(0 9px 14px rgba(0,0,0,.45)) saturate(1.03)}
+.ceo .ceo-shadow{position:absolute;left:50%;bottom:-4px;width:72%;height:14px;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.62),rgba(0,0,0,.26) 55%,rgba(0,0,0,0) 76%);filter:blur(2.5px);z-index:0}
+.ceo .ceo-cue{display:none;font-size:8.5px;font-weight:750;white-space:nowrap;padding:1px 7px;border-radius:999px;margin-top:2px;
+  color:#cdf9d6;background:rgba(9,30,18,.9);border:1px solid rgba(74,222,128,.5)}
+.ceo.golfing .ceo-full{animation:golfSwing 5.9s cubic-bezier(.37,.03,.28,1) infinite}
+.ceo.golfing .ceo-stamp{display:none}
+.ceo .ceo-stamp{right:0;top:2%}
+.ceo.approved .ceo-plate{border-color:rgba(142,240,184,.75);box-shadow:0 14px 30px -18px #000,0 0 26px -10px rgba(142,240,184,.85)}
+.walker.z-front{z-index:8}
+
+/* 접근성·정지 모드 */
+@media (prefers-reduced-motion:reduce){
+  .walker.golfing .w-full,.ceo.golfing .ceo-full,.walker.golfing .w-arc,.walker.golfing .w-ball,
+  .ceo.golfing .ceo-ball,.walker.walking .w-fig{animation:none !important}
+}
+body.still .w-full,body.still .ceo-full,body.still .w-arc,body.still .w-ball,body.still .ceo-ball,
+body.still .walker .w-fig{animation:none !important}
+@media (max-width:760px){
+  .w-cue{font-size:8px;padding:1px 6px}
+  .ceo .ceo-cue{font-size:7.5px}
+}
+
 </style>
 </head>
 <body>
@@ -739,7 +839,7 @@ body.light .cd.off{color:#8794a6;background:rgba(16,38,64,.05);border-color:rgba
       </div>
       <div>
         <h1>PARK LAB <em>AI OFFICE</em></h1>
-        <p>쎄컨 · 빡이 · 인스팅트 · 뮤즈 — 대표 최종 승인 결재라인 · <b style="color:var(--teal)">v3.6.1 · 야외 골프장 라운딩</b></p>
+        <p>쎄컨 · 빡이 · 인스팅트 · 뮤즈 — 대표 최종 승인 결재라인 · <b style="color:var(--teal)">v3.7 · 전신 골프모델 라운딩</b></p>
       </div>
     </div>
     <div class="topbar-r">
@@ -758,12 +858,19 @@ body.light .cd.off{color:#8794a6;background:rgba(16,38,64,.05);border-color:rgba
 
       <div class="stations" id="stations"></div>
 
-      <button class="ceo" id="ceoDesk" style="--x:81%;--y:63%" data-id="ceo" aria-label="대표 최종 승인자 — 승인 데스크">
-        <img class="ceo-ava" src="assets/avatar_ceo_v36.webp" alt="대표 아바타" width="76" height="76" decoding="async">
-        <span class="ceo-k">최종 승인자</span>
-        <b>대표</b>
-        <span class="ceo-st" id="ceoSt">대기</span>
-        <span class="ceo-stamp">승인</span>
+      <button class="ceo" id="ceoDesk" style="--x:73.5%;--y:84%" data-id="ceo" aria-label="대표 최종 승인자 — 승인 데스크">
+        <span class="ceo-plate">
+          <span class="ceo-k">최종 승인자</span>
+          <b>대표</b>
+          <span class="ceo-st" id="ceoSt">대기</span>
+          <span class="ceo-cue">⛳ 티샷 연습 중</span>
+        </span>
+        <span class="ceo-fig">
+          <span class="ceo-shadow"></span>
+          <img class="ceo-full" src="assets/full/ceo.webp" alt="대표 전신 골프 모델" width="265" height="640" decoding="async">
+          <span class="ceo-ball"></span>
+          <span class="ceo-stamp">승인</span>
+        </span>
       </button>
 
       <div class="walkers" id="walkers"></div>
@@ -776,7 +883,7 @@ body.light .cd.off{color:#8794a6;background:rgba(16,38,64,.05);border-color:rgba
           Drive 동기화
         </span>
       </div>
-      <span class="hint">캐릭터·부스를 눌러 상세 보기</span>
+      <span class="hint">캐릭터·부스를 누르면 상세 · 보고 없을 땐 골프 연습 ㅋㅋ</span>
     </div>
 
     <aside class="panel" id="panel" aria-live="polite"></aside>
@@ -883,8 +990,7 @@ body.light .cd.off{color:#8794a6;background:rgba(16,38,64,.05);border-color:rgba
       <code>downloads/qa_audit/</code> · <code>downloads/instinct_analysis/</code> · <code>downloads/production_packs/</code> · 유튜브 watch·채널 페이지 · <code>scheduled-actions/</code></p>
     <p>비공개 정보(연락처·주소·계좌·이메일·가족·투자 정보) 없이 공개 브랜드·계정 핸들·공개 영상 ID·작업 상태만 담았습니다.
       데이터는 <b id="stamp2">—</b> KST 스냅샷이며, 시계·카운트다운·결재 시연만 실시간으로 흐릅니다.</p>
-    <p>v3.6.1 야외 골프장 라운딩 에디션 — 대표(최종 승인)·총괄 빡이·부총괄 쎄컨 호칭 정정 반영. 배경과 대표·피클 5계정·인스팅트·뮤즈 아바타는 새로 생성한 이미지입니다.
-      모든 이미지는 <code>assets/*.webp</code> 로컬 파일(외부 CDN·추적 0건)입니다. 밝은 화면은 우상단 <b>밝게</b> 버튼으로 전환합니다.</p>
+    <p>v3.7 전신 골프모델 에디션 — 대표(최종 승인)·총괄 빡이·부총괄 쎄컨과 인스팅트·뮤즈를 전신 골프웨어 모델로 세우고, 보고가 없을 때는 페어웨이를 거닐며 스윙·퍼팅 연습을 합니다. 전신 모델 8인과 아바타는 새로 생성해 크로마키로 배경을 걷어낸 이미지입니다. 모든 이미지는 <code>assets/*.webp</code> 로컬 파일(외부 CDN·추적 0건)입니다. 밝은 화면은 우상단 <b>밝게</b> 버튼으로 전환합니다.</p>
   </footer>
 </div>
 
@@ -894,7 +1000,7 @@ body.light .cd.off{color:#8794a6;background:rgba(16,38,64,.05);border-color:rgba
    1. 실제 데이터 (워크스페이스 기록 기반 · 가짜 값 없음)
    ========================================================= */
 var DATA = {
-  stamp: "2026-11-29 00:30",
+  stamp: "2026-11-29 01:05",
 
   kpi: [
     { v:"4", u:"대 기준", c:"#37e0c6", t:"137편 리텐션 기준", d:"원포인트 1결론 · 실패상황+수치 · 32~52초 · 클릭 패키징" },
@@ -952,7 +1058,7 @@ var DATA = {
     { t:"가사·한글발음·사운드랩 테스트 발주", d:"트랙 A 회화 숏폼 · 트랙 B 사운드랩 무드 영상" },
     { t:"고퀄 대본·콘티팩 8편 사전 제작", d:"골프 2 · 꿀팁 2 · 회화 2 · 사운드랩 2 (컷 단위 명세)" },
     { t:"피클 5계정 총괄·부총괄 인계", d:"@pdy1124 빡이 총괄 · @ppppdy1124 쎄컨 부총괄 · 부캐 3계정 검증" },
-    { t:"ai-office v3.6 골프장 라운딩 제작", d:"배경 + 8인 아바타 새 생성 · GitHub Pages 배포" }
+    { t:"ai-office v3.7 전신 골프모델 · 스윙 모션", d:"전신 8인 크로마키 컷아웃 · 아이들 스윙/퍼팅 연습 · 보고 오면 정지" }
   ],
 
   guides: [
@@ -996,7 +1102,7 @@ var DATA = {
    ========================================================= */
 var PEOPLE = {
   ceo:{ name:"대표", short:"대표", role:"최종 승인자 · 유일한 결재권자", color:"#ffd166", kind:"approver", badge:"APPROVER",
-    img:"assets/avatar_ceo_v36.webp",
+    img:"assets/avatar_ceo_v37.webp", full:"assets/full/ceo.webp",
     rows:[["직함","대표 (최종 승인자)"],
           ["결재","결재라인 마지막 — 승인 / 보류 / 반려"],
           ["규칙","유튜브는 공개·비공개·예약 모두 승인 후 업로드"],
@@ -1005,7 +1111,7 @@ var PEOPLE = {
     say:["최종 승인은 대표","승인 전 업로드 없음"] },
 
   secon:{ name:"쎄컨", short:"쎄컨", handle:"@ppppdy1124", role:"부총괄 · 리텐션/QA", color:"#37e0c6", kind:"person", badge:"부총괄",
-    img:"assets/avatar_secon_v36.webp",
+    img:"assets/avatar_secon_v37.webp", full:"assets/full/secon.webp",
     rows:[["계정","@ppppdy1124 · 피클 부총괄"],
           ["역할","실무·리텐션/QA 기준 · 부캐 3계정 검증 지휘 · 총괄 배분 보좌"],
           ["지금","v3.6.1 호칭 정정 배포 · qa_gate PASS 기준 적용"],
@@ -1014,7 +1120,7 @@ var PEOPLE = {
     say:["기준 먼저 맞춥니다","qa_gate 통과분만 올려요","검증은 3계정이 나눕니다"] },
 
   bro:{ name:"빡이", short:"빡이", handle:"@pdy1124", role:"총괄 · 보고·지시 창구", color:"#5aa2ff", kind:"person", badge:"총괄",
-    img:"assets/avatar_jjongi_v36.webp",
+    img:"assets/avatar_bro_v37.webp", full:"assets/full/bro.webp",
     rows:[["계정","@pdy1124 · 피클 본캐 · 총괄"],
           ["역할","총괄 — 대표 보고 · 지시 전달·회신 창구 · 일감 배분"],
           ["지금","실무는 쎄컨 부총괄에 이관 · 창구·총괄 유지"],
@@ -1023,7 +1129,7 @@ var PEOPLE = {
     say:["총괄로서 보고 창구입니다","지시는 각 파트로 전달","한도는 제가 지킵니다"] },
 
   c1:{ name:"찌니", short:"찌니", handle:"@ppdy1124", role:"피클 부캐 1 · 소재 조사", color:"#7fb0ff", kind:"person", badge:"PICKLE · 부캐",
-    img:"assets/avatar_jjini_v36.webp",
+    img:"assets/avatar_c1_v37.webp", full:"assets/full/c1.webp",
     rows:[["계정","@ppdy1124 · 피클 부캐 1"],
           ["역할","소재 조사 · 크로스 검증(수치·출처 대조)"],
           ["지금","테스트 2편 소재 후보 조사"],
@@ -1032,7 +1138,7 @@ var PEOPLE = {
     say:["소재 후보 조사했습니다","출처 4항목 확인할게요"] },
 
   c2:{ name:"쮸", short:"쮸", handle:"@pppdy1124", role:"피클 부캐 2 · 크로스 검증", color:"#37e0c6", kind:"person", badge:"PICKLE · 부캐",
-    img:"assets/avatar_jju_v36.webp",
+    img:"assets/avatar_c2_v37.webp", full:"assets/full/c2.webp",
     rows:[["계정","@pppdy1124 · 피클 부캐 2"],
           ["역할","크로스 검증 · 병렬 제작 보조"],
           ["지금","대본·영상 항목 수 대조"],
@@ -1041,7 +1147,7 @@ var PEOPLE = {
     say:["병렬로 대조 돌립니다","항목 수 맞는지 봤어요"] },
 
   c3:{ name:"써니", short:"써니", handle:"@pppppdy1124", role:"피클 부캐 3 · 자료 대조", color:"#b18cff", kind:"person", badge:"PICKLE · 부캐",
-    img:"assets/avatar_sunny_v36.webp",
+    img:"assets/avatar_c3_v37.webp", full:"assets/full/c3.webp",
     rows:[["계정","@pppppdy1124 · 피클 부캐 3"],
           ["역할","자료 대조 · 자막·표기 검증"],
           ["지금","자막·카드 표기 오탈자 대조"],
@@ -1050,7 +1156,7 @@ var PEOPLE = {
     say:["표기 대조 맡을게요","오탈자 2건 찾았습니다"] },
 
   instinct:{ name:"인스팅트", short:"인스팅트", role:"제작·조립 · 검사·업로드", color:"#8b8cff", kind:"person", badge:"PARTNER",
-    img:"assets/avatar_instinct_v36.webp",
+    img:"assets/avatar_instinct_v37.webp", full:"assets/full/instinct.webp",
     rows:[["역할","영상 ffmpeg 조립·블로그·유튜브 업로드 전담"],
           ["지금","골프 v8 보완 2컷 · qa_gate 재검수 대기"],
           ["검수","자체 게이트 → 쎄컨(부총괄) QA → 대표 최종 승인"],
@@ -1059,7 +1165,7 @@ var PEOPLE = {
     say:["수치 근거 확인했어요","qa_gate PASS까지 안 올립니다","업로드는 제가 합니다"] },
 
   muse:{ name:"뮤즈", short:"뮤즈", role:"사진·목소리 · 수정", color:"#ff8ac2", kind:"person", badge:"PARTNER",
-    img:"assets/avatar_muse_v36.webp",
+    img:"assets/avatar_muse_v37.webp", full:"assets/full/muse.webp",
     rows:[["역할","사진(컷)·목소리 생성 + 가능한 건 실사 영상"],
           ["지금","음성 출처 4항목 회신 대기 · 가사 테스트 배경 공급"],
           ["Drive","muse_staging/ 에만 저장 · 직접 발행 없음"],
@@ -1097,12 +1203,12 @@ var ENTITY_IDS = ["ceo","secon","bro","c1","c2","c3","instinct","muse","meet","l
 
 /* 좌표: 장면 대비 % (바닥 기준점 · 캐릭터는 그 위에 서 있음) */
 var SPOT = {
-  museDesk:{ x:26, y:86 },
-  seconDesk:{ x:38, y:90 },
-  broDesk:{ x:50, y:86 },
-  instinctDesk:{ x:62, y:90 },
-  ceoSpot:{ x:72, y:80 },
-  meet:{ x:44, y:70 },
+  museDesk:{ x:25, y:88 },
+  seconDesk:{ x:37, y:91 },
+  broDesk:{ x:49, y:88 },
+  instinctDesk:{ x:61, y:91 },
+  ceoSpot:{ x:73.5, y:84 },
+  meet:{ x:43, y:72 },
   ninstinct:{ x:68.5, y:88 },
   nsecon:{ x:31.5, y:88 },
   nbro:{ x:43.5, y:86 }
@@ -1163,19 +1269,25 @@ function walkerHTML(id){
   var wrap = el("div", "walker");
   wrap.setAttribute("data-id", id);
   var body = el("div", "w-body");
-  var ava = el("div", "w-ava-wrap");
+
+  var plate = el("div", "w-plate");
+  plate.appendChild(el("span", "w-name", p.name));
+  plate.appendChild(el("span", "w-st idle", "대기"));
+  plate.appendChild(el("span", "w-cue", "⛳ 티샷 연습 중"));
+  body.appendChild(plate);
+
+  var fig = el("div", "w-fig");
+  fig.appendChild(el("span", "w-shadow"));
   var im = document.createElement("img");
-  im.className = "w-ava"; im.src = p.img; im.alt = p.name + " 아바타"; im.decoding = "async";
-  im.width = 58; im.height = 58;
-  ava.appendChild(im);
-  ava.appendChild(el("span", "w-shadow"));
-  var doc = el("span", "w-doc",
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 12h5M10 16h5"/></svg><b>Drive</b>');
-  ava.appendChild(doc);
-  body.appendChild(ava);
-  body.appendChild(el("span", "w-name", p.name));
-  var st = el("span", "w-st idle", "대기");
-  body.appendChild(st);
+  im.className = "w-full"; im.src = p.full; im.alt = p.name + " 전신 골프 모델";
+  im.width = 260; im.height = 640; im.decoding = "async";
+  fig.appendChild(im);
+  fig.appendChild(el("span", "w-arc"));
+  fig.appendChild(el("span", "w-ball"));
+  fig.appendChild(el("span", "w-doc",
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 12h5M10 16h5"/></svg><b>Drive</b>'));
+  body.appendChild(fig);
+
   var bub = el("div", "w-bubble");
   body.appendChild(bub);
   wrap.appendChild(body);
@@ -1190,7 +1302,8 @@ function buildWalkers(){
     host.appendChild(w);
     walkerEls[id] = w;
     var s = SPOT[DESK_OF[id]];
-    pos[id] = { x:s.x, y:s.y, doc:false };
+    pos[id] = { x:s.x, y:s.y, doc:false, t:Date.now() };
+    busy[id] = false;
     w.style.setProperty("--x", s.x + "%");
     w.style.setProperty("--y", s.y + "%");
     w.style.setProperty("--wd", "0ms");
@@ -1200,16 +1313,18 @@ function buildWalkers(){
 
 function setStatus(id, text){
   var el2, cls = "idle";
+  busy[id] = !/^(대기|완료|승인 완료|수정 완료)$/.test(text);
   if (id === "ceo"){
     el2 = document.getElementById("ceoSt");
-    if (/완료|승인$/.test(text)) cls = "ok"; else if (/대기|상신/.test(text)) cls = "busy";
+    if (/완료|승인$/.test(text)) cls = "ok"; else if (/대기|상신/.test(text)) cls = "busy";
     if (!el2) return;
-    el2.textContent = text; el2.className = "ceo-st " + cls; return;
+    el2.textContent = text; el2.className = "ceo-st " + cls; syncGolf(); return;
   }
   var w = walkerEls[id]; if (!w) return;
-  if (/완료|통과|PASS|게시/.test(text)) cls = "ok"; else if (/대기/.test(text)) cls = "idle"; else cls = "busy";
+  if (/완료|통과|PASS|게시/.test(text)) cls = "ok"; else if (/대기/.test(text)) cls = "idle"; else cls = "busy";
   var s = w.querySelector(".w-st");
   s.textContent = text; s.className = "w-st " + cls;
+  syncGolf();
 }
 
 function moveTo(id, spotKey, doc, cb){
@@ -1228,7 +1343,7 @@ function moveTo(id, spotKey, doc, cb){
   w.style.setProperty("--wd", ms + "ms");
   w.style.setProperty("--x", tx + "%");
   w.style.setProperty("--y", ty + "%");
-  pos[id].x = tx; pos[id].y = ty;
+  pos[id].x = tx; pos[id].y = ty; pos[id].t = Date.now();
   w.classList.toggle("has-doc", !!doc);
   w.classList.toggle("compact", spotKey === "meet");
   pos[id].doc = !!doc;
@@ -1259,8 +1374,14 @@ function say(id, text, ms){
   b.style.setProperty("--shift","0px");
   b.classList.add("on");
   clampBubble(b);
+  w.classList.add("talking");
+  syncGolf();
   clearTimeout(b._t);
-  b._t = setTimeout(function(){ b.classList.remove("on"); }, ms || 3200);
+  b._t = setTimeout(function(){
+    b.classList.remove("on");
+    w.classList.remove("talking");
+    syncGolf();
+  }, ms || 3200);
 }
 
 /* 존·멤버 hover 시 짧은 말풍선 (장면 하단 표시) */
@@ -1443,7 +1564,7 @@ function resetAll(){
     w.style.setProperty("--wd", "0ms");
     w.style.setProperty("--x", s.x + "%");
     w.style.setProperty("--y", s.y + "%");
-    pos[id] = { x:s.x, y:s.y, doc:false };
+    pos[id] = { x:s.x, y:s.y, doc:false, t:Date.now() };
     w.classList.remove("walking","has-doc","compact");
     w.querySelector(".w-bubble").classList.remove("on");
     w.querySelector(".w-bubble").textContent = "";
@@ -1530,6 +1651,80 @@ function setAuto(on){
   btnAuto.setAttribute("aria-pressed", on ? "true" : "false");
 }
 btnAuto.addEventListener("click", function(){ setAuto(!autoOn); });
+
+
+/* =========================================================
+   6-b. 아이들 골프 — 보고 없을 땐 스윙·퍼팅 연습 (v3.7)
+   ========================================================= */
+var busy = { ceo:false, secon:false, bro:false, instinct:false, muse:false };
+var GOLF_CUES = ["⛳ 티샷 연습 중", "🏌️ 어프로치 연습", "⛳ 퍼팅 라인 보기", "🏌️ 스윙 템포 점검", "⛳ 라운딩 중"];
+var cueIdx = {}, cueTick = 0;
+
+function reduceMotion(){
+  return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+}
+
+/* 아이들 상태면 골프 모션 ON, 보고·이동·말풍선이면 OFF */
+function syncGolf(){
+  WALKER_IDS.forEach(function(id){
+    var w = walkerEls[id]; if (!w) return;
+    var idle = !busy[id];
+    var blocked = w.classList.contains("walking") || w.classList.contains("talking") ||
+                  w.classList.contains("compact") || w.classList.contains("has-doc");
+    w.classList.toggle("golfing", idle && !blocked && !STILL);
+  });
+  var c = document.getElementById("ceoDesk");
+  if (c) c.classList.toggle("golfing", !busy.ceo && !c.classList.contains("talking") && !STILL);
+}
+
+/* 좌표 직접 지정 이동 (아이들 산책용) */
+function walkTo(id, x, y, ms){
+  var w = walkerEls[id]; if (!w) return;
+  if (reduceMotion()) ms = 0;
+  w.style.setProperty("--wd", ms + "ms");
+  w.style.setProperty("--x", x + "%");
+  w.style.setProperty("--y", y + "%");
+  pos[id].x = x; pos[id].y = y; pos[id].t = Date.now();
+  if (ms > 0){
+    w.classList.add("walking");
+    clearTimeout(w._wt);
+    w._wt = setTimeout(function(){ w.classList.remove("walking"); syncGolf(); }, ms + 80);
+  }
+}
+
+/* 상태 큐 문구를 천천히 돌려 쓴다 */
+function rollCues(){
+  WALKER_IDS.forEach(function(id){
+    var w = walkerEls[id]; if (!w) return;
+    cueIdx[id] = (cueIdx[id] || 0) + 1;
+    var c = w.querySelector(".w-cue");
+    if (c) c.textContent = GOLF_CUES[cueIdx[id] % GOLF_CUES.length];
+  });
+}
+
+/* 아이들 산책 — 페어웨이를 조금씩 옮겨 다닌다 */
+function strollTick(){
+  if (STILL || reduceMotion()) return;
+  WALKER_IDS.forEach(function(id){
+    if (busy[id]) return;
+    var w = walkerEls[id]; if (!w) return;
+    if (w.classList.contains("walking") || w.classList.contains("compact")) return;
+    if (w.querySelector(".w-bubble").classList.contains("on")) return;
+    if (Date.now() - (pos[id].t || 0) < 5200) return;
+    if (Math.random() > 0.5) return;
+    var base = SPOT[DESK_OF[id]];
+    var dx = (Math.random() < .5 ? -1 : 1) * (2.5 + Math.random() * 4.5);
+    var tx = Math.max(11, Math.min(87, base.x + dx));
+    var ty = Math.max(81, Math.min(93, base.y + (Math.random() - .5) * 3));
+    walkTo(id, tx, ty, 3400 + Math.round(Math.random() * 900));
+  });
+}
+
+function idleTick(){
+  cueTick++;
+  if (cueTick % 9 === 0) rollCues();
+  syncGolf();
+}
 
 /* =========================================================
    7. 대시보드 렌더
@@ -1838,6 +2033,7 @@ setInterval(tickClock, 1000);
 var STILL = false;
 try { STILL = new URLSearchParams(location.search).get("still") === "1"; } catch(e){}
 if (STILL){
+  document.body.classList.add("still");
   moveTo("bro","meet"); moveTo("secon","meet"); moveTo("instinct","meet"); moveTo("muse","meet");
   setStatus("secon","오더 접수"); setStatus("bro","브리핑 참석"); setStatus("instinct","대기"); setStatus("muse","대기");
   renderFlow(0,false);
@@ -1845,6 +2041,8 @@ if (STILL){
   say("bro","빡이 총괄 창구로 들어온 골프 v8 보완 오더 — 쎄컨 부총괄에 넘깁니다.", 600000);
 } else {
   setTimeout(function(){ runStep(0); }, 900);
+  setInterval(idleTick, 1500);
+  setInterval(strollTick, 6500);
 }
 </script>
 </body>
