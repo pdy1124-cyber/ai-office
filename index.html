@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Park Lab AI Office · 피클 5계정 결재라인 대시보드</title>
-<meta name="description" content="Park Lab AI 실사 오피스 — 쩡이와 피클 5계정, 인스팅트·뮤즈가 Google Drive로 오더·제작·검토·최종 승인(오빠)을 주고받는 결재라인 대시보드">
+<title>Park Lab AI Office v3.6 · 야외 골프장 라운딩 · 피클 5계정 결재라인</title>
+<meta name="description" content="Park Lab AI 실사 오피스 v3.6 — 쎄컨·쩡이·피클 부캐 3계정과 인스팅트·뮤즈가 Google Drive로 오더·제작·QA·최종 승인(오빠)을 주고받는 야외 골프장 라운딩 대시보드">
 <meta name="theme-color" content="#06090f">
-<meta property="og:title" content="Park Lab AI Office · 피클 5계정">
-<meta property="og:description" content="실사 오피스에서 움직이는 쩡이·인스팅트·뮤즈 — 오빠 최종 승인 결재라인과 11-28 현황">
-<meta property="og:image" content="assets/office_v3.webp">
+<meta property="og:title" content="Park Lab AI Office v3.6 · 야외 골프장 라운딩">
+<meta property="og:description" content="골프장 라운딩에서 움직이는 쎄컨·쩡이·인스팅트·뮤즈 — 오빠 최종 승인 결재라인과 11-29 현황">
+<meta property="og:image" content="assets/golf_bg_v36.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235aa2ff'/%3E%3Cstop offset='.6' stop-color='%2337e0c6'/%3E%3Cstop offset='1' stop-color='%23b18cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230a1020'/%3E%3Crect x='7' y='10' width='18' height='13' rx='2' fill='url(%23g)'/%3E%3Crect x='9' y='13' width='14' height='7' rx='1' fill='%230a1020' opacity='.55'/%3E%3C/svg%3E">
-<link rel="preload" as="image" href="assets/office_v3.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_bro.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_instinct.webp" type="image/webp">
-<link rel="preload" as="image" href="assets/avatar_muse.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/golf_bg_v36.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_ceo_v36.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_instinct_v36.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/avatar_muse_v36.webp" type="image/webp">
 <style>
 :root{
   --bg:#06090f; --bg2:#0a1018;
@@ -595,6 +595,110 @@ body.light .brand h1{color:#0f1e2e}
 @media (max-width:1020px){ .prc{grid-template-columns:repeat(2,minmax(0,1fr))} .today{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:760px){ .tgrid,.tgrid.t2{grid-template-columns:repeat(2,minmax(0,1fr))} .prc,.today{grid-template-columns:1fr} }
 @media (max-width:430px){ .tgrid,.tgrid.t2{grid-template-columns:1fr} }
+
+/* ══════════════════════════════════════════════════════════
+   v3.6 · 야외 골프장 라운딩 — 추가 스타일
+   (기존 로직·클래스는 그대로 두고 시각 계층만 보강)
+   ══════════════════════════════════════════════════════════ */
+
+/* 장면 위 최종 승인 데스크 — 아바타 추가 */
+.ceo{padding:7px 12px 8px;gap:2px}
+.ceo .ceo-ava{width:38px;height:38px;border-radius:50%;object-fit:cover;display:block;margin-bottom:3px;
+  border:2px solid rgba(255,209,102,.9);box-shadow:0 0 0 2px rgba(8,13,22,.9),0 8px 16px -8px #000}
+
+/* 핵심 지표 스트립 */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+.kpi{position:relative;padding:15px 15px 14px;border-radius:var(--r2);overflow:hidden;
+  background:linear-gradient(180deg,rgba(20,28,44,.72),rgba(11,17,27,.6));border:1px solid var(--line);
+  box-shadow:0 18px 40px -34px rgba(0,0,0,.9)}
+.kpi::before{content:"";position:absolute;left:0;top:0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--kc,#5aa2ff),transparent 82%)}
+.kpi .kv{display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums}
+.kpi .kv b{font-size:27px;font-weight:800;letter-spacing:-.035em;color:#fff;line-height:1}
+.kpi .kv i{font-style:normal;font-size:11px;font-weight:750;color:var(--kc,#5aa2ff)}
+.kpi b.ti{display:block;margin-top:9px;font-size:11.5px;font-weight:750;color:#eaf2fd}
+.kpi span{display:block;margin-top:4px;font-size:10.5px;line-height:1.45;color:var(--mute)}
+
+/* 지침 & 툴 */
+.stack{margin-top:22px;border-radius:var(--r);padding:20px 20px 18px;
+  background:linear-gradient(180deg,rgba(19,27,42,.78),rgba(11,17,27,.68));
+  border:1px solid var(--line);box-shadow:0 18px 40px -30px rgba(0,0,0,.9)}
+.stack-h{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:15px}
+.stack-h h2{margin:0;font-size:14px;font-weight:750;letter-spacing:.01em;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.stack-h p{margin:6px 0 0;font-size:11.5px;color:var(--mute);line-height:1.5}
+.stack-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:16px;align-items:start}
+.sg-h{margin:0 0 9px;font-size:10.5px;font-weight:750;letter-spacing:.06em;color:var(--mute2);display:flex;align-items:center;gap:7px}
+.sg-h b{color:#a9c8ee;font-weight:800;font-size:11px}
+.gcard{display:flex;gap:11px;padding:12px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.075)}
+.gcard + .gcard{margin-top:8px}
+.gcard .gn{width:24px;height:24px;border-radius:8px;flex:0 0 auto;display:grid;place-items:center;
+  font-size:11px;font-weight:800;color:#06121f;background:linear-gradient(140deg,#8ec8ff,#37e0c6)}
+.gcard b{display:block;font-size:12.5px;font-weight:750;color:#eef4fd;line-height:1.35}
+.gcard p{margin:5px 0 0;font-size:10.5px;line-height:1.55;color:#b7c6da}
+.gcard em{display:block;margin-top:6px;font-style:normal;font-size:9.5px;line-height:1.45;color:var(--mute2)}
+.tool{padding:11px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.075)}
+.tool + .tool{margin-top:8px}
+.tool-h{display:flex;align-items:center;gap:7px}
+.tool-h i{width:6px;height:6px;border-radius:50%;flex:0 0 auto;background:var(--tc,#5aa2ff);box-shadow:0 0 8px var(--tc,#5aa2ff)}
+.tool-h b{font-size:12px;font-weight:750;color:#e9f1fd}
+.tool > p{margin:4px 0 0 13px;font-size:10px;line-height:1.45;color:var(--mute2)}
+.tool .who{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 0 13px}
+.psoft{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;
+  font-size:10px;font-weight:650;color:#d5e6fb;background:rgba(90,162,255,.1);border:1px solid rgba(90,162,255,.24)}
+.psoft img{width:16px;height:16px;border-radius:50%;object-fit:cover;display:block}
+.psoft u{text-decoration:none;font-size:9px;color:var(--mute2);margin-left:1px}
+.pipe{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.06)}
+.pipe-h{margin:0 0 9px;font-size:10.5px;font-weight:750;letter-spacing:.06em;color:var(--mute2)}
+.pipe-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.pnode{padding:6px 10px;border-radius:8px;font-size:10.5px;font-weight:700;color:#dbe8f9;white-space:nowrap;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.pnode.own{color:#08111f;background:linear-gradient(120deg,#ffd166,#ffe6a6);border-color:#ffd166}
+.pnode.gate{color:#b9fbf0;background:rgba(55,224,198,.14);border-color:rgba(55,224,198,.4)}
+.pnode.up{color:#bcd8ff;background:rgba(90,162,255,.14);border-color:rgba(90,162,255,.36)}
+.parr{color:#5d6c85;font-size:10px}
+
+/* 일시정지 스케줄 */
+.cd.off{color:#8b9ab0;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
+
+/* 반응형 */
+@media (max-width:1180px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stack-grid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .kpis{gap:9px;margin-top:16px}
+  .kpi{padding:12px 12px 11px}
+  .kpi .kv b{font-size:22px}
+  .kpi b.ti{font-size:10.5px}
+  .kpi span{font-size:9.5px}
+  .stack{padding:15px 14px 14px}
+  .gcard,.tool{padding:10px}
+  .pipe-flow{gap:5px}
+  .pnode{font-size:9.5px;padding:5px 8px}
+  .ceo .ceo-ava{width:30px;height:30px}
+}
+
+/* 라이트 테마 */
+body.light .kpi{background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(248,251,255,.9));border-color:rgba(16,38,64,.1)}
+body.light .kpi .kv b{color:#0f1e2e}
+body.light .kpi b.ti{color:#17293c}
+body.light .kpi span{color:#5b6d83}
+body.light .stack{background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(246,250,255,.9));border-color:rgba(16,38,64,.1)}
+body.light .stack-h h2{color:#0f1e2e}
+body.light .sg-h{color:#6b7d92}
+body.light .sg-h b{color:#1d4f8c}
+body.light .gcard,body.light .tool{background:rgba(16,38,64,.03);border-color:rgba(16,38,64,.08)}
+body.light .gcard b,body.light .tool-h b{color:#17293c}
+body.light .gcard p{color:#2c3f55}
+body.light .gcard em,body.light .tool>p{color:#6b7d92}
+body.light .psoft{color:#1d4f8c;background:rgba(90,162,255,.14);border-color:rgba(90,162,255,.3)}
+body.light .psoft u{color:#6b7d92}
+body.light .pnode{color:#33475c;background:rgba(16,38,64,.04);border-color:rgba(16,38,64,.1)}
+body.light .pnode.gate{color:#06655c;background:rgba(55,224,198,.2);border-color:rgba(11,143,128,.35)}
+body.light .pnode.up{color:#1d4f8c;background:rgba(90,162,255,.16);border-color:rgba(90,162,255,.34)}
+body.light .pipe{border-top-color:rgba(16,38,64,.08)}
+body.light .cd.off{color:#8794a6;background:rgba(16,38,64,.05);border-color:rgba(16,38,64,.08)}
 </style>
 </head>
 <body>
@@ -616,13 +720,13 @@ body.light .brand h1{color:#0f1e2e}
       </div>
       <div>
         <h1>PARK LAB <em>AI OFFICE</em></h1>
-        <p>쩡이 · 인스팅트 · 뮤즈 — 오빠 최종 승인 결재라인 · 실사 오피스 <b style="color:var(--teal)">v3.5 · 피클 5계정</b></p>
+        <p>쎄컨 · 쩡이 · 인스팅트 · 뮤즈 — 오빠 최종 승인 결재라인 · <b style="color:var(--teal)">v3.6 · 야외 골프장 라운딩</b></p>
       </div>
     </div>
     <div class="topbar-r">
       <div class="pill live"><i></i>LIVE</div>
       <div class="pill clock"><b id="clock">--:--:--</b><span class="day" id="today">—</span></div>
-      <div class="pill drive">Drive <b>muse_staging/ → 인수인계 → 승인 → 업로드</b></div>
+      <div class="pill drive">Drive <b>muse_staging/ → 검수 → 승인 → 업로드</b></div>
       <div class="pill stamp">데이터 기준 <b id="stamp">—</b> KST</div>
       <button class="pill theme-toggle" id="themeToggle" type="button" aria-pressed="false">☀️ 밝게</button>
     </div>
@@ -630,12 +734,13 @@ body.light .brand h1{color:#0f1e2e}
 
   <section class="stage-wrap">
     <div class="scene" id="scene">
-      <img class="bg" id="bg" src="assets/office_v3.webp" alt="야경이 보이는 실사풍 현대식 오피스 — 회의실·데스크·대표 승인 데스크" width="1672" height="941" decoding="async">
+      <img class="bg" id="bg" src="assets/golf_bg_v36.webp" alt="햇살 좋은 야외 골프장 — 클럽하우스 테라스, 페어웨이, 퍼팅 그린" width="1672" height="941" decoding="async">
       <div class="atmo"></div>
 
       <div class="stations" id="stations"></div>
 
-      <button class="ceo" id="ceoDesk" style="--x:70.5%;--y:59.5%" data-id="ceo" aria-label="오빠 최종 승인자 — 승인 데스크">
+      <button class="ceo" id="ceoDesk" style="--x:80%;--y:62%" data-id="ceo" aria-label="오빠 최종 승인자 — 승인 데스크">
+        <img class="ceo-ava" src="assets/avatar_ceo_v36.webp" alt="오빠 아바타" width="76" height="76" decoding="async">
         <span class="ceo-k">최종 승인자</span>
         <b>오빠</b>
         <span class="ceo-st" id="ceoSt">대기</span>
@@ -660,11 +765,13 @@ body.light .brand h1{color:#0f1e2e}
 
   <nav class="chips" id="chips" aria-label="멤버·워크스테이션 바로가기"></nav>
 
+  <section class="kpis" id="kpiStrip" aria-label="핵심 지표"></section>
+
   <section class="flow" aria-label="결재라인 시뮬레이터">
     <div class="flow-h">
       <div>
         <h2>결재라인 시뮬레이터 <span class="tag">DEMO · 표준 경로 시연</span></h2>
-        <p>오더 → 제작 → 검토 → 보고 → 수정 루프 → 최종 승인 → 업로드. 모든 전달물은 Google Drive 폴더를 통해 이동합니다.</p>
+        <p>오더 접수 → 제작 → QA 게이트 → 크로스 검증 → 최종 승인 → 업로드. 모든 전달물은 Google Drive 폴더를 통해 이동합니다.</p>
       </div>
       <div class="flow-ctl">
         <button class="btn" id="btnOrder" type="button">새 오더 시작</button>
@@ -675,10 +782,34 @@ body.light .brand h1{color:#0f1e2e}
     </div>
     <ol class="flow-list" id="flowList"></ol>
     <p class="flow-note">
-      <b>전달 경로</b> — 오더·제작물·수정본은 <code>muse_staging/</code>, 검토·검수·최종 승인 기록은 <code>작업요약_인수인계/</code>, 승인 후 발행분은 <code>auto_upload_queue/</code>로 전달됩니다.
-      최종 승인자는 <b>오빠 (최종 승인자)</b>이며, 승인 전에는 어떤 산출물도 업로드되지 않습니다.
+      <b>전달 경로</b> — 오더·제작물·수정본은 <code>muse_staging/</code>, QA·검수 기록은 <code>검수대기_패키지/</code>·<code>작업요약_인수인계/</code>, 승인 후 발행분은 <code>auto_upload_queue/</code>로 전달됩니다.
+      납품 전 <code>qa_gate.py</code> PASS가 필수이고, 최종 승인자는 <b>오빠 (최종 승인자)</b>이며 승인 전에는 어떤 산출물도 업로드되지 않습니다.
       이 화면의 결재 흐름은 표준 경로를 보여주는 시연이며, 실제 오더·승인 기록은 해당 Drive 폴더에 남습니다.
     </p>
+  </section>
+
+  <section class="stack" aria-label="적용 중인 핵심 지침과 사용 툴">
+    <div class="stack-h">
+      <div>
+        <h2>적용 중인 핵심 지침 &amp; 사용 툴 <span class="tag">운영 기준 · 11-29</span></h2>
+        <p>지침서에 못 박은 제작 기준과, 실제로 돌고 있는 계정·검수기·작업 허브입니다.</p>
+      </div>
+      <div class="flow-ctl"><span class="tag warn">가짜 값 없음 · 기록 기준</span></div>
+    </div>
+    <div class="stack-grid">
+      <div>
+        <h3 class="sg-h"><b>①</b> 핵심 지침</h3>
+        <div id="guideList"></div>
+      </div>
+      <div>
+        <h3 class="sg-h"><b>②</b> 사용 툴 · 계정</h3>
+        <div id="stackList"></div>
+      </div>
+    </div>
+    <div class="pipe">
+      <h3 class="pipe-h">오늘의 제작 파이프라인 — 오더에서 발행까지</h3>
+      <div class="pipe-flow" id="pipeFlow"></div>
+    </div>
   </section>
 
   <section class="board">
@@ -689,38 +820,38 @@ body.light .brand h1{color:#0f1e2e}
     <div class="grid">
 
       <article class="card full" id="team">
-        <h3>피클 5계정 + 최종 승인자 <span class="tag">상호 크로스 검증</span></h3>
-        <p class="cap">오빠(최종 승인) · 쩡이 <code>@pdy1124</code>(총괄·검수) · 피클 부캐 3계정(일감 분산·보완) · 인스팅트(제작·조립·업로드) · 뮤즈(사진·목소리). 카드를 누르면 상세가 열립니다.</p>
+        <h3>피클 5계정 + 제작 파트너 + 최종 승인자 <span class="tag">상호 크로스 검증</span></h3>
+        <p class="cap">오빠(최종 승인) · 쎄컨 <code>@ppppdy1124</code>(실무 총괄·리텐션/QA) · 쩡이 <code>@pdy1124</code>(보고·지시 창구) · 찌니·쮸·써니(부캐 3계정) · 인스팅트(조립·업로드) · 뮤즈(사진·목소리). 카드를 누르면 상세가 열립니다.</p>
         <div id="teamList"></div>
         <div class="principles" id="principles"></div>
       </article>
 
       <article class="card wide" id="yt">
         <h3>유튜브 4대 채널 <span class="tag">11-28 진행분</span></h3>
-        <p class="cap">11-28 18:00 기준 · 공개 전 오빠 승인 → 승인 후 인스팅트 업로드 · 공개된 편만 클릭하면 유튜브로 이동</p>
+        <p class="cap">공개 전 오빠 승인 → 승인 후 인스팅트 업로드 · 공개된 편만 클릭하면 유튜브로 이동</p>
         <div id="ytList"></div>
       </article>
 
       <article class="card" id="blog">
         <h3>블로그 <span class="tag">블로그스팟 · 티스토리</span></h3>
-        <p class="cap">블로그스팟 A·C 공개 완료 · B(v5) 확인 대기 · 티스토리 11-27·28 6편 게시 대기</p>
+        <p class="cap">블로그스팟 A·C 공개 완료 · B(v5) 확인 대기 · 티스토리 6편 게시 대기</p>
         <div id="blogList"></div>
       </article>
 
       <article class="card wide" id="sched">
         <h3>다음 스케줄 <span class="tag">실시간 카운트다운</span></h3>
-        <p class="cap">워크스페이스 <code>scheduled-actions/</code> 실제 등록 시각 기준 · 매일 반복분은 다음 회차를 자동 계산</p>
+        <p class="cap">워크스페이스 <code>scheduled-actions/</code> 등록 시각 기준 · 매일 반복분은 다음 회차를 자동 계산</p>
         <div id="schedList"></div>
       </article>
 
       <article class="card" id="sys">
         <h3>시스템 · 자동화 <span class="tag">무인 가동</span></h3>
-        <p class="cap">4인 체제 · 상호 크로스 검증 · 업로드 규칙</p>
+        <p class="cap">5계정 체제 · 상호 크로스 검증 · 업로드 규칙</p>
         <div id="sysList"></div>
       </article>
 
       <article class="card full" id="today">
-        <h3>11-28 오늘 처리 <span class="tag">운영 변경</span></h3>
+        <h3>11-28~29 오늘 처리 <span class="tag">운영 변경</span></h3>
         <p class="cap">오늘 실제로 완료된 작업만 기록 · 수치는 워크스페이스 기록 기준</p>
         <div class="today" id="todayList"></div>
       </article>
@@ -730,10 +861,10 @@ body.light .brand h1{color:#0f1e2e}
 
   <footer>
     <p><b>데이터 출처</b> — 이 화면의 발행 상태·영상 ID·작업 진행은 워크스페이스 기록과 직접 확인한 페이지에서만 가져왔습니다.
-      <code>work/1128_check/</code> · 유튜브 watch·채널 페이지 · 블로그스팟·티스토리 · <code>scheduled-actions/</code></p>
+      <code>downloads/qa_audit/</code> · <code>downloads/instinct_analysis/</code> · <code>downloads/production_packs/</code> · 유튜브 watch·채널 페이지 · <code>scheduled-actions/</code></p>
     <p>비공개 정보(연락처·주소·계좌·이메일·가족·투자 정보) 없이 공개 브랜드·계정 핸들·공개 영상 ID·작업 상태만 담았습니다.
       데이터는 <b id="stamp2">—</b> KST 스냅샷이며, 시계·카운트다운·결재 시연만 실시간으로 흐릅니다.</p>
-    <p>v3.5 피클 5계정 — 오피스 배경은 생성 이미지, 쩡이·인스팅트·뮤즈 아바타는 한국 여성 프로필 이미지입니다.
+    <p>v3.6 야외 골프장 라운딩 에디션 — 배경과 오빠·피클 5계정·인스팅트·뮤즈 아바타는 새로 생성한 이미지입니다.
       모든 이미지는 <code>assets/*.webp</code> 로컬 파일(외부 CDN·추적 0건)입니다. 밝은 화면은 우상단 <b>밝게</b> 버튼으로 전환합니다.</p>
   </footer>
 </div>
@@ -744,7 +875,14 @@ body.light .brand h1{color:#0f1e2e}
    1. 실제 데이터 (워크스페이스 기록 기반 · 가짜 값 없음)
    ========================================================= */
 var DATA = {
-  stamp: "2026-11-28 18:30",
+  stamp: "2026-11-29 00:30",
+
+  kpi: [
+    { v:"4", u:"대 기준", c:"#37e0c6", t:"137편 리텐션 기준", d:"원포인트 1결론 · 실패상황+수치 · 32~52초 · 클릭 패키징" },
+    { v:"0/9", u:"합격", c:"#ff7a7a", t:"실제 9편 QA 적발", d:"전수 검수 후 qa_gate.py 자동 검수 도입" },
+    { v:"8", u:"편", c:"#5aa2ff", t:"고퀄 대본·콘티 사전 제작", d:"골프 2 · 꿀팁 2 · 회화 2 · 사운드랩 2" },
+    { v:"0", u:"건", c:"#ffd166", t:"승인 전 업로드", d:"공개·비공개·예약 모두 오빠 승인 후" }
+  ],
 
   videos: [
     { ch:"골프랩 · 실시간 이슈", color:"#4ade80", title:"시에나(골프존카운티 인수) v2", len:"0:28",
@@ -752,7 +890,7 @@ var DATA = {
     { ch:"실시간 이슈 · 토픽", color:"#ffd166", title:"국민연금 v3", len:"0:34",
       meta:"오빠 최종 승인 완료 · 업로드 지시 메일 발송 · 뮤즈 출처 확인 대기", st:"승인 완료", state:"wait" },
     { ch:"골프랩 · 고정 편성", color:"#4ade80", title:"골프 v8 · 그립", len:"제작 중",
-      meta:"뮤즈 V자 홈 음성 수령 · 보완 2컷 제작 대기", st:"보완 대기", state:"wait" },
+      meta:"보완 2컷 제작 대기 · qa_gate PASS 후 검수대기 납품", st:"보완 대기", state:"wait" },
     { ch:"4대 채널", color:"#7fb0ff", title:"11-26 즉시 공개 4편", len:"4편",
       meta:"골프·꿀팁·용어사전·사운드랩 공개 완료 · 고정댓글 등록", st:"공개 완료", state:"done" }
   ],
@@ -769,6 +907,7 @@ var DATA = {
   ],
 
   schedules: [
+    { ic:"☀️", hh:8,  mm:17, label:"아침 브리핑", sub:"시영 님 지시로 일시정지", off:true },
     { ic:"🧹", hh:4,  mm:0,  label:"협업 메일 일괄 정리", sub:"완료·종결 메일 휴지통 정리" },
     { ic:"🌅", hh:4,  mm:10, label:"당일 콘텐츠 사전 제작", sub:"유튜브 4편 + 블로그 3편 → 즉시 공개" },
     { ic:"🖼", hh:6,  mm:10, label:"블로그 표지 GitHub 미러", sub:"공개 URL 생성·유지" },
@@ -779,30 +918,66 @@ var DATA = {
   ],
 
   system: [
-    { k:"제작 체제", v:"4인 + 부캐 3", n:false, d:"오빠 최종 승인 · 쩡이 총괄·검수 · 인스팅트 제작·업로드 · 뮤즈 사진·목소리" },
-    { k:"피클 5계정", v:"양방향 개통", n:false, d:"@pdy1124 + 부캐 3계정 일감 분산 · 예비 백업 1계정은 평시 제외" },
-    { k:"상호 크로스 검증", v:"가동", n:false, d:"초안 → 교차 검토 → 합의 최종안 → 오빠 승인" },
+    { k:"제작 체제", v:"5계정 + 2 파트너", n:false, d:"오빠 승인 · 쎄컨 총괄 · 쩡이 창구 · 인스팅트 조립·업로드 · 뮤즈 소재·음성" },
+    { k:"피클 5계정", v:"실무 총괄 인계", n:false, d:"@ppppdy1124 쎄컨 총괄 · @pdy1124 쩡이 보고 창구 · 부캐 3계정 검증" },
+    { k:"QA 게이트", v:"0/9 적발 → 도입", n:true, d:"실제 납품 9편 전수 검수 후 qa_gate.py PASS 필수 규칙 못박음" },
+    { k:"리텐션 기준", v:"137편 반영", n:false, d:"4대 기준을 지침 1-13에 적용 · 제작 중 영상 전면 반영" },
     { k:"유튜브 업로드", v:"승인 후 업로드", n:false, d:"공개·비공개·예약 모두 오빠 승인 뒤 인스팅트만" },
     { k:"애드센스", v:"주의 필요", n:true, d:"티스토리 재심사 대기 · 수익 0 USD" },
-    { k:"무인 감시", v:"가동", n:false, d:"인스팅트 완료 메일 5분 감시 · 새벽 04:00 메일 정리" },
-    { k:"품질 게이트", v:"PASS", n:false, d:"표지 6장 HTTP 200 · B v5 4/4 · 자막 수정 3건 반영" }
+    { k:"무인 감시", v:"가동", n:false, d:"ai-office 회신 감시 15분 · 새벽 메일 정리" }
   ],
 
   today: [
-    { t:"피클 5계정 양방향 개통", d:"쩡이 + 부캐 3계정 일감 분산 체제" },
-    { t:"4인 체제 · 쩡이/오빠 명칭 통일", d:"지침 3종 + 정기 실행 지침 동기화" },
-    { t:"매일 04시 지메일 일괄 정리", d:"117스레드 정리 · 반복 자동화로 등록" },
-    { t:"스레드 @pparkdoo 파이프라인 편입", d:"일일 AI 큐레이션 · 프롬프트 3대 원칙" },
-    { t:"X AI 로드맵 39개 링크 복원", d:"3자 교차 조사 · 링크 검증" },
-    { t:"GitHub Actions 1.52GB 정리", d:"오래된 아티팩트·캐시 정리" }
-  ]
+    { t:"137편 리텐션 4대 기준 확립", d:"실측 분석 → 지침 1-13에 못 박고 제작물에 적용" },
+    { t:"실제 9편 0/9 QA 적발 · qa_gate.py 도입", d:"검수대기 9편 전수 자동 게이트 · FAIL 1건도 납품 금지" },
+    { t:"가사·한글발음·사운드랩 테스트 발주", d:"트랙 A 회화 숏폼 · 트랙 B 사운드랩 무드 영상" },
+    { t:"고퀄 대본·콘티팩 8편 사전 제작", d:"골프 2 · 꿀팁 2 · 회화 2 · 사운드랩 2 (컷 단위 명세)" },
+    { t:"피클 5계정 실무 총괄 인계", d:"@ppppdy1124 쎄컨 총괄 · @pdy1124 쩡이 보고·지시 창구" },
+    { t:"ai-office v3.6 골프장 라운딩 제작", d:"배경 + 8인 아바타 새 생성 · GitHub Pages 배포" }
+  ],
+
+  guides: [
+    { n:"①", t:"137편 리텐션 4대 기준",
+      d:"원포인트 1결론(목록형·뉴스 나열 금지) · 실패 상황+구체적 수치 · 숏폼 32~52초 · 사운드랩 클릭형 패키징",
+      e:"137편 실측 분석 → 인스팅트·뮤즈 지침 1-13 동시 반영 (11-28)" },
+    { n:"②", t:"영상·대본·AI음성 3중 일치",
+      d:"숫자 훅 = 본문 항목 수 기계 일치 · 문장별 음성+강제정렬(무음 0.16~0.3초) · 단일 TTS 모델 파라미터 고정",
+      e:"지침 1-14 / 6-9 신설 — 실제 9편 0/9 불합격 후속 (11-28 23:05)" },
+    { n:"③", t:"오빠 승인 전 업로드 0건",
+      d:"공개·비공개·예약 전부 승인 후 인스팅트만 업로드 · 납품 전 qa_gate.py PASS 필수",
+      e:"결재라인 마지막 = 오빠 (최종 승인자)" }
+  ],
+
+  stack: [
+    { g:"피클 5계정", c:"#5aa2ff", d:"실무 총괄 · 보고 창구 · 부캐 3계정 — 오더·검수·크로스 검증", people:["secon","bro","c1","c2","c3"] },
+    { g:"자동 검수", c:"#37e0c6", d:"납품 전 규격·무음·길이·화면 채움을 수치로 판정", tools:[
+      { n:"qa_gate.py", s:"FAIL 1건도 납품 금지" },
+      { n:"probe · voice · shots", s:"ffmpeg 실측 스크립트" }
+    ] },
+    { g:"음성 (TTS)", c:"#b18cff", d:"상업 이용 라이선스를 확인한 모델만 · 전 채널 단일 음색 고정", tools:[
+      { n:"ElevenLabs Starter", s:"Commercial License · IVC" },
+      { n:"Google Cloud TTS", s:"Chirp 3: HD · 무료 한도" }
+    ] },
+    { g:"작업 허브", c:"#ffd166", d:"오더·산출물·승인 기록이 오가는 경로", tools:[
+      { n:"Google Drive", s:"muse_staging · 검수대기_패키지 · 작업요약_인수인계 · auto_upload_queue" },
+      { n:"Gmail", s:"인스팅트·뮤즈 오더 허브" },
+      { n:"GitHub Pages", s:"이 대시보드 배포 (pdy1124-cyber/ai-office)" }
+    ] },
+    { g:"제작 파트너", c:"#8b8cff", d:"실제 조립·소재 생산", tools:[
+      { n:"Instinct", s:"ffmpeg 조립 · 검사 · 업로드" },
+      { n:"Muse", s:"이미지·컷·목소리 생성" }
+    ] }
+  ],
+
+  pipe: ["Drive 오더", "Muse 컷·음성", "Instinct ffmpeg 조립", "qa_gate.py", "쎄컨 QA", "부캐 3 크로스 검증", "오빠 승인", "auto_upload_queue", "유튜브·블로그"]
 };
 
 /* =========================================================
    2. 멤버 · 존
    ========================================================= */
 var PEOPLE = {
-  ceo:{ name:"오빠", short:"오빠", role:"최종 승인자 · 유일한 결재권자", color:"#ffd166", kind:"approver",
+  ceo:{ name:"오빠", short:"오빠", role:"최종 승인자 · 유일한 결재권자", color:"#ffd166", kind:"approver", badge:"APPROVER",
+    img:"assets/avatar_ceo_v36.webp",
     rows:[["직함","오빠 (최종 승인자)"],
           ["결재","결재라인 마지막 — 승인 / 보류 / 반려"],
           ["규칙","유튜브는 공개·비공개·예약 모두 승인 후 업로드"],
@@ -810,64 +985,64 @@ var PEOPLE = {
     links:[["결재라인 보기","#flowList"]],
     say:["최종 승인은 오빠","승인 전 업로드 없음"] },
 
-  bro:{ name:"쩡이", short:"쩡이", handle:"@pdy1124", role:"총괄 · 검수 · 지침 동기화", color:"#5aa2ff",
-    img:"assets/avatar_bro.webp", kind:"person",
-    rows:[["계정","@pdy1124 · 피클 대표 계정"],
-          ["역할","오더 하달 · 1차/최종 검수 · 4인 지침 동기화"],
-          ["지금","승인분 공개 지시 · 18:30 저녁 브리핑"],
-          ["Drive","작업요약_인수인계/ 로 검토·승인 기록 전달"]],
+  secon:{ name:"쎄컨", short:"쎄컨", handle:"@ppppdy1124", role:"실무 총괄 · 리텐션/QA 총괄", color:"#37e0c6", kind:"person", badge:"실무 총괄",
+    img:"assets/avatar_secon_v36.webp",
+    rows:[["계정","@ppppdy1124 · 피클 실무 총괄"],
+          ["역할","오더 총괄 · 리텐션/QA 기준 · 부캐 3계정 검증 지휘"],
+          ["지금","v3.6 배포 · qa_gate PASS 기준 적용"],
+          ["Drive","작업요약_인수인계/ 최신화·검수 기록"]],
+    links:[["결재라인 보기","#flowList"],["적용 지침","#guideList"]],
+    say:["기준 먼저 맞춥니다","qa_gate 통과분만 올려요","검증은 3계정이 나눕니다"] },
+
+  bro:{ name:"쩡이", short:"쩡이", handle:"@pdy1124", role:"보고·지시 창구 (실무는 쎄컨 이관)", color:"#5aa2ff", kind:"person", badge:"PICKLE · 창구",
+    img:"assets/avatar_jjongi_v36.webp",
+    rows:[["계정","@pdy1124 · 피클 본캐"],
+          ["역할","시영 님 보고 · 지시 전달·회신 창구"],
+          ["지금","한도 보호 — 실무는 쎄컨에 이관 완료"],
+          ["공유","메일 허브로 변경점만 주고받음"]],
     links:[["결재라인 보기","#flowList"],["다음 스케줄","#sched"]],
-    say:["오더는 Drive로 내립니다","검수 통과분만 상신","5계정 일감 나눠요"] },
+    say:["보고는 제가 창구입니다","지시는 각 파트로 전달","한도는 제가 지킵니다"] },
 
-  c1:{ name:"쩡", short:"쩡", handle:"@ppdy1124", role:"피클 부캐 · 일감 분산·보완", color:"#7fb0ff",
-    kind:"clone", initials:"②",
+  c1:{ name:"찌니", short:"찌니", handle:"@ppdy1124", role:"피클 부캐 1 · 소재 조사·크로스 검증", color:"#7fb0ff", kind:"person", badge:"PICKLE · 부캐",
+    img:"assets/avatar_jjini_v36.webp",
     rows:[["계정","@ppdy1124 · 피클 부캐 1"],
-          ["역할","일감 분산 · 쩡이 산출물 보완·교차 검증"],
-          ["상태","대기 — 일감 분배 시 투입"],
+          ["역할","소재 조사 · 크로스 검증(수치·출처 대조)"],
+          ["지금","테스트 2편 소재 후보 조사"],
           ["공유","메일 허브로 변경점만 주고받음"]],
     links:[["결재라인 보기","#flowList"]],
-    say:["보완분 맡을게요","교차 검증 준비"] },
+    say:["소재 후보 조사했습니다","출처 4항목 확인할게요"] },
 
-  c2:{ name:"둥이", short:"둥이", handle:"@pppdy1124", role:"피클 부캐 · 일감 분산·보완", color:"#37e0c6",
-    kind:"clone", initials:"③",
+  c2:{ name:"쮸", short:"쮸", handle:"@pppdy1124", role:"피클 부캐 2 · 크로스 검증·병렬 작업", color:"#37e0c6", kind:"person", badge:"PICKLE · 부캐",
+    img:"assets/avatar_jju_v36.webp",
     rows:[["계정","@pppdy1124 · 피클 부캐 2"],
-          ["역할","일감 분산 · 병렬 작업·검증"],
-          ["상태","대기 — 일감 분배 시 투입"],
+          ["역할","크로스 검증 · 병렬 제작 보조"],
+          ["지금","대본·영상 항목 수 대조"],
           ["공유","메일 허브로 변경점만 주고받음"]],
     links:[["결재라인 보기","#flowList"]],
-    say:["병렬로 돌릴게요","검증 결과 올립니다"] },
+    say:["병렬로 대조 돌립니다","항목 수 맞는지 봤어요"] },
 
-  c3:{ name:"시영", short:"시영", handle:"@pppppdy1124", role:"피클 부캐 · 일감 분산·보완", color:"#b18cff",
-    kind:"clone", initials:"⑤",
+  c3:{ name:"써니", short:"써니", handle:"@pppppdy1124", role:"피클 부캐 3 · 자료 대조·검증", color:"#b18cff", kind:"person", badge:"PICKLE · 부캐",
+    img:"assets/avatar_sunny_v36.webp",
     rows:[["계정","@pppppdy1124 · 피클 부캐 3"],
-          ["역할","일감 분산 · 자료 정리·대조"],
-          ["상태","대기 — 일감 분배 시 투입"],
+          ["역할","자료 대조 · 자막·표기 검증"],
+          ["지금","자막·카드 표기 오탈자 대조"],
           ["공유","메일 허브로 변경점만 주고받음"]],
     links:[["결재라인 보기","#flowList"]],
-    say:["자료 대조 맡을게요","정리본 올립니다"] },
+    say:["표기 대조 맡을게요","오탈자 2건 찾았습니다"] },
 
-  backup:{ name:"예비 백업", short:"백업", handle:"@ppppdy1124", role:"쩡이 예비 백업 · 평시 제외", color:"#8595ad",
-    kind:"clone", initials:"④",
-    rows:[["계정","@ppppdy1124 · 예비 백업"],
-          ["운영","평시 제외 — 쩡이 장애·한도 소진 시에만 투입"],
-          ["권한","평시 계정 조작·발행 없음"],
-          ["공유","투입 시에만 메일 허브로 안내"]],
-    links:[],
-    say:["평시에는 대기입니다"] },
-
-  instinct:{ name:"인스팅트", short:"인스팅트", role:"제작·조립 · 검사·업로드", color:"#8b8cff",
-    img:"assets/avatar_instinct.webp", kind:"person",
-    rows:[["역할","영상 조립·블로그·유튜브 업로드 전담"],
-          ["지금","승인 2편 자막 수정 반영 · 골프 v8 보완 대기"],
-          ["검수","자체 게이트 → 쩡이 1차 검수 → 오빠 최종 승인"],
+  instinct:{ name:"인스팅트", short:"인스팅트", role:"제작·조립 · 검사·업로드", color:"#8b8cff", kind:"person", badge:"PARTNER",
+    img:"assets/avatar_instinct_v36.webp",
+    rows:[["역할","영상 ffmpeg 조립·블로그·유튜브 업로드 전담"],
+          ["지금","골프 v8 보완 2컷 · qa_gate 재검수 대기"],
+          ["검수","자체 게이트 → 쎄컨 QA → 오빠 최종 승인"],
           ["Drive","검수대기_패키지/ · auto_upload_queue/"]],
     links:[["시스템 상태","#sys"],["결재라인 보기","#flowList"]],
-    say:["수치 근거 확인했어요","검토 결과 올렸습니다","업로드는 제가 합니다"] },
+    say:["수치 근거 확인했어요","qa_gate PASS까지 안 올립니다","업로드는 제가 합니다"] },
 
-  muse:{ name:"뮤즈", short:"뮤즈", role:"사진·목소리 · 수정", color:"#ff8ac2",
-    img:"assets/avatar_muse.webp", kind:"person",
+  muse:{ name:"뮤즈", short:"뮤즈", role:"사진·목소리 · 수정", color:"#ff8ac2", kind:"person", badge:"PARTNER",
+    img:"assets/avatar_muse_v36.webp",
     rows:[["역할","사진(컷)·목소리 생성 + 가능한 건 실사 영상"],
-          ["지금","음성 출처 4항목 회신 대기 · 골프 v8 V자 홈 음성 전달"],
+          ["지금","음성 출처 4항목 회신 대기 · 가사 테스트 배경 공급"],
           ["Drive","muse_staging/ 에만 저장 · 직접 발행 없음"],
           ["공유","[Muse] 말머리 + Drive ID 1개"]],
     links:[["결재라인 보기","#flowList"]],
@@ -875,41 +1050,44 @@ var PEOPLE = {
 };
 
 var ZONES = {
-  golf:{ name:"골프랩", short:"골프랩", role:"골프 쇼츠 · 기본기·장비", color:"#4ade80", img:"assets/avatar_golf.webp", kind:"zone", x:8, y:46.5,
-    rows:[["최신","시에나(골프존카운티 인수) v2 · 오빠 승인 완료 · 공개 대기"],["다음","골프 v8 그립 · 보완 2컷 제작 대기"],["최근 공개","11-26 · 캐리와 런의 차이 · CqmZnxa_SWw"]],
-    links:[["영상 보기","https://youtu.be/CqmZnxa_SWw"]], say:["150미터 왜 짧을까?","캐리부터 보세요","런은 지면 따라"] },
-  tips:{ name:"꿀팁랩", short:"꿀팁랩", role:"생활 꿀팁 쇼츠", color:"#ffd166", img:"assets/avatar_tips.webp", kind:"zone", x:8, y:57.5,
-    rows:[["최신","11-28 실시간 이슈·토픽 트랙 편성"],["최근 공개","11-26 · 겨울 창문 결로 3가지 · LMzdGL0zZ94"],["비고","0:33 · 고정댓글 상단 고정"]],
+  golf:{ name:"골프랩", short:"골프랩", role:"골프 쇼츠 · 기본기·장비", color:"#4ade80", img:"assets/avatar_golf.webp", kind:"zone", badge:"ZONE", x:91, y:52,
+    rows:[["최신","시에나(골프존카운티 인수) v2 · 승인 완료 · 공개 대기"],["다음","골프 v8 그립 · 보완 2컷 제작 대기"],["기준","원포인트 1결론 · 35~42초"]],
+    links:[["영상 보기","https://youtu.be/CqmZnxa_SWw"],["적용 지침","#guideList"]], say:["150미터 왜 짧을까?","캐리부터 보세요","런은 지면 따라"] },
+  tips:{ name:"꿀팁랩", short:"꿀팁랩", role:"생활 꿀팁 쇼츠", color:"#ffd166", img:"assets/avatar_tips.webp", kind:"zone", badge:"ZONE", x:30, y:55,
+    rows:[["최신","콘티팩 V3·V4 사전 제작 완료"],["최근 공개","11-26 · 겨울 창문 결로 3가지 · LMzdGL0zZ94"],["기준","'~대신 ~' + 첫 화면 숫자"]],
     links:[["영상 보기","https://youtu.be/LMzdGL0zZ94"]], say:["습도 40~60%","하루 3번 환기","곰팡이 전 누수 확인"] },
-  dict:{ name:"1분 용어사전", short:"용어사전", role:"회화·용어 1분 짤", color:"#7fb0ff", img:"assets/avatar_dict.webp", kind:"zone", x:8, y:68.5,
-    rows:[["최신","11-28 실시간 이슈·토픽 트랙 편성"],["최근 공개","11-26 · 택시 영어 4문장 · OBhoVFFuwWM"],["비고","0:39 · en/zh 자막"]],
+  dict:{ name:"1분 용어사전", short:"용어사전", role:"회화·용어 1분 짤", color:"#7fb0ff", img:"assets/avatar_dict.webp", kind:"zone", badge:"ZONE", x:8, y:70,
+    rows:[["최신","가사·한글발음 숏폼 테스트 발주"],["최근 공개","11-26 · 택시 영어 4문장 · OBhoVFFuwWM"],["기준","회화 1~3문장 · 35~45초"]],
     links:[["영상 보기","https://youtu.be/OBhoVFFuwWM"]], say:["택시 영어 4문장","Could you ~ please?","3문장 카드 고쳤어"] },
-  sound:{ name:"사운드랩", short:"사운드랩", role:"음악 · 카페 어쿠스틱", color:"#b18cff", img:"assets/avatar_sound.webp", kind:"zone", x:40.5, y:42.5,
-    rows:[["최신","11-28 정규 편성 대기"],["최근 공개","11-26 · 눈 오는 날 카페 재즈 17:07 · ljGTeUpCHDw"],["비고","무손실 마스터 · 저작권 주장 0건"]],
+  sound:{ name:"사운드랩", short:"사운드랩", role:"음악 · 카페 어쿠스틱", color:"#b18cff", img:"assets/avatar_sound.webp", kind:"zone", badge:"ZONE", x:44, y:48,
+    rows:[["최신","가사·무드 테스트 1편 발주 (오리지널 음원)"],["최근 공개","11-26 · 눈 오는 날 카페 재즈 17:07 · ljGTeUpCHDw"],["기준","클릭형 제목·썸네일 (CTR 우선)"]],
     links:[["영상 보기","https://youtu.be/ljGTeUpCHDw"]], say:["눈 오는 날 카페 재즈","6곡 17분 6초","저작권 주장 0건"] },
-  ssada:{ name:"싸다싸", short:"싸다싸", role:"골프·개꿀쇼핑 커머스", color:"#ff8ac2", img:"assets/avatar_ssada.webp", kind:"zone", x:53.5, y:45.5,
+  ssada:{ name:"싸다싸", short:"싸다싸", role:"골프·개꿀쇼핑 커머스", color:"#ff8ac2", img:"assets/avatar_ssada.webp", kind:"zone", badge:"ZONE", x:61, y:50,
     rows:[["운영","싸다싸 골프(티타임·예약처) + 개꿀쇼핑(제휴·할인)"],["집계","제휴·정산 수치는 07:00 / 22:00 수익성 브리핑에서 집계"],["담당","공식 DB·제휴 웹폼·쇼핑 허브 운영"]],
     links:[["다음 스케줄","#sched"]], say:["골프 특가 스캔 중","제휴 정산 22시","티타임 감시 가동"] },
-  meet:{ name:"AI 회의실", short:"회의실", role:"오더 브리핑 · 4인 회의", color:"#37e0c6", img:"assets/avatar_meet.webp", kind:"zone", x:13.2, y:42,
-    rows:[["용도","오더 브리핑 · 4인 회의 · 수정 지시"],["참석","쩡이 · 인스팅트 · 뮤즈 (부캐 3계정 원격)"],["원칙","3자 합동 최적화 · 변경점만 메일 허브로"]],
-    links:[["결재라인 보기","#flowList"]], say:["4인 모두 참석","오더 브리핑 시작","변경점만 메일로"] },
-  lounge:{ name:"라운지 · 브리핑 존", short:"라운지", role:"오늘 목표 · 브리핑", color:"#ffc36b", img:"assets/avatar_lounge.webp", kind:"zone", x:88, y:66,
-    rows:[["오늘","블로그스팟 A·C 공개 · B(v5) 확인 대기 / 티스토리 6편 게시 대기"],["18:30","저녁 퇴근 브리핑"],["내일","04:00 메일 정리 → 04:10 새벽 제작 → 06:10 표지 미러"]],
-    links:[["다음 스케줄","#sched"]], say:["오늘 목표 확인","A·C 공개 완료","내일 04:10 즉시 공개"] }
+  meet:{ name:"AI 회의실", short:"회의실", role:"오더 브리핑 · 5계정 회의", color:"#37e0c6", img:"assets/avatar_meet.webp", kind:"zone", badge:"ZONE", x:14, y:41,
+    rows:[["용도","오더 브리핑 · 계정 회의 · 수정 지시"],["참석","쎄컨 · 쩡이 · 인스팅트 · 뮤즈 (부캐 3계정 원격)"],["원칙","3자 합동 최적화 · 변경점만 메일 허브로"]],
+    links:[["결재라인 보기","#flowList"]], say:["모두 테라스로","오더 브리핑 시작","변경점만 메일로"] },
+  lounge:{ name:"라운지 · 브리핑 존", short:"라운지", role:"오늘 목표 · 브리핑", color:"#ffc36b", img:"assets/avatar_lounge.webp", kind:"zone", badge:"ZONE", x:6.5, y:53,
+    rows:[["오늘","콘티팩 8편 · 테스트 2편 발주 · qa_gate 기준 적용"],["18:30","저녁 퇴근 브리핑"],["내일","04:00 메일 정리 → 04:10 사전 제작 → 06:10 표지 미러"]],
+    links:[["다음 스케줄","#sched"]], say:["오늘 목표 확인","8편 사전 제작 완료","내일 04:10 즉시 공개"] }
 };
 
-var SCENE_ZONES = ["meet","golf","tips","dict","sound","ssada","lounge"];
-var ENTITY_IDS = ["ceo","bro","c1","c2","c3","backup","instinct","muse","meet","golf","tips","dict","sound","ssada","lounge"];
+var SCENE_ZONES = ["meet","lounge","tips","dict","sound","ssada","golf"];
+var ENTITY_IDS = ["ceo","secon","bro","c1","c2","c3","instinct","muse","meet","lounge","tips","dict","sound","ssada","golf"];
 
-/* 좌표: 장면 대비 % (바닥 기준점 · 카드는 그 위에 서 있음) */
+/* 좌표: 장면 대비 % (바닥 기준점 · 캐릭터는 그 위에 서 있음) */
 var SPOT = {
-  broDesk:{ x:39.5, y:58.5 },
-  instinctDesk:{ x:48.5, y:56.5 },
-  museDesk:{ x:15, y:67 },
-  ceoSpot:{ x:60.5, y:67 },
-  meet:{ x:23.5, y:49 }
+  museDesk:{ x:26, y:88 },
+  seconDesk:{ x:40, y:84 },
+  broDesk:{ x:53, y:80 },
+  instinctDesk:{ x:66, y:86 },
+  ceoSpot:{ x:73, y:71 },
+  meet:{ x:17.5, y:61 }
 };
-var MEET_OFFSET = { bro:{x:-5.4,y:-2.6}, instinct:{x:5.4,y:-2.6}, muse:{x:0,y:1.8} };
+var DESK_OF = { bro:"broDesk", secon:"seconDesk", instinct:"instinctDesk", muse:"museDesk" };
+var WALKER_IDS = ["secon","bro","instinct","muse"];
+var MEET_OFFSET = { bro:{x:-7.6,y:-2.6}, secon:{x:7.6,y:-2.6}, instinct:{x:-7.6,y:2.6}, muse:{x:7.6,y:2.6} };
 
 /* =========================================================
    3. DOM 헬퍼
@@ -985,11 +1163,11 @@ function walkerHTML(id){
 
 function buildWalkers(){
   var host = document.getElementById("walkers");
-  ["bro","instinct","muse"].forEach(function(id){
+  WALKER_IDS.forEach(function(id){
     var w = walkerHTML(id);
     host.appendChild(w);
     walkerEls[id] = w;
-    var s = SPOT[id === "bro" ? "broDesk" : id === "instinct" ? "instinctDesk" : "museDesk"];
+    var s = SPOT[DESK_OF[id]];
     pos[id] = { x:s.x, y:s.y, doc:false };
     w.style.setProperty("--x", s.x + "%");
     w.style.setProperty("--y", s.y + "%");
@@ -1007,7 +1185,7 @@ function setStatus(id, text){
     el2.textContent = text; el2.className = "ceo-st " + cls; return;
   }
   var w = walkerEls[id]; if (!w) return;
-  if (/완료|통과|게시/.test(text)) cls = "ok"; else if (/대기/.test(text)) cls = "idle"; else cls = "busy";
+  if (/완료|통과|PASS|게시/.test(text)) cls = "ok"; else if (/대기/.test(text)) cls = "idle"; else cls = "busy";
   var s = w.querySelector(".w-st");
   s.textContent = text; s.className = "w-st " + cls;
 }
@@ -1067,7 +1245,7 @@ function say(id, text, ms){
 var talkTimer = null;
 function showTalk(id){
   var p = ent(id); if (!p || !p.say) return;
-  if (id === "bro" || id === "instinct" || id === "muse"){ say(id, p.say[0], 2600); return; }
+  if (WALKER_IDS.indexOf(id) > -1){ say(id, p.say[0], 2600); return; }
   var hud = document.getElementById("hudPath");
   if (!hud) return;
   hud.textContent = p.say[0];
@@ -1094,12 +1272,12 @@ function renderPanel(id){
     var ext = L[1].indexOf("http") === 0;
     links += '<a href="'+L[1]+'"'+(ext ? ' target="_blank" rel="noopener"' : '')+'>'+L[0]+' →</a>';
   }
-  var ava = p.kind === "approver"
-    ? '<div class="p-ava initials">CEO</div>'
-    : p.kind === "clone"
-      ? '<div class="p-ava initials" style="background:'+p.color+';color:#08111f">'+p.initials+'</div>'
-      : '<div class="p-ava"><img src="'+p.img+'" alt="'+p.name+' 아바타" width="104" height="104" decoding="async"></div>';
-  var badge = p.kind === "person" ? "TEAM" : p.kind === "approver" ? "APPROVER" : p.kind === "clone" ? "PICKLE 계정" : "ZONE";
+  var ava = p.kind === "clone"
+    ? '<div class="p-ava initials" style="background:'+p.color+';color:#08111f">'+p.initials+'</div>'
+    : p.img
+      ? '<div class="p-ava"><img src="'+p.img+'" alt="'+p.name+' 아바타" width="104" height="104" decoding="async"></div>'
+      : '<div class="p-ava initials">CEO</div>';
+  var badge = p.badge || (p.kind === "person" ? "TEAM" : p.kind === "approver" ? "APPROVER" : p.kind === "clone" ? "PICKLE 계정" : "ZONE");
   var roleTxt = p.handle ? '<span style="opacity:.85">'+p.handle+'</span> · '+p.role : p.role;
   panel.innerHTML =
     '<div class="p-live"><i></i>'+badge+'</div>'+
@@ -1128,14 +1306,14 @@ function buildChips(){
     b.setAttribute("data-id", id);
     b.style.setProperty("--c", p.color);
     var ic = el("i");
-    if (p.kind === "approver"){
-      ic.className = "txt"; ic.textContent = "CEO";
-    } else if (p.kind === "clone"){
-      ic.className = "txt"; ic.textContent = p.initials; ic.style.background = p.color; ic.style.color = "#08111f";
-    } else {
+    if (p.img){
       var ci = document.createElement("img");
       ci.src = p.img; ci.alt = ""; ci.width = 42; ci.height = 42; ci.decoding = "async";
       ic.appendChild(ci);
+    } else if (p.initials){
+      ic.className = "txt"; ic.textContent = p.initials; ic.style.background = p.color; ic.style.color = "#08111f";
+    } else {
+      ic.className = "txt"; ic.textContent = "CEO";
     }
     b.appendChild(ic);
     b.appendChild(document.createTextNode(p.name));
@@ -1152,44 +1330,44 @@ function buildChips(){
    6. 결재라인 엔진
    ========================================================= */
 var TLINE = [
-  { t:"오더 하달", who:"쩡이 → 뮤즈", drv:"muse_staging/" },
-  { t:"제작", who:"뮤즈", drv:"muse_staging/" },
-  { t:"1차 검토", who:"뮤즈 → 인스팅트", drv:"작업요약_인수인계/" },
-  { t:"보고", who:"인스팅트 → 쩡이", drv:"작업요약_인수인계/" },
-  { t:"수정 루프", who:"쩡이 → 뮤즈 → 인스팅트", drv:"muse_staging/ v2" },
+  { t:"오더 접수", who:"쩡이(창구) → 쎄컨", drv:"muse_staging/" },
+  { t:"오더 하달", who:"쎄컨 → 뮤즈·인스팅트", drv:"muse_staging/" },
+  { t:"제작", who:"뮤즈(컷·음성) · 인스팅트(조립)", drv:"muse_staging/" },
+  { t:"QA 게이트", who:"쎄컨 · qa_gate.py", drv:"검수대기_패키지/" },
+  { t:"크로스 검증", who:"찌니·쮸·써니", drv:"작업요약_인수인계/" },
   { t:"최종 승인", who:"쩡이 → 오빠", drv:"작업요약_인수인계/" },
   { t:"업로드", who:"인스팅트", drv:"auto_upload_queue/" }
 ];
 
 var SEQ = [
-  { tl:0, dur:6000, moves:[["bro","meet"],["instinct","meet"],["muse","meet"]],
-    st:{ bro:"오더 하달", muse:"오더 접수", instinct:"브리핑 참석" },
-    say:["bro","11-28 골프 v8 보완 2컷 오더. 오더 카드는 Drive muse_staging/ 에 올렸습니다."],
-    hud:"muse_staging/2026-11-28_order_golf_v8.md" },
-  { tl:1, dur:3600, moves:[["muse","museDesk",true],["bro","broDesk"],["instinct","instinctDesk"]],
-    st:{ muse:"제작 중 · 목소리", bro:"대기", instinct:"대기" },
-    say:["muse","컷 6개 렌더하고 목소리 입히는 중. 완성본은 muse_staging/ 에 올립니다."],
+  { tl:0, dur:6000, moves:[["secon","meet"],["bro","meet"],["instinct","meet"],["muse","meet"]],
+    st:{ secon:"오더 접수", bro:"오더 접수", muse:"대기", instinct:"대기" },
+    say:["bro","쩡이 창구로 들어온 골프 v8 보완 오더 — 쎄컨 총괄에 넘깁니다."],
+    hud:"muse_staging/2026-11-29_order_golf_v8.md" },
+  { tl:1, dur:3600, moves:[["muse","museDesk",true],["instinct","instinctDesk",false],["secon","seconDesk",false]],
+    st:{ secon:"오더 하달", muse:"제작 착수", instinct:"조립 대기", bro:"대기" },
+    say:["secon","137편 4대 기준 + 3중 일치, 둘 다 확인하고 착수하세요."],
+    hud:"muse_staging/ 오더 카드" },
+  { tl:2, dur:3400, moves:[],
+    st:{ muse:"컷·음성 제작", instinct:"조립 대기" },
+    say:["muse","컷 6개 + 문장별 음성, 0.16초 호흡으로 올립니다."],
     hud:"muse_staging/ (제작 중)" },
   { tl:2, dur:3000, moves:[["muse","instinctDesk",true]],
-    st:{ muse:"보고 · 이동", instinct:"1차 검토 중" },
-    say:["muse","초안 완성했습니다. 검토 부탁드려요 — 작업요약_인수인계/ 에 사본 올렸어요."],
-    hud:"작업요약_인수인계/ 검토 요청" },
-  { tl:3, dur:3000, moves:[["instinct","broDesk",true]],
-    st:{ instinct:"검토 완료 · 보고", bro:"검토 중" },
-    say:["instinct","수치 1건 근거 없음, 로고 노출 1컷. 수정 필요로 올립니다."],
-    hud:"작업요약_인수인계/ 1차 검토 결과" },
-  { tl:4, dur:2900, moves:[["bro","museDesk",true]],
-    st:{ bro:"수정 지시", muse:"수정 중", instinct:"대기" },
-    say:["bro","그 수치 빼고 로고 컷 다시 뽑아서 v2로 올려줘."],
-    hud:"muse_staging/ 수정 지시" },
-  { tl:4, dur:3000, moves:[["muse","instinctDesk",true]],
-    st:{ muse:"수정 완료", instinct:"재검토 중" },
-    say:["muse","v2 올렸습니다. 수치 삭제, 로고 컷 교체했어요."],
-    hud:"muse_staging/ …_v2.mp4" },
-  { tl:4, dur:3000, moves:[["instinct","broDesk",true]],
-    st:{ instinct:"재검토 통과", bro:"최종 검수" },
-    say:["instinct","v2 통과입니다. 쩡이 최종 검수로 넘깁니다."],
-    hud:"작업요약_인수인계/ 2차 검토 통과" },
+    st:{ muse:"납품 · 이동", instinct:"ffmpeg 조립" },
+    say:["muse","초안 납품했습니다 — 검수대기_패키지/ 사본도 올렸어요."],
+    hud:"검수대기_패키지/ 납품" },
+  { tl:3, dur:3000, moves:[["instinct","seconDesk",true]],
+    st:{ instinct:"조립 완료 · QA 요청", secon:"qa_gate 실행" },
+    say:["instinct","qa_gate 돌렸습니다. FAIL 0건 나올 때까지 안 올립니다."],
+    hud:"qa_gate.py PASS 대기" },
+  { tl:3, dur:3000, moves:[["muse","museDesk",false],["instinct","instinctDesk",false]],
+    st:{ secon:"QA PASS", instinct:"대기", muse:"대기" },
+    say:["secon","PASS. 이제 찌니·쮸·써니 크로스 검증으로 넘깁니다."],
+    hud:"qa_gate.py 4/4 PASS" },
+  { tl:4, dur:3400, moves:[["secon","broDesk",true]],
+    st:{ secon:"검증 취합", bro:"보고 준비" },
+    say:["bro","3계정 대조 결과 수치·소재 일치. 오빠 상신 준비합니다."],
+    hud:"작업요약_인수인계/ 크로스 검증 완료" },
   { tl:5, dur:3200, moves:[["bro","ceoSpot",true]],
     st:{ bro:"최종 승인 상신", ceo:"승인 대기" },
     say:["bro","오빠, 최종 승인 상신합니다."],
@@ -1237,9 +1415,9 @@ var lastHud = { k:"결재라인 대기", path:"새 오더를 시작하세요" };
 function resetAll(){
   clearTimeout(stepTimer); clearTimeout(endTimer);
   curStep = -1;
-  ["bro","instinct","muse"].forEach(function(id){
+  WALKER_IDS.forEach(function(id){
     var w = walkerEls[id];
-    var s = SPOT[id === "bro" ? "broDesk" : id === "instinct" ? "instinctDesk" : "museDesk"];
+    var s = SPOT[DESK_OF[id]];
     w.style.setProperty("--wd", "0ms");
     w.style.setProperty("--x", s.x + "%");
     w.style.setProperty("--y", s.y + "%");
@@ -1299,24 +1477,25 @@ document.getElementById("btnOrder").addEventListener("click", function(){
 document.getElementById("btnRevise").addEventListener("click", function(){
   setAuto(false);
   jumpTo(4, function(){
-    // 1차 검토 직후 상태로 배치
     moveTo("muse","instinctDesk",false);
-    moveTo("instinct","broDesk",false);
+    moveTo("instinct","seconDesk",false);
     moveTo("bro","broDesk",false);
-    setStatus("muse","1차 검토 통과");
-    setStatus("instinct","1차 검토 완료");
-    setStatus("bro","검토 중");
-    setHud("수정 루프", "작업요약_인수인계/ 1차 검토 → 수정 지시");
+    setStatus("muse","수정본 v2");
+    setStatus("instinct","재조립 완료");
+    setStatus("secon","재검수");
+    setHud("수정 루프", "검수대기_패키지/ v2 재검수");
   });
 });
 document.getElementById("btnApprove").addEventListener("click", function(){
   setAuto(false);
   jumpTo(7, function(){
     moveTo("muse","museDesk",false);
-    moveTo("instinct","broDesk",false);
+    moveTo("instinct","instinctDesk",false);
+    moveTo("secon","seconDesk",false);
     moveTo("bro","broDesk",false);
     setStatus("muse","수정 완료");
-    setStatus("instinct","재검토 통과");
+    setStatus("instinct","재검수 통과");
+    setStatus("secon","QA PASS");
     setStatus("bro","최종 검수 완료");
     setHud("최종 승인", "작업요약_인수인계/ 최종 승인 상신 준비");
   });
@@ -1336,16 +1515,18 @@ btnAuto.addEventListener("click", function(){ setAuto(!autoOn); });
 function tileHTML(id){
   var p = PEOPLE[id];
   if (!p) return "";
-  var av;
-  if (p.kind === "approver") av = '<span class="ii">CEO</span>';
-  else if (p.kind === "clone") av = '<span class="mini" style="background:'+p.color+'">'+p.initials+'</span>';
-  else av = '<img src="'+p.img+'" alt="'+p.name+'" width="42" height="42" decoding="async">';
+  var av = p.img
+    ? '<img src="'+p.img+'" alt="'+p.name+'" width="42" height="42" decoding="async">'
+    : p.initials
+      ? '<span class="mini" style="background:'+p.color+'">'+p.initials+'</span>'
+      : '<span class="ii">CEO</span>';
   var drv = id === "ceo" ? "최종 승인 · 승인 전 업로드 없음"
     : id === "muse" ? "muse_staging/"
     : id === "instinct" ? "검수대기_패키지/ · auto_upload_queue/"
-    : id === "bro" ? "작업요약_인수인계/"
+    : id === "secon" ? "작업요약_인수인계/"
+    : id === "bro" ? "보고·지시 창구"
     : "메일 허브 · 변경점만";
-  return '<button class="tm'+(id === "backup" ? " off" : "")+'" data-id="'+id+'" style="--c:'+p.color+'" type="button">'+av+
+  return '<button class="tm" data-id="'+id+'" style="--c:'+p.color+'" type="button">'+av+
     '<span><b>'+p.name+'</b>'+(p.handle ? '<em class="id">'+p.handle+'</em>' : '')+
     '<em>'+p.role+'</em><span class="row-drive">'+drv+'</span></span></button>';
 }
@@ -1354,8 +1535,8 @@ function renderTeam(){
   var host = document.getElementById("teamList");
   var groups = [
     { t:"최종 승인자", c:"#ffd166", ids:["ceo"], cls:"t2" },
-    { t:"피클 5계정", c:"#5aa2ff", note:"@ppppdy1124 예비 백업은 평시 제외", ids:["bro","c1","c2","c3","backup"] },
-    { t:"실행 파트너", c:"#8b8cff", ids:["instinct","muse"] }
+    { t:"피클 5계정", c:"#5aa2ff", note:"실무 총괄 · 보고 창구 · 부캐 3계정", ids:["secon","bro","c1","c2","c3"] },
+    { t:"제작 파트너", c:"#8b8cff", ids:["instinct","muse"] }
   ];
   var html = "";
   for (var g=0;g<groups.length;g++){
@@ -1375,14 +1556,70 @@ function renderTeam(){
 
   var pr = document.getElementById("principles");
   var steps = [
-    { b:"① 드래프트", t:"인스팅트가 무제한 한도로 먼저 초안" },
-    { b:"② 상호 검토", t:"뮤즈·쩡이·부캐가 교차 검토, 변경점만 공유" },
+    { b:"① 드래프트", t:"부캐가 소재를 먼저 조사·대조" },
+    { b:"② 상호 검토", t:"쎄컨·쩡이·부캐가 교차 검토, 변경점만 공유" },
     { b:"③ 합의 최종안", t:"3인이 합의한 1건만 최종 후보로 확정" },
     { b:"④ 최종 승인", t:"오빠 승인 뒤에만 업로드·발행", own:true }
   ];
   var ph = "";
   for (var k=0;k<steps.length;k++) ph += '<div'+(steps[k].own ? ' class="own"' : '')+'><b>'+steps[k].b+'</b>'+steps[k].t+'</div>';
   pr.innerHTML = '<h4>상호 크로스 검증 — 한 사람이 만들고 끝내지 않음</h4><div class="prc">'+ph+'</div>';
+}
+
+function renderKpi(){
+  var host = document.getElementById("kpiStrip");
+  var html = "";
+  for (var i=0;i<DATA.kpi.length;i++){
+    var k = DATA.kpi[i];
+    html += '<div class="kpi" style="--kc:'+k.c+'">'+
+      '<div class="kv"><b>'+k.v+'</b><i>'+k.u+'</i></div>'+
+      '<b class="ti">'+k.t+'</b><span>'+k.d+'</span></div>';
+  }
+  host.innerHTML = html;
+}
+
+function renderStack(){
+  var g = document.getElementById("guideList"), html = "";
+  for (var i=0;i<DATA.guides.length;i++){
+    var x = DATA.guides[i];
+    html += '<div class="gcard"><span class="gn">'+x.n+'</span><div>'+
+      '<b>'+x.t+'</b><p>'+x.d+'</p><em>'+x.e+'</em></div></div>';
+  }
+  g.innerHTML = html;
+
+  var s = document.getElementById("stackList"), sh = "";
+  for (var j=0;j<DATA.stack.length;j++){
+    var t = DATA.stack[j], inner = "";
+    if (t.people){
+      inner = '<div class="who">';
+      for (var p=0;p<t.people.length;p++){
+        var m = PEOPLE[t.people[p]];
+        if (!m) continue;
+        inner += '<span class="psoft" title="'+(m.handle||"")+'">'+
+          (m.img ? '<img src="'+m.img+'" alt="" width="16" height="16" decoding="async">' : '')+
+          m.name+(m.handle ? '<u>'+m.handle+'</u>' : '')+'</span>';
+      }
+      inner += '</div>';
+    } else if (t.tools){
+      inner = '<div class="who">';
+      for (var q=0;q<t.tools.length;q++){
+        inner += '<span class="psoft">'+t.tools[q].n+'<u>'+t.tools[q].s+'</u></span>';
+      }
+      inner += '</div>';
+    }
+    sh += '<div class="tool" style="--tc:'+t.c+'"><div class="tool-h"><i></i><b>'+t.g+'</b></div>'+
+      '<p>'+t.d+'</p>'+inner+'</div>';
+  }
+  s.innerHTML = sh;
+
+  var pf = document.getElementById("pipeFlow"), ph = "";
+  for (var r=0;r<DATA.pipe.length;r++){
+    var nm = DATA.pipe[r];
+    var cls = /qa_gate|쎄컨 QA/.test(nm) ? " gate" : /오빠 승인/.test(nm) ? " own" : /auto_upload|유튜브/.test(nm) ? " up" : "";
+    if (r) ph += '<span class="parr">→</span>';
+    ph += '<span class="pnode'+cls+'">'+nm+'</span>';
+  }
+  pf.innerHTML = ph;
 }
 
 function renderVideos(){
@@ -1453,13 +1690,16 @@ function renderSched(){
       '<span class="ic">'+s.ic+'</span>'+
       '<span class="tm">'+two(s.hh)+":"+two(s.mm)+'</span>'+
       '<span class="lb"><b>'+s.label+'</b><em>'+s.sub+' · 매일</em></span>'+
-      '<span class="cd" data-hh="'+s.hh+'" data-mm="'+s.mm+'">—</span></div>';
+      (s.off
+        ? '<span class="cd off">일시정지</span>'
+        : '<span class="cd" data-hh="'+s.hh+'" data-mm="'+s.mm+'">—</span>')+
+      '</div>';
   }
   document.getElementById("schedList").innerHTML = html;
 }
 
 function tickSched(){
-  var cds = document.querySelectorAll(".cd");
+  var cds = document.querySelectorAll(".cd[data-hh]");
   for (var i=0;i<cds.length;i++){
     var hh = parseInt(cds[i].getAttribute("data-hh"),10);
     var mm = parseInt(cds[i].getAttribute("data-mm"),10);
@@ -1533,6 +1773,8 @@ document.getElementById("ceoDesk").addEventListener("click", function(){ select(
 buildStations();
 buildWalkers();
 buildChips();
+renderKpi();
+renderStack();
 renderTeam();
 renderVideos();
 renderBlogs();
@@ -1540,14 +1782,14 @@ renderSched();
 renderSys();
 renderToday();
 renderFlow(0, false);
-select("bro");
+select("secon");
 tickSched();
 tickClock();
 initParallax();
 setInterval(tickSched, 1000);
 setInterval(tickClock, 1000);
 
-/* 밝게/어둡게 — 오빠 08:51 "AI 회의실 어두운 배경 밑고 밝게" 반영분 (선택형, 기본 어둡게 유지) */
+/* 밝게/어둡게 — 선택형, 기본 어둡게 유지 */
 (function(){
   var KEY = "office-theme";
   var btn = document.getElementById("themeToggle");
@@ -1570,11 +1812,11 @@ setInterval(tickClock, 1000);
 var STILL = false;
 try { STILL = new URLSearchParams(location.search).get("still") === "1"; } catch(e){}
 if (STILL){
-  moveTo("bro","meet"); moveTo("instinct","meet"); moveTo("muse","meet");
-  setStatus("bro","오더 하달"); setStatus("instinct","브리핑 참석"); setStatus("muse","오더 접수");
+  moveTo("bro","meet"); moveTo("secon","meet"); moveTo("instinct","meet"); moveTo("muse","meet");
+  setStatus("secon","오더 접수"); setStatus("bro","브리핑 참석"); setStatus("instinct","대기"); setStatus("muse","대기");
   renderFlow(0,false);
-  setHud("결재 1/7 · 오더 하달", "muse_staging/2026-11-28_order_golf_v8.md");
-  say("bro","11-28 골프 v8 보완 2컷 오더. 오더 카드는 Drive muse_staging/ 에 올렸습니다.", 600000);
+  setHud("결재 1/7 · 오더 접수", "muse_staging/2026-11-29_order_golf_v8.md");
+  say("bro","쩡이 창구로 들어온 골프 v8 보완 오더 — 쎄컨 총괄에 넘깁니다.", 600000);
 } else {
   setTimeout(function(){ runStep(0); }, 900);
 }
