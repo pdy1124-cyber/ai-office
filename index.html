@@ -1535,9 +1535,9 @@ function tileHTML(id){
       : '<span class="ii">CEO</span>';
   var drv = id === "ceo" ? "최종 승인 · 승인 전 업로드 없음"
     : id === "muse" ? "muse_staging/"
-    : id === "instinct" ? "검수대기_패키지/ · auto_upload_queue/"
+    : id === "instinct" ? "검수대기 → 업로드 큐"
     : id === "secon" ? "작업요약_인수인계/"
-    : id === "bro" ? "보고·지시 창구"
+    : id === "bro" ? "시영 님 보고 · 지시 전달"
     : "메일 허브 · 변경점만";
   return '<button class="tm" data-id="'+id+'" style="--c:'+p.color+'" type="button">'+av+
     '<span><b>'+p.name+'</b>'+(p.handle ? '<em class="id">'+p.handle+'</em>' : '')+
@@ -1547,9 +1547,9 @@ function tileHTML(id){
 function renderTeam(){
   var host = document.getElementById("teamList");
   var groups = [
-    { t:"최종 승인자", c:"#ffd166", ids:["ceo"], cls:"t2" },
+    { t:"최종 승인자", c:"#ffd166", ids:["ceo"], cls:"t5" },
     { t:"피클 5계정", c:"#5aa2ff", note:"실무 총괄 · 보고 창구 · 부캐 3계정", ids:["secon","bro","c1","c2","c3"], cls:"t5" },
-    { t:"제작 파트너", c:"#8b8cff", ids:["instinct","muse"] }
+    { t:"제작 파트너", c:"#8b8cff", ids:["instinct","muse"], cls:"t5" }
   ];
   var html = "";
   for (var g=0;g<groups.length;g++){
